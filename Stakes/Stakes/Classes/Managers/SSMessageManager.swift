@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class SSMessageManager: NSObject {
     
     enum AlertButtonTitles: String {
@@ -19,6 +20,7 @@ class SSMessageManager: NSObject {
     enum MessageTypeTitle: String {
         case success = "Success"
         case inProgress = "In progress"
+        case warning = "Warning"
         case failure = "Failure"
     }
     
@@ -35,13 +37,16 @@ class SSMessageManager: NSObject {
         case emptyStake = "Add stake to maximise commitment?"
         case lastActionNoSelected = "Would you like to create new actions?"
         case lastAction = "It was your last action, did your  Achieve your goal?"
-        case goalDeleted = "Some times goals can become irrelevant!  Confirm deletion (-50 points)?"
+        case goalDeleted = "Sometimes goals can become irrelevant!  Confirm deletion (-50 points)?"
         case deleteStake = "Looks like you are not confident enough  in your performance.  Confirm deletion (-10 points)?"
-        case actionDeleted = "Some times actions can become irrelevant! This is probably the case? Confirm deletion (-10 points)?"
+        case actionDeleted = "Sometimes actions can become irrelevant! This is probably the case? Confirm deletion (-10 points)?"
         
         // TODO: For Push Notifications (Insert name of the action)
         case calendarReminderToday = "Today is the due date for your action: (name of the action). Make sure you complete it!"
         case calendarReminderOneDay = "Important reminder, that tomorrow is the due date to complete action (name of the action)"
+        
+        // Warnings
+        case dueDateWarning = "You cannot pick any date in the past"
     }
     
     
@@ -94,10 +99,10 @@ class SSMessageManager: NSObject {
         alert.addAction(cancelAction)
         
         if onViewController != nil {
-            onViewController?.present(instance.createAlertWith(title: title, message: message, style: .alert), animated: true, completion: nil)
+            onViewController?.present(alert, animated: true, completion: nil)
             return
         }
-        instance.rootViewController?.present(instance.createAlertWith(title: title, message: message, style: .alert), animated: true, completion: nil)
+        instance.rootViewController?.present(alert, animated: true, completion: nil)
         return
     }
     
@@ -110,7 +115,7 @@ class SSMessageManager: NSObject {
     private func createAlertWith(title: String, message: String, style: UIAlertControllerStyle) -> UIAlertController {
         
         let alert = UIAlertController(title: title.localized(), message: message.localized(), preferredStyle: style)
-        let cancelAction = UIAlertAction(title: AlertButtonTitles.cancel.rawValue.localized(), style: .cancel, handler: { (action) in
+        let cancelAction = UIAlertAction(title: AlertButtonTitles.ok.rawValue.localized(), style: .cancel, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
         })
         

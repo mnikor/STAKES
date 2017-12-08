@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        Fabric.with([Crashlytics.self])
+        
         if window == nil {
             window = UIWindow(frame: UIScreen.main.bounds)
         }
@@ -28,18 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let launchKey = "isLaunched"
         var rootVC = UIViewController()
         if UserDefaults.standard.bool(forKey: launchKey) {
-            rootVC = UIStoryboard.ssStoryboard(type: .home).ssInstantiateViewController(type: .mainNC)
+            rootVC = UIStoryboard.getSlideMenuController()
         } else {
-            rootVC = UIStoryboard.ssStoryboard(type: .main).ssInstantiateViewController(type: .introduction) as! UIPageViewController
+            rootVC = UIStoryboard.ssInstantiateVC(.main, typeVC: .introduction) as! UIPageViewController
             UserDefaults.standard.set(true, forKey: launchKey)
         }
         
-//        let rootVC = UIStoryboard.ssStoryboard(type: .main).ssInstantiateViewController(type: .introduction) as! UIPageViewController
-        
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
-        
-        Fabric.with([Crashlytics.self])
         
         return true
     }

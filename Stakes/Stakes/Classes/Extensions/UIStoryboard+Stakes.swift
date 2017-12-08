@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
+import SlideMenuControllerSwift
 
 extension UIStoryboard {
+    
     
     //MARK: View Controllers
     
@@ -29,9 +31,10 @@ extension UIStoryboard {
         // Home
         case mainNC = "SSMainNavigationController"
         case homeVC = "SSHomeViewController"
-        case timelineVC = "SSTimelineViewController"
-        case expandVC = "SSExpandViewController"
-        case editActionVC = "SSEditActionViewController"
+        case actionPlanVC = "SSActionPlanViewController"
+        case selectedGolaTVC = "SSSelectedGoalTableViewController"
+        case createActionVC = "SSCreateActionViewController"
+        case createGoalVC = "SSCreateGoalViewController"
         
         // Menu
         case menuVC = "SSMenuViewController"
@@ -40,19 +43,59 @@ extension UIStoryboard {
         case feedbackVC = "SSFeedbackViewController"
     }
     
+    
     //MARK: Storyboards
 
-    enum StakesType: String {
+    enum SSStoryboardType: String {
         case main = "Main"
         case home = "Home"
         case menu = "Menu"
     }
     
-    class func ssStoryboard(type: StakesType) -> UIStoryboard {
+    
+    //MARK: Storyboards
+    
+    // Instantiate ViewController
+    class func ssInstantiateVC(_ storyboard: SSStoryboardType, typeVC: SSViewControllerType) -> UIViewController {
+        
+        let path = Bundle.main.resourcePath!.appending("/Resources/Storyboards")
+        let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: Bundle(path: path))
+        
+        return storyboard.instantiateViewController(withIdentifier: typeVC.rawValue)
+    }
+    
+    // Instantiate NavigationController
+    class func ssInstantiateNavigationFor(_ viewController: UIViewController) -> UINavigationController {
+        
+        let navigation = UINavigationController(rootViewController: viewController)
+        let window = UIApplication.shared.delegate?.window ?? nil
+        window?.rootViewController = navigation
+        
+        return navigation
+    }
+    
+    // Instantiate Storyboard
+    class func ssStoryboard(type: SSStoryboardType) -> UIStoryboard {
         let path = Bundle.main.resourcePath!.appending("/Resources/Storyboards")
         let storyboard = UIStoryboard(name: type.rawValue, bundle: Bundle(path: path))
         //SSLocalizationManager.sharedManager.localizedStoryboard(name: type.rawValue)
         return storyboard
+    }
+    
+    // Instantiate Slide Menu Controller
+    class func getSlideMenuController() -> UIViewController {
+        
+        let mainViewController = UIStoryboard.ssInstantiateVC(.home, typeVC: .mainNC)
+        let leftViewController = UIStoryboard.ssInstantiateVC(.menu, typeVC: .menuVC)
+        
+        return SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController)
+    }
+    
+    // Instantiate Slide Menu Controller
+    class func getSideMenuControllerFor(_ navigationController: UINavigationController) -> UIViewController {
+        
+        let leftViewController = UIStoryboard.ssInstantiateVC(.menu, typeVC: .menuVC)
+        return SlideMenuController(mainViewController: navigationController, leftMenuViewController: leftViewController)
     }
     
     func ssInstantiateViewController(type: SSViewControllerType) -> UIViewController {

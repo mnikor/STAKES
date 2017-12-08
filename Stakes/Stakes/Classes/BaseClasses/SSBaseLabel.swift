@@ -12,14 +12,13 @@ class SSBaseLabel: UILabel {
     
     
     // MARK: Private Properties
-    private let colorLabel = #colorLiteral(red: 0.3921568627, green: 0.3921568627, blue: 0.3921568627, alpha: 1)
-    private var fontLabel:UIFont { return UIFont(name: SSConstants.font, size: self.font.pointSize)! }
+    private let colorLabel = UIColor.colorFrom(colorType: .defaultBlack)
+    private var fontLabel:UIFont { return UIFont(name: SSConstants.fontType.bigCaslon.rawValue, size: self.font.pointSize)! }
     
     
     // MARK: Initializers
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        self.setup()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     
@@ -29,11 +28,38 @@ class SSBaseLabel: UILabel {
         self.setup()
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+    
     
     // MARK: Private funcs
     private func setup() {
         
         textColor = colorLabel
         font = fontLabel
+    }
+    
+    
+    // MARK: Public funcs
+    
+    // Change size by amount of characters
+    func sizeByTextFor(lines: Int) {
+        numberOfLines = lines
+        lineBreakMode = .byTruncatingTail
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.2
+    }
+    
+    // Addition for Date with format "Month Day th, Year"
+    func additionFor(_ dateText: String) -> String {
+        
+        let dateParts = dateText.components(separatedBy: " ")
+        if dateParts.count == 3 {
+            return "\(dateParts[0])  \(dateParts[1])th, \(dateParts[2])"
+        } else {
+            return dateText
+        }
     }
 }

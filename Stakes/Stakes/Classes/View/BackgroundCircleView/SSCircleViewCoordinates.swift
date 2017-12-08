@@ -18,28 +18,33 @@ struct SSCircleViewCoordinates {
         return [firstScreenCoordinates,
                 secondScreenCoordinates,
                 thirdScreenCoordinates,
-                fourthScreenCoordinates]
+                fourthScreenCoordinates,
+                homeScreenCoordinates]
     }
     
     private let firstScreenCoordinates: SSCircleCoordinate = [.purple: CGPoint(x: -240, y: -258),
-                                                            .green: CGPoint(x: 248, y: -64),
-                                                            .red: CGPoint(x: 222, y: 429),
-                                                            .orange: CGPoint(x: -300, y: 300)]
+                                                              .green: CGPoint(x: 248, y: -64),
+                                                              .red: CGPoint(x: 222, y: 429),
+                                                              .orange: CGPoint(x: -300, y: 300)]
     
     private let secondScreenCoordinates: SSCircleCoordinate = [.purple: CGPoint(x: -370, y: -102),
-                                                             .green: CGPoint(x: 146, y: -199),
-                                                             .red: CGPoint(x: 42, y: 600),
-                                                             .orange: CGPoint(x: -380, y: 238)]
+                                                               .green: CGPoint(x: 146, y: -199),
+                                                               .red: CGPoint(x: 42, y: 600),
+                                                               .orange: CGPoint(x: -380, y: 238)]
     
     private let thirdScreenCoordinates: SSCircleCoordinate = [.purple: CGPoint(x: -370, y: 135),
-                                                            .green: CGPoint(x: 0, y: -264),
-                                                            .red: CGPoint(x: 306, y: 300),
-                                                            .orange: CGPoint(x: -323, y: 505)]
+                                                              .green: CGPoint(x: 0, y: -264),
+                                                              .red: CGPoint(x: 306, y: 300),
+                                                              .orange: CGPoint(x: -323, y: 505)]
     
     private let fourthScreenCoordinates: SSCircleCoordinate = [.purple: CGPoint(x: -135, y: -363),
-                                                             .green: CGPoint(x: 306, y: -64),
-                                                             .red: CGPoint(x: 155, y: 450),
-                                                             .orange: CGPoint(x: -374, y: 0)]
+                                                               .green: CGPoint(x: 306, y: -64),
+                                                               .red: CGPoint(x: 155, y: 450),
+                                                               .orange: CGPoint(x: -374, y: 0)]
+    private let homeScreenCoordinates: SSCircleCoordinate = [.purple: CGPoint(x: 250, y: 520),
+                                                             .green: CGPoint(x: 220, y: -281),
+                                                             .red: CGPoint(x: -370, y: -50),
+                                                             .orange: CGPoint(x: -350, y: 400)]
     
     
     // MARK: Public funcs

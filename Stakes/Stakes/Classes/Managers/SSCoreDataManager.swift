@@ -8,16 +8,7 @@
 
 import CoreData
 import Foundation
-// MARK: Initializers
-// MARK: Outlets
-// MARK: Properties
-// MARK: Overriden funcs
-// MARK: Action funcs
-// MARK: Notifcation observers
-// MARK: Public funcs
-// MARK: Private funcs
-// MARK: Delegate funcs
-// MARK: Class(Static) funcs
+
 
 enum CoredataObjectType: String {
     
@@ -43,11 +34,16 @@ class SSCoreDataManager {
     
     
     // MARK: Fetched Results Controller for Entity Name
-    func fetchedResultsController(entityName: CoredataObjectType, keyForSort: String) -> NSFetchedResultsController<NSFetchRequestResult> {
+    func fetchedResultsController(entityName: CoredataObjectType, keyForSort: String, predicate: [String : String]?) -> NSFetchedResultsController<NSFetchRequestResult> {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName.rawValue)
         let sortDescriptor = NSSortDescriptor(key: keyForSort, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let filter = predicate, filter.count == 1 {
+            let fetchPredicate = NSPredicate(format: "%K == %@", filter.keys.first!, filter.values.first!)
+            fetchRequest.predicate = fetchPredicate
+        }
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: SSCoreDataManager.instance.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         

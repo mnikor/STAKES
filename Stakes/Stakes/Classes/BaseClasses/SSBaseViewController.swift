@@ -22,14 +22,55 @@ class SSBaseViewController: UIViewController {
         super.viewDidLoad()
         
         
+        settingsNavigationController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set image for Side Menu Left Bar Button
+        self.addLeftBarButtonWithImage(getLeftBarButtonImage())
+        
+        // Update Points Label
+        self.updatePointsLabel()
     }
     
     
-    // MARK: Private funcs
+    // MARK: Public funcs
+    
+    func setTitle(_ newTitle: String) {
+        
+        let title = SSBaseLabel()
+        title.text = newTitle
+        title.textColor = UIColor.colorFrom(colorType: .defaultBlack)
+        navigationItem.titleView = title
+    }
+    
+    // Update Points Label in Navigation Right Item
+    func updatePointsLabel() {
+        if let pointsView = navigationItem.rightBarButtonItem?.customView as? SSPointsView {
+            pointsView.updatePointsView()
+        }
+    }
+    
+    // Image for Side Menu Left Bar Button
+    func getLeftBarButtonImage() -> UIImage {
+        return UIImage(named: "menu_button")!
+    }
+    
+    // Create Background view with Circles
+    func createCirclesBackground() {
+        
+        let circleView = UIImageView(image: UIImage(named: "background"))
+        circleView.frame = self.view.frame
+        
+//        let circleView = SSCircleView(frame: view.frame)
+//        circleView.createCircleViewsFor(currentScreen: 4)
+        view.insertSubview(circleView, at: 0)
+    }
     
     // Hiding Keyboard When Tapped Around
-    private func hideKeyboardWhenTappedAround() {
-        
+    func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
@@ -38,4 +79,23 @@ class SSBaseViewController: UIViewController {
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    
+    // MARK: Private funcs
+    
+    // Settings for Navigaton Controller
+    private func settingsNavigationController() {
+        guard let navBar = navigationController?.navigationBar else { return }
+        
+        navBar.tintColor = UIColor.fromRGB(rgbValue: 0x686868)
+        navBar.setBackgroundImage(UIImage(), for: .default)
+        navBar.shadowImage = UIImage()
+        navBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+        
+        // Add Right UIBarButtonItem
+        let rightButton = UIBarButtonItem(customView: SSPointsView())
+        navigationItem.rightBarButtonItem = rightButton
+    }
 }
+

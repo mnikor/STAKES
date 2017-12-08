@@ -9,7 +9,7 @@
 import UIKit
 
 class SSGoalTextField: SSBaseTextField {
-
+    
     
     // MARK: Private Properties
     private let charactersLimit = 70
@@ -19,6 +19,7 @@ class SSGoalTextField: SSBaseTextField {
     
     // Call in textFieldDidEndEditing func of UITextFieldDelegate
     func setTextFrom(_ textField: UITextField) {
+        
         text = textField.text
     }
     

@@ -10,4 +10,15 @@ import UIKit
 
 class SSSecondOnboardingViewController: UIViewController {
     
+    
+    // MARK: Outlets
+    @IBOutlet weak var createGoalView: SSCreateGoalView!
+    
+    
+    // MARK: Overriden funcs
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        createGoalView.goalNameTextField.text = createGoalView.goalNameTextField.placeholder
+    }
 }

@@ -26,15 +26,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="stakes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3d2-pe-ing" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="95.5" y="249" width="184.5" height="81.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3d2-pe-ing" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="123" y="249" width="129.5" height="82"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="68"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for those who want to achieve goals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2A-5K-0Qs" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="57.5" y="335.5" width="260.5" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2A-5K-0Qs" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="77" y="331" width="222" height="57.5"/>
+                                <string key="text">for those who want to
+achieve their goals</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -42,7 +44,7 @@
                         <constraints>
                             <constraint firstItem="3d2-pe-ing" firstAttribute="centerX" secondItem="3QF-LN-kEi" secondAttribute="centerX" id="JKh-C9-rog"/>
                             <constraint firstItem="3d2-pe-ing" firstAttribute="top" secondItem="m5j-o7-LuT" secondAttribute="top" constant="229" id="aeZ-CP-cWm"/>
-                            <constraint firstItem="t2A-5K-0Qs" firstAttribute="top" secondItem="3d2-pe-ing" secondAttribute="bottom" constant="5" id="tkq-uY-Xog"/>
+                            <constraint firstItem="t2A-5K-0Qs" firstAttribute="top" secondItem="3d2-pe-ing" secondAttribute="bottom" id="tkq-uY-Xog"/>
                             <constraint firstItem="t2A-5K-0Qs" firstAttribute="centerX" secondItem="3QF-LN-kEi" secondAttribute="centerX" id="xfi-xG-jFf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m5j-o7-LuT"/>
@@ -66,61 +68,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WS-GD-WZN" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="20" y="390" width="335" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Run a Marathon" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="hn8-RC-Q26" customClass="SSGoalTextField" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="20" y="327" width="335" height="29"/>
-                                <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="September 10th, 2018" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bCh-UV-LxE" customClass="SSDueDateTextField" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="20" y="416.5" width="335" height="32"/>
-                                <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gU-g3-8WP" userLabel="LineViewGoal">
-                                <rect key="frame" x="20" y="364" width="335" height="1"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2B-XI-Z9L" customClass="SSCreateGoalView" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="20" y="307" width="335" height="170"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="2kY-ME-qjI"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeB-aq-TYo" userLabel="LineViewDate">
-                                <rect key="frame" x="20" y="453.5" width="335" height="1"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="VSE-lx-8YJ"/>
+                                    <constraint firstAttribute="height" constant="170" id="Kgf-46-i1c"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="WeB-aq-TYo" firstAttribute="leading" secondItem="2gU-g3-8WP" secondAttribute="leading" id="0id-73-EbH"/>
-                            <constraint firstAttribute="trailing" secondItem="2gU-g3-8WP" secondAttribute="trailing" constant="20" id="2z7-yC-Atx"/>
-                            <constraint firstItem="WeB-aq-TYo" firstAttribute="trailing" secondItem="2gU-g3-8WP" secondAttribute="trailing" id="8J5-IE-hsI"/>
-                            <constraint firstItem="hn8-RC-Q26" firstAttribute="leading" secondItem="2gU-g3-8WP" secondAttribute="leading" id="Baf-bo-uJl"/>
-                            <constraint firstItem="2gU-g3-8WP" firstAttribute="top" secondItem="hn8-RC-Q26" secondAttribute="bottom" constant="8" id="Bcr-vv-qhq"/>
-                            <constraint firstItem="9WS-GD-WZN" firstAttribute="leading" secondItem="2gU-g3-8WP" secondAttribute="leading" id="Kwj-ah-z7N"/>
-                            <constraint firstItem="WeB-aq-TYo" firstAttribute="top" secondItem="bCh-UV-LxE" secondAttribute="bottom" constant="5" id="NIG-vP-ofs"/>
-                            <constraint firstItem="bCh-UV-LxE" firstAttribute="leading" secondItem="2gU-g3-8WP" secondAttribute="leading" id="U0N-cp-78K"/>
-                            <constraint firstItem="2gU-g3-8WP" firstAttribute="leading" secondItem="j5l-NM-GNj" secondAttribute="leading" constant="20" id="UVb-qg-frp"/>
-                            <constraint firstItem="bCh-UV-LxE" firstAttribute="trailing" secondItem="2gU-g3-8WP" secondAttribute="trailing" id="XAP-yO-rMI"/>
+                            <constraint firstItem="bfl-XJ-gSD" firstAttribute="trailing" secondItem="O2B-XI-Z9L" secondAttribute="trailing" constant="20" id="YAG-6L-Czp"/>
                             <constraint firstItem="vJY-W8-yG6" firstAttribute="centerX" secondItem="j5l-NM-GNj" secondAttribute="centerX" id="a4A-OL-Dv6"/>
-                            <constraint firstItem="hn8-RC-Q26" firstAttribute="trailing" secondItem="2gU-g3-8WP" secondAttribute="trailing" id="bOh-5i-B43"/>
-                            <constraint firstItem="hn8-RC-Q26" firstAttribute="top" secondItem="vJY-W8-yG6" secondAttribute="bottom" constant="29" id="dBq-BD-K3y"/>
-                            <constraint firstItem="9WS-GD-WZN" firstAttribute="top" secondItem="2gU-g3-8WP" secondAttribute="bottom" constant="25" id="mE8-vg-NkS"/>
-                            <constraint firstItem="9WS-GD-WZN" firstAttribute="trailing" secondItem="2gU-g3-8WP" secondAttribute="trailing" id="oo5-q7-WZH"/>
-                            <constraint firstItem="bCh-UV-LxE" firstAttribute="top" secondItem="9WS-GD-WZN" secondAttribute="bottom" constant="7" id="pmL-NA-c0l"/>
-                            <constraint firstItem="2gU-g3-8WP" firstAttribute="centerX" secondItem="j5l-NM-GNj" secondAttribute="centerX" id="rAQ-Gu-gKW"/>
+                            <constraint firstItem="O2B-XI-Z9L" firstAttribute="leading" secondItem="bfl-XJ-gSD" secondAttribute="leading" constant="20" id="b02-0Q-eFW"/>
+                            <constraint firstItem="O2B-XI-Z9L" firstAttribute="top" secondItem="vJY-W8-yG6" secondAttribute="bottom" constant="9" id="p9H-TZ-4iS"/>
                             <constraint firstItem="vJY-W8-yG6" firstAttribute="top" secondItem="bfl-XJ-gSD" secondAttribute="top" constant="217" id="ygh-ok-955"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bfl-XJ-gSD"/>
                     </view>
+                    <connections>
+                        <outlet property="createGoalView" destination="O2B-XI-Z9L" id="b8P-GT-fMP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRV-Y5-98p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,91 +115,106 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Foq-bm-65G" userLabel="Stack View First">
-                                <rect key="frame" x="119" y="384" width="159.5" height="70"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5h7-Xq-NrC" userLabel="TimeLineView">
+                                <rect key="frame" x="25" y="364" width="283.5" height="228"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 10th, 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00C-jD-xpc" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="19.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 5km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-ko-Pll" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="19.5" width="159.5" height="50.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Foq-bm-65G" userLabel="Stack View First">
+                                        <rect key="frame" x="94" y="20" width="159.5" height="70"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 10th, 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00C-jD-xpc" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="159.5" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 5km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-ko-Pll" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="19.5" width="159.5" height="50.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="FxF-ko-Pll" firstAttribute="centerX" secondItem="Foq-bm-65G" secondAttribute="centerX" id="Y3h-nd-lXi"/>
+                                            <constraint firstItem="00C-jD-xpc" firstAttribute="centerX" secondItem="Foq-bm-65G" secondAttribute="centerX" id="xri-yl-OHV"/>
+                                        </constraints>
+                                    </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding_TimeLine" translatesAutoresizingMaskIntoConstraints="NO" id="QsU-BQ-P0f" userLabel="TimeLineImageView">
+                                        <rect key="frame" x="25" y="20" width="3" height="188"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="3" id="LiH-Fh-sgG"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etd-fk-mk1" userLabel="CircleOne" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="48.5" width="13" height="13"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="13" id="UVr-CE-I29"/>
+                                            <constraint firstAttribute="height" constant="13" id="dib-F3-nnO"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EET-3V-0xe" userLabel="CircleTwo" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="166.5" width="13" height="13"/>
+                                        <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="13" id="2fC-1V-bPG"/>
+                                            <constraint firstAttribute="height" constant="13" id="zR0-O6-paX"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CCH-nb-XWK" userLabel="Stack View Second">
+                                        <rect key="frame" x="84" y="138" width="179.5" height="70"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="May 10th, 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cp4-cM-MzL" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="179.5" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 10km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bR-Kq-bJ0" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="19.5" width="179.5" height="50.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="0bR-Kq-bJ0" firstAttribute="centerX" secondItem="CCH-nb-XWK" secondAttribute="centerX" id="fEh-F2-VGa"/>
+                                            <constraint firstItem="Cp4-cM-MzL" firstAttribute="centerX" secondItem="CCH-nb-XWK" secondAttribute="centerX" id="lUz-E5-I6L"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="FxF-ko-Pll" firstAttribute="centerX" secondItem="Foq-bm-65G" secondAttribute="centerX" id="Y3h-nd-lXi"/>
-                                    <constraint firstItem="00C-jD-xpc" firstAttribute="centerX" secondItem="Foq-bm-65G" secondAttribute="centerX" id="xri-yl-OHV"/>
-                                </constraints>
-                            </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding_TimeLine" translatesAutoresizingMaskIntoConstraints="NO" id="QsU-BQ-P0f" userLabel="TimeLineImageView">
-                                <rect key="frame" x="50" y="384" width="3" height="188"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="3" id="LiH-Fh-sgG"/>
-                                </constraints>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etd-fk-mk1" userLabel="CircleOne" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="45" y="412.5" width="13" height="13"/>
-                                <color key="backgroundColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="13" id="UVr-CE-I29"/>
-                                    <constraint firstAttribute="height" constant="13" id="dib-F3-nnO"/>
+                                    <constraint firstAttribute="height" constant="228" id="2Ri-lA-hab"/>
+                                    <constraint firstItem="CCH-nb-XWK" firstAttribute="top" secondItem="FxF-ko-Pll" secondAttribute="bottom" constant="48" id="2qu-gO-ief"/>
+                                    <constraint firstItem="CCH-nb-XWK" firstAttribute="centerY" secondItem="EET-3V-0xe" secondAttribute="centerY" id="6ep-nc-Pov"/>
+                                    <constraint firstItem="QsU-BQ-P0f" firstAttribute="leading" secondItem="5h7-Xq-NrC" secondAttribute="leading" constant="25" id="C47-bB-hWy"/>
+                                    <constraint firstAttribute="width" constant="283.5" id="MIl-FK-fQX"/>
+                                    <constraint firstItem="Foq-bm-65G" firstAttribute="top" secondItem="5h7-Xq-NrC" secondAttribute="top" constant="20" id="R29-As-dUt"/>
+                                    <constraint firstItem="QsU-BQ-P0f" firstAttribute="top" secondItem="Foq-bm-65G" secondAttribute="top" id="Sh1-ql-zJG"/>
+                                    <constraint firstItem="EET-3V-0xe" firstAttribute="centerX" secondItem="QsU-BQ-P0f" secondAttribute="centerX" id="aQ4-cy-elD"/>
+                                    <constraint firstItem="QsU-BQ-P0f" firstAttribute="bottom" secondItem="CCH-nb-XWK" secondAttribute="bottom" id="aeB-p7-P5V"/>
+                                    <constraint firstItem="Etd-fk-mk1" firstAttribute="centerY" secondItem="Foq-bm-65G" secondAttribute="centerY" id="fZ0-oP-ct9"/>
+                                    <constraint firstItem="Foq-bm-65G" firstAttribute="leading" secondItem="QsU-BQ-P0f" secondAttribute="trailing" constant="66" id="kpY-lH-dFB"/>
+                                    <constraint firstItem="CCH-nb-XWK" firstAttribute="centerX" secondItem="Foq-bm-65G" secondAttribute="centerX" id="swn-zn-Mav"/>
+                                    <constraint firstItem="Etd-fk-mk1" firstAttribute="centerX" secondItem="QsU-BQ-P0f" secondAttribute="centerX" id="xnD-gm-xUK"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EET-3V-0xe" userLabel="CircleTwo" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="45" y="530.5" width="13" height="13"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="13" id="2fC-1V-bPG"/>
-                                    <constraint firstAttribute="height" constant="13" id="zR0-O6-paX"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CCH-nb-XWK" userLabel="Stack View Second">
-                                <rect key="frame" x="109" y="502" width="179.5" height="70"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="May 10th, 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cp4-cM-MzL" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="179.5" height="19.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 10km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bR-Kq-bJ0" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="19.5" width="179.5" height="50.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="0bR-Kq-bJ0" firstAttribute="centerX" secondItem="CCH-nb-XWK" secondAttribute="centerX" id="fEh-F2-VGa"/>
-                                    <constraint firstItem="Cp4-cM-MzL" firstAttribute="centerX" secondItem="CCH-nb-XWK" secondAttribute="centerX" id="lUz-E5-I6L"/>
-                                </constraints>
-                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="eh6-9y-oih" firstAttribute="centerX" secondItem="Iwl-mu-odq" secondAttribute="centerX" id="3c2-OD-fPj"/>
-                            <constraint firstItem="Foq-bm-65G" firstAttribute="leading" secondItem="QsU-BQ-P0f" secondAttribute="trailing" constant="66" id="7bu-8B-iQ8"/>
-                            <constraint firstItem="Etd-fk-mk1" firstAttribute="centerY" secondItem="Foq-bm-65G" secondAttribute="centerY" id="8Ee-2j-ctM"/>
-                            <constraint firstItem="QsU-BQ-P0f" firstAttribute="leading" secondItem="G0u-ic-4sS" secondAttribute="leading" constant="50" id="8f6-Va-rQg"/>
-                            <constraint firstItem="CCH-nb-XWK" firstAttribute="top" secondItem="FxF-ko-Pll" secondAttribute="bottom" constant="48" id="BnT-Dt-zjG"/>
+                            <constraint firstItem="5h7-Xq-NrC" firstAttribute="leading" secondItem="G0u-ic-4sS" secondAttribute="leading" constant="25" id="Hwd-47-mq6"/>
                             <constraint firstItem="OV6-6f-9oS" firstAttribute="top" secondItem="G0u-ic-4sS" secondAttribute="top" constant="204" id="Llw-kE-Ikn"/>
-                            <constraint firstItem="CCH-nb-XWK" firstAttribute="centerX" secondItem="Foq-bm-65G" secondAttribute="centerX" id="VeR-8v-iy5"/>
-                            <constraint firstItem="Etd-fk-mk1" firstAttribute="centerX" secondItem="QsU-BQ-P0f" secondAttribute="centerX" id="dOd-P0-QwQ"/>
-                            <constraint firstItem="CCH-nb-XWK" firstAttribute="centerY" secondItem="EET-3V-0xe" secondAttribute="centerY" id="da4-OA-c4y"/>
                             <constraint firstItem="G0u-ic-4sS" firstAttribute="trailing" secondItem="OV6-6f-9oS" secondAttribute="trailing" constant="19" id="f3v-rW-cTu"/>
-                            <constraint firstItem="EET-3V-0xe" firstAttribute="centerX" secondItem="QsU-BQ-P0f" secondAttribute="centerX" id="mji-BH-ahs"/>
-                            <constraint firstItem="Foq-bm-65G" firstAttribute="top" secondItem="eh6-9y-oih" secondAttribute="bottom" constant="68" id="pTd-89-eON"/>
                             <constraint firstItem="OV6-6f-9oS" firstAttribute="leading" secondItem="G0u-ic-4sS" secondAttribute="leading" constant="19" id="pib-I1-8E9"/>
                             <constraint firstItem="eh6-9y-oih" firstAttribute="top" secondItem="OV6-6f-9oS" secondAttribute="bottom" constant="3" id="qi3-sb-gaX"/>
-                            <constraint firstItem="QsU-BQ-P0f" firstAttribute="top" secondItem="Foq-bm-65G" secondAttribute="top" id="sDJ-7c-uAZ"/>
-                            <constraint firstItem="QsU-BQ-P0f" firstAttribute="bottom" secondItem="CCH-nb-XWK" secondAttribute="bottom" id="zlt-Ng-oKm"/>
+                            <constraint firstItem="5h7-Xq-NrC" firstAttribute="top" secondItem="eh6-9y-oih" secondAttribute="bottom" constant="48" id="wdq-5S-fCp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G0u-ic-4sS"/>
                     </view>
+                    <connections>
+                        <outlet property="timeLineView" destination="5h7-Xq-NrC" id="5AO-To-jUm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APL-m0-8mD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -263,7 +245,7 @@ It Interesting</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i.e. you don’t need to bet a ton of money. but make its sendible to try harder" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXg-i3-wiE" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
                                 <rect key="frame" x="57.5" y="339" width="260.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$99.99" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-Sz-Sqn" customClass="SSBaseTextField" customModule="Stakes" customModuleProvider="target">
@@ -285,6 +267,9 @@ It Interesting</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X6S-55-sO2"/>
                     </view>
+                    <connections>
+                        <outlet property="tipLabel" destination="HXg-i3-wiE" id="P8R-Hd-ccP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLe-wj-Agh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

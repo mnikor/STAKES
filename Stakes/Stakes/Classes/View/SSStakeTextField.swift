@@ -1,5 +1,5 @@
 //
-//  SSPriceTextField.swift
+//  SSStakeTextField.swift
 //  Stakes
 //
 //  Created by Dmitry Nezhidenko on 11/13/17.
@@ -8,29 +8,41 @@
 
 import UIKit
 
-class SSPriceTextField: SSBaseTextField {
+// TODO: Delete if unused
+class SSStakeTextField: SSBaseTextField {
     
     
     // MARK: Public Properties
-    var selectedPrice: Float?
+    var selectedPrice: Float {
+        
+        guard var newText = text else {
+//            point.currentPoints = 0.0
+            return 0.0
+        }
+        
+        if newText == "" {
+            newText = "0.00"
+        }
+        let stake = Float(newText)!
+        return stake
+    }
     
+    
+    // MARK: Private Properties
+    private var stake = 0
     
     // MARK: Public Funcs
     
     // Call in textFieldDidEndEditing func of UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard var newText = textField.text else { return }
+        let newStake = Int(selectedPrice)
         
-        if newText == "" {
-            newText = "0.00"
-        }
-        self.text = "$\(newText)"
-        selectedPrice = Float(newText)
+//        SSPoint().currentPoints = newStake
+        self.text = "$\(newStake)"
     }
     
     // Call in shouldChangeCharactersIn func of UITextFieldDelegate
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+    func setCharactersLimitFor(textField: UITextField, range: NSRange, string: String) -> Bool {
         let newText = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
         
         let regex = try? NSRegularExpression(pattern: "^\\d{0,3}(\\.\\d{0,2})?$", options: [])

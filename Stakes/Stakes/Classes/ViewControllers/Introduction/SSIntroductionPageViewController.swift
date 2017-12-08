@@ -17,10 +17,10 @@ class SSIntroductionPageViewController: UIPageViewController {
     private var circleView = SSCircleView()
     
     private var orderedViewControllers: [UIViewController] = {
-        return [UIStoryboard.ssStoryboard(type: .main).ssInstantiateViewController(type: .firstOnboardingVC),
-                UIStoryboard.ssStoryboard(type: .main).ssInstantiateViewController(type: .secondOnboardingVC),
-                UIStoryboard.ssStoryboard(type: .main).ssInstantiateViewController(type: .thirdOnboardingVC),
-                UIStoryboard.ssStoryboard(type: .main).ssInstantiateViewController(type: .fourthOnboardingVC)]
+        return [UIStoryboard.ssInstantiateVC(.main, typeVC: .firstOnboardingVC),
+                UIStoryboard.ssInstantiateVC(.main, typeVC: .secondOnboardingVC),
+                UIStoryboard.ssInstantiateVC(.main, typeVC: .thirdOnboardingVC),
+                UIStoryboard.ssInstantiateVC(.main, typeVC: .fourthOnboardingVC)]
     }()
     
     
@@ -75,13 +75,6 @@ extension SSIntroductionPageViewController: UIPageViewControllerDataSource {
         
         let previousIndex = viewControllerIndex - 1
         
-        // Set destinationScreen for CircleView
-        if viewControllerIndex == 0 {
-            circleView.destinationScreen = 1
-        } else {
-            circleView.destinationScreen = previousIndex
-        }
-        
         guard previousIndex >= 0 else { return nil }
         guard orderedViewControllers.count > previousIndex else { return nil }
         
@@ -94,13 +87,6 @@ extension SSIntroductionPageViewController: UIPageViewControllerDataSource {
         
         let nextIndex = viewControllerIndex + 1
         let orderedViewControllersCount = orderedViewControllers.count
-        
-        // Set destinationScreen for CircleView
-        if orderedViewControllersCount == nextIndex {
-            circleView.destinationScreen = viewControllerIndex - 1
-        } else {
-            circleView.destinationScreen = nextIndex
-        }
         
         guard orderedViewControllersCount != nextIndex else {
             if let lastVC = orderedViewControllers[viewControllerIndex] as? SSFourthOnboardingViewController {
@@ -139,18 +125,27 @@ extension SSIntroductionPageViewController: UIScrollViewDelegate {
         
         let width = view.frame.width
         let contentOffsetX = scrollView.contentOffset.x
+        var nextScreen = Int()
         guard contentOffsetX != width else { return }
         
         if contentOffsetX < width {
             guard pageControl.currentPage != 0 else { return }
             
             // Swipe left
+            
+            nextScreen = pageControl.currentPage - 1
+            circleView.destinationScreen = pageControl.currentPage == 0 ? 1 : nextScreen
+            
             let percentSwipingLeft = contentOffsetX / width
             circleView.changeCircleViewsBy(percent: percentSwipingLeft)
             
         } else {
             
             // Swipe right
+            
+            nextScreen = pageControl.currentPage + 1
+            circleView.destinationScreen = orderedViewControllers.count == nextScreen ? nextScreen - 1 : nextScreen
+            
             let percentSwipingRight = (width * 2 - contentOffsetX) / width
             circleView.changeCircleViewsBy(percent: percentSwipingRight)
         }

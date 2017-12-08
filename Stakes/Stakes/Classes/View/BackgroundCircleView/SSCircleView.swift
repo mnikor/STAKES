@@ -9,7 +9,7 @@
 import UIKit
 
 
-enum SSCircleType: UInt {
+enum SSCircleType: Int {
     case purple = 0xA5B0FF
     case green = 0x7CEAC4
     case red = 0xEF8686
@@ -65,19 +65,10 @@ class SSCircleView: UIView {
     private func createCircleView(coordinate: CGPoint, circleType: SSCircleType) -> UIView {
         let circle = UIView(frame: CGRect(origin: coordinate, size: circleSize))
         
-        circle.backgroundColor = UIColorFromRGB(rgbValue: circleType.rawValue)
+        circle.backgroundColor = UIColor.fromRGB(rgbValue: circleType.rawValue)
         circle.layer.masksToBounds = true
         circle.layer.cornerRadius = circle.frame.width / 2
         circle.isUserInteractionEnabled = false
         return circle
-    }
-    
-    private func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
     }
 }

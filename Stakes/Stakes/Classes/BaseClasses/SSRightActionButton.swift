@@ -14,9 +14,9 @@ class SSRightActionButton: UIButton {
     // MARK: Private Properties
     private var buttonColor: UIColor = .white
     private var buttonImage: UIImage = UIImage()
-    private let sizeButton: CGFloat = 69.0
+    private let sizeButton: CGFloat = 60.0//69.0
     private let rightIndent: CGFloat = 7.0
-    private let bottomIndent: CGFloat = 18.0
+    private let bottomIndent: CGFloat = 7.0//18.0
     
     
     // MARK: Initializers

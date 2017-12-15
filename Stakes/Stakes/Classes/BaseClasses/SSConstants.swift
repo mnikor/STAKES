@@ -26,6 +26,9 @@ struct SSConstants {
         case dueDate = 0x9C9C9C
         case underlineView = 0x979797
         case createActionBlack = 0x5F5F5F
+        case redTitleAlert = 0xFF7979
+        case blackTitleAlert = 0x4A4A4A
+        
         case testGreen = 0x0CFF14
     }
 }

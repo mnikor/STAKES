@@ -21,12 +21,4 @@ class SSBaseButton: UIButton {
         
         titleLabel?.font = fontLabel
     }
-    
-    
-    // MARK: Public funcs
-    func makeBorder(width: CircleBorderSize, color: UIColor) {
-        
-        layer.borderColor = color.cgColor
-        layer.borderWidth = width.rawValue
-    }
 }

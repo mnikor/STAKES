@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSActionPlanViewController" customModule="Stakes" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SSActionPlanTableViewCell" rowHeight="116" id="KGk-i7-Jjw" customClass="SSActionPlanTableViewCell" customModule="Stakes" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="362" height="116"/>
@@ -22,18 +22,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibB-3K-IvH" userLabel="MainView">
                         <rect key="frame" x="0.0" y="17" width="362" height="57"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gxo-6i-Xkk" userLabel="SelectButton" customClass="SSSelectCircleGoalButton" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="5" y="18.5" width="20" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="3s2-EI-HIb"/>
-                                    <constraint firstAttribute="width" constant="20" id="NA8-xf-rJE"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gxo-6i-Xkk" userLabel="SelectButton" customClass="SSSelectCircleButton" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="5" y="0.0" width="30" height="57"/>
                                 <connections>
-                                    <action selector="tappedSelectButton:" destination="-1" eventType="touchUpInside" id="JTP-zS-aga"/>
+                                    <action selector="tappedSelectGoalButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ikd-lj-3Zc"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stake: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEd-eo-XIx" userLabel="Stake: " customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="35" y="0.0" width="49.5" height="19.5"/>
+                                <rect key="frame" x="45" y="0.0" width="49.5" height="19.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="GOm-m7-xa3"/>
                                 </constraints>
@@ -42,13 +38,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEE-UT-vzb" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="84.5" y="0.0" width="63" height="20"/>
+                                <rect key="frame" x="94.5" y="0.0" width="63" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Launch App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVN-Na-TR2" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="35" y="25.5" width="327" height="31.5"/>
+                                <rect key="frame" x="45" y="25.5" width="327" height="31.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="327" id="Z0O-6A-kin"/>
                                     <constraint firstAttribute="height" constant="32" id="f0I-1j-f7t"/>
@@ -58,7 +54,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRb-bQ-XQ3" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="154.5" y="8.5" width="3" height="3"/>
+                                <rect key="frame" x="164.5" y="8.5" width="3" height="3"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="ALQ-iQ-G7w"/>
@@ -66,7 +62,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 11th, 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ru-Io-txZ" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="165" y="0.0" width="163" height="19.5"/>
+                                <rect key="frame" x="175" y="0.0" width="163" height="19.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="163" id="qMN-Os-I10"/>
                                 </constraints>
@@ -89,11 +85,13 @@
                             <constraint firstItem="nEE-UT-vzb" firstAttribute="top" secondItem="ibB-3K-IvH" secondAttribute="top" id="6Nh-J5-EI0"/>
                             <constraint firstItem="yVN-Na-TR2" firstAttribute="leading" secondItem="Gxo-6i-Xkk" secondAttribute="trailing" constant="10" id="Oyw-R7-cbx"/>
                             <constraint firstItem="xEd-eo-XIx" firstAttribute="top" secondItem="ibB-3K-IvH" secondAttribute="top" id="PLy-D1-NJA"/>
+                            <constraint firstAttribute="bottom" secondItem="Gxo-6i-Xkk" secondAttribute="bottom" id="SO6-Ho-GcM"/>
                             <constraint firstItem="5Ru-Io-txZ" firstAttribute="centerY" secondItem="TRb-bQ-XQ3" secondAttribute="centerY" id="WLw-3f-qcN"/>
                             <constraint firstItem="Gxo-6i-Xkk" firstAttribute="centerY" secondItem="ibB-3K-IvH" secondAttribute="centerY" id="Y8l-Gs-vrS"/>
                             <constraint firstAttribute="trailing" secondItem="Xon-On-rlk" secondAttribute="trailing" constant="10" id="Zh3-th-k7o"/>
                             <constraint firstAttribute="bottom" secondItem="yVN-Na-TR2" secondAttribute="bottom" id="aXI-4J-obS"/>
                             <constraint firstItem="nEE-UT-vzb" firstAttribute="leading" secondItem="xEd-eo-XIx" secondAttribute="trailing" id="dgg-vx-Hwz"/>
+                            <constraint firstItem="Gxo-6i-Xkk" firstAttribute="top" secondItem="ibB-3K-IvH" secondAttribute="top" id="gjT-xM-qUL"/>
                             <constraint firstItem="Xon-On-rlk" firstAttribute="centerY" secondItem="5Ru-Io-txZ" secondAttribute="centerY" id="p7P-2g-2xq"/>
                             <constraint firstItem="TRb-bQ-XQ3" firstAttribute="centerY" secondItem="nEE-UT-vzb" secondAttribute="centerY" id="rFC-Pb-gq5"/>
                             <constraint firstItem="5Ru-Io-txZ" firstAttribute="leading" secondItem="TRb-bQ-XQ3" secondAttribute="trailing" constant="7" id="ufT-gK-VXl"/>
@@ -104,7 +102,7 @@
                         <rect key="frame" x="0.0" y="74" width="362" height="29"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yg9-lh-akG" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="35" y="8" width="80" height="21"/>
+                                <rect key="frame" x="45" y="8" width="80" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7xD-k5-7qV"/>
                                 </constraints>
@@ -113,14 +111,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellow_star" translatesAutoresizingMaskIntoConstraints="NO" id="N4z-pV-IoU">
-                                <rect key="frame" x="156" y="9" width="19" height="19"/>
+                                <rect key="frame" x="166" y="9" width="19" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="19" id="C2X-b9-aOP"/>
                                     <constraint firstAttribute="height" constant="19" id="MkU-EU-b6Y"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOF-rF-aCH" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="122" y="9" width="27" height="19.5"/>
+                                <rect key="frame" x="132" y="9" width="27" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -150,6 +148,7 @@
             <connections>
                 <outlet property="actionNameLabel" destination="yVN-Na-TR2" id="FIc-Lh-skr"/>
                 <outlet property="dueDateLabel" destination="5Ru-Io-txZ" id="Zxb-na-BKO"/>
+                <outlet property="editImageView" destination="Xon-On-rlk" id="bYT-dw-aKW"/>
                 <outlet property="pointsLabel" destination="xOF-rF-aCH" id="EMQ-uu-iCZ"/>
                 <outlet property="selectButton" destination="Gxo-6i-Xkk" id="NDo-kR-z3v"/>
                 <outlet property="stakeLabel" destination="nEE-UT-vzb" id="cJM-WW-jks"/>

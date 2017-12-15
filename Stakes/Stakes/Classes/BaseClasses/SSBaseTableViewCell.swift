@@ -8,7 +8,15 @@
 
 import UIKit
 
+protocol SSSelectCircleButtonDelegate {
+    func selectCircleButton(_ sender: SSSelectCircleButton)
+}
+
 class SSBaseTableViewCell: UITableViewCell {
+    
+    
+    // MARK: Delegate
+    var delegate: SSSelectCircleButtonDelegate?
     
     
     // MARK: Overriden funcs

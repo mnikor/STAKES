@@ -24,6 +24,10 @@ class SSMessageManager: NSObject {
         case failure = "Failure"
     }
     
+    enum SSCustomAlertType {
+        case main, completeAction, withAction, shareGoal
+    }
+    
     enum MessageTypeDescription: String {
         
         // Simple Messages
@@ -37,9 +41,9 @@ class SSMessageManager: NSObject {
         case emptyStake = "Add stake to maximise commitment?"
         case lastActionNoSelected = "Would you like to create new actions?"
         case lastAction = "It was your last action, did your  Achieve your goal?"
-        case goalDeleted = "Sometimes goals can become irrelevant!  Confirm deletion (-50 points)?"
-        case deleteStake = "Looks like you are not confident enough  in your performance.  Confirm deletion (-10 points)?"
-        case actionDeleted = "Sometimes actions can become irrelevant! This is probably the case? Confirm deletion (-10 points)?"
+        case goalDeleted = "Sometimes goals can become irrelevant!  Confirm deletion?"
+        case deleteStake = "Looks like you are not confident enough  in your performance.  Confirm deletion?"
+        case actionDeleted = "Sometimes actions can become irrelevant! This is probably the case? Confirm deletion?"
         
         // TODO: For Push Notifications (Insert name of the action)
         case calendarReminderToday = "Today is the due date for your action: (name of the action). Make sure you complete it!"
@@ -62,6 +66,55 @@ class SSMessageManager: NSObject {
     
     
     // MARK: Class(Static) funcs
+    
+    // Main Custom Alert
+    class func showMainCustomAlertWith(title: MessageTypeTitle, and message: MessageTypeDescription, onViewController: UIViewController?) {
+        
+        let alertCompletedActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .completeActionAlert) as! SSCustomAlertViewController
+        
+        alertCompletedActionVC.messageType = .main
+        alertCompletedActionVC.alertTitle = title.rawValue
+        alertCompletedActionVC.alertDescription = message.rawValue
+        alertCompletedActionVC.modalPresentationStyle = .overCurrentContext
+        
+        instance.presentAlert(alertCompletedActionVC, onViewController)
+    }
+    
+    // Custom Alert
+    class func showCustomAlertWith(type: SSCustomAlertType, onViewController: UIViewController?) {
+        
+        let alertCompletedActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .completeActionAlert) as! SSCustomAlertViewController
+        alertCompletedActionVC.messageType = type
+        alertCompletedActionVC.modalPresentationStyle = .overCurrentContext
+        
+        instance.presentAlert(alertCompletedActionVC, onViewController)
+    }
+    
+    // Custom Alert with Action
+    class func showCustomAlertWithAction(title: MessageTypeTitle, and message: MessageTypeDescription, onViewController: UIViewController?, action:@escaping CompletionBlock) {
+        
+        let alertCompletedActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .completeActionAlert) as! SSCustomAlertViewController
+        alertCompletedActionVC.messageType = .withAction
+        alertCompletedActionVC.alertTitle = title.rawValue
+        alertCompletedActionVC.alertDescription = message.rawValue
+        alertCompletedActionVC.handler = action
+        
+        var points = String()
+        switch message {
+        case .emptyStake: points = ""
+        case .lastActionNoSelected: points = "+5"
+        case .lastAction: points = "+50"
+        case .goalDeleted: points = "-50"
+        case .deleteStake: points = "-10"
+        case .actionDeleted: points = "-10"
+        default: break
+        }
+        alertCompletedActionVC.points = points
+        
+        alertCompletedActionVC.modalPresentationStyle = .overCurrentContext
+        
+        instance.presentAlert(alertCompletedActionVC, onViewController)
+    }
     
     // Error Alert
     class func showAlertWith(error: Error, onViewController: UIViewController?) {
@@ -108,6 +161,14 @@ class SSMessageManager: NSObject {
     
     
     // MARK: Private funcs
+    private func presentAlert(_ alertVC: UIViewController, _ onViewController: UIViewController?) {
+        if let viewController = onViewController {
+            viewController.present(alertVC, animated: false, completion: nil)
+        } else {
+            rootViewController?.present(alertVC, animated: false, completion: nil)
+        }
+    }
+    
     private func createAlertWith(title: MessageTypeTitle, message: MessageTypeDescription, style: UIAlertControllerStyle) -> UIAlertController {
         return createAlertWith(title: title.rawValue, message: message.rawValue, style: style)
     }

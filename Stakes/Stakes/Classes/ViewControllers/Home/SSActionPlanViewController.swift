@@ -22,14 +22,14 @@ class SSActionPlanViewController: SSBaseDetailViewController {
     @IBOutlet weak var expandButton: SSCenterActionButton!
     @IBOutlet weak var titleUnderlineView: SSUnderlineView!
     
+    
     // MARK: Public Properties
     var goal: Goal?
+    var isExpanded = false
     
     
     // MARK: Private Properties
-    private var hideActionButton = true
-    private var isExpanded = false
-    private var selectedActionButton: SSSelectCircleGoalButton?
+    private var selectedCellCircleButton: SSSelectCircleButton?
     
     var showEmptyView: Bool {
         return actions.count == 0
@@ -56,12 +56,16 @@ class SSActionPlanViewController: SSBaseDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        hideActionButton = false
-        updateActionButtons(nil)
+        updateUIAfterAction()
         showHideEptyView()
+        expandAction()
+        tableViewTop.isHidden = isExpanded
         
-        tableViewTop.reloadData()
-        tableViewBottom.reloadData()
+        // Delegate for Cells from tableViewTop
+        for cell in tableViewTop.visibleCells {
+            let cellWithCircle = cell as? SSBaseTableViewCell
+            cellWithCircle?.delegate = self
+        }
     }
     
     // Pass Goal to Container View with Top table view
@@ -81,42 +85,46 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         }
     }
     
-    // MARK: Action funcs
     
-    // Select Action by Right Circle
-    @IBAction func tappedSelectButton(_ sender: SSSelectCircleGoalButton) {
-        
-        updateActionButtons(sender)
-        selectedActionButton = sender
-    }
+    // MARK: Action funcs
     
     // Delete Goal action on DeleteCompleteView
     @IBAction func tappedDeleteButton(_ sender: SSBaseButton) {
         
-        SSMessageManager.showAlertWithCancelButton(title: .warning,
-                                                   message: .actionDeleted,
-                                                   onViewController: self,
-                                                   action: { self.deleteAction() })
+        if selectedCellCircleButton?.typeButton == SSCircleButtonType.goal {
+            
+            SSMessageManager.showCustomAlertWithAction(title: .warning,
+                                                       and: .goalDeleted,
+                                                       onViewController: self,
+                                                       action: { self.delete(isGoal: true) })
+        } else {
+            SSMessageManager.showCustomAlertWithAction(title: .warning,
+                                                       and: .actionDeleted,
+                                                       onViewController: self,
+                                                       action: { self.delete(isGoal: false) })
+        }
         
-        updateActionButtons(selectedActionButton)
-        
-        // Update Points Label
-        updatePointsLabel()
+        updateUIAfterAction()
     }
     
     // Complete Goal action on DeleteCompleteView
     @IBAction func tappedCompleteButton(_ sender: SSBaseButton) {
         
-        if selectedActionButton!.selectedAction!.status != GoalStatusType.complete.rawValue {
-            selectedActionButton!.selectedAction!.changeStatus(.complete)
-            SSMessageManager.showAlertWith(title: .success, and: .completedAction, onViewController: self)
+        if let selectedAction = selectedCellCircleButton?.selectedAction {
+            
+            selectedAction.changeStatus(.complete)
+            if goal?.calculateСompletion() == 100 {
+                SSMessageManager.showMainCustomAlertWith(title: .success, and: .goalAchieved, onViewController: nil)
+            } else {
+                SSMessageManager.showCustomAlertWith(type: .completeAction, onViewController: self)
+            }
+        } else {
+            
+            goal?.changeStatus(.complete)
+            SSMessageManager.showMainCustomAlertWith(title: .success, and: .goalAchieved, onViewController: nil)
         }
         
-        updateActionButtons(selectedActionButton)
-        tableViewBottom.reloadData()
-        
-        // Update Points Label
-        updatePointsLabel()
+        updateUIAfterAction()
     }
     
     // Right Button action Create Action rightButtonActionShare
@@ -127,7 +135,8 @@ class SSActionPlanViewController: SSBaseDetailViewController {
     
     // Right Button action Share
     @objc func rightButtonActionShare(_ sender: UIButton) {
-        // share
+        
+        SSMessageManager.showCustomAlertWith(type: .shareGoal, onViewController: self)
     }
     
     // Expand/Reduce Actions
@@ -136,6 +145,7 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         if isExpanded { tableViewTop.isHidden = !isExpanded }
         isExpanded = !isExpanded
         
+        showDeleteCompleteView(false)
         showCreateActionButton()
         UIView.animate(withDuration: 0.5, animations: {
             self.expandAction()
@@ -163,26 +173,23 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         }
     }
     
-    private func updateActionButtons(_ button: SSSelectCircleGoalButton?) {
+    private func showDeleteCompleteView(_ bool: Bool) {
         
-        rightActionButton.isHidden = hideActionButton
-        hideActionButton = !hideActionButton
-        deleteCompleteView.isHidden = hideActionButton
-        
-        guard let selectButton = button else { return }
-        
-        if hideActionButton {
-            selectButton.backgroundColor = .white
-            selectedActionButton?.backgroundColor = .white
-        } else {
-            selectButton.backgroundColor = UIColor(cgColor: selectButton.layer.borderColor!)
-        }
+        deleteCompleteView.isHidden = !bool
+        rightActionButton.isHidden = bool
+        selectedCellCircleButton?.isSelectedView = bool
     }
     
-    private func deleteAction() {
+    private func delete(isGoal: Bool) {
         
-        // Delete action from Core Data
-        goal!.delete(selectedActionButton!.selectedAction!)
+        // Delete selected action or goal from Core Data
+        if isGoal {
+            // Delete Goal
+            goal?.deleteGoal()
+        } else {
+            // Delete Action
+            goal!.delete(selectedCellCircleButton!.selectedAction!)
+        }
         
         //TableView reloadData after deleteRows animation finished
         let tableView = (isExpanded ? tableViewBottom : tableViewTop)!
@@ -196,7 +203,7 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         tableView.beginUpdates()
         
         if isExpanded {
-            tableView.deleteRows(at: [selectedActionButton!.indexPath], with: .left)
+            tableView.deleteRows(at: [selectedCellCircleButton!.indexPath], with: .left)
         }
         
         tableView.endUpdates()
@@ -234,7 +241,11 @@ class SSActionPlanViewController: SSBaseDetailViewController {
     
     private func showCreateActionButton() {
         
+        // Clear actions for rightActionButton
+        rightActionButton.removeTarget(nil, action: nil, for: .allEvents)
+        
         if showEmptyView || isExpanded {
+            
             rightActionButton.setImage(UIImage(named: "red_plus"), for: .normal)
             rightActionButton.addTarget(self, action: #selector(rightButtonActionCreate), for: .touchUpInside)
         } else {
@@ -245,6 +256,15 @@ class SSActionPlanViewController: SSBaseDetailViewController {
             rightActionButton.addTarget(self, action: #selector(rightButtonActionShare), for: .touchUpInside)
         }
         view.addSubview(rightActionButton)
+    }
+    
+    // Update Points Label, DeleteCompleteView and TableViews
+    private func updateUIAfterAction() {
+        
+        tableViewBottom.reloadData()
+        tableViewTop.reloadData()
+        updatePointsLabel()
+        showDeleteCompleteView(false)
     }
 }
 
@@ -262,6 +282,7 @@ extension SSActionPlanViewController: UITableViewDataSource {
         // TODO: Config Cell
         let cell = tableView.dequeueReusableCell(withIdentifier: SSActionPlanTableViewCell.reuseID, for: indexPath) as! SSActionPlanTableViewCell
         cell.configCellBy(actions[indexPath.row], at: indexPath)
+        cell.delegate = self
         
         return cell
     }
@@ -278,5 +299,21 @@ extension SSActionPlanViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         openCreateActionVC(editAction: actions[indexPath.row])
+    }
+}
+
+
+// MARK: Select Goal by Right Circle
+
+extension SSActionPlanViewController: SSSelectCircleButtonDelegate {
+    
+    func selectCircleButton(_ sender: SSSelectCircleButton) {
+        
+        if selectedCellCircleButton != sender {
+            selectedCellCircleButton?.isSelectedView = false
+        }
+        
+        selectedCellCircleButton = sender
+        showDeleteCompleteView(sender.isSelectedView)
     }
 }

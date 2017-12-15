@@ -53,7 +53,6 @@ class SSSelectedGoalTableViewController: UITableViewController {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: firstCellName, for: indexPath) as! SSHomeTableViewCell
             cell.configCellBy(goal!)
-            cell.deleteCompleteButton.backgroundColor = UIColor(cgColor: cell.deleteCompleteButton.layer.borderColor!)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: secondCellName, for: indexPath) as! SSActionPlanTableViewCell
@@ -77,11 +76,9 @@ class SSSelectedGoalTableViewController: UITableViewController {
         
         switch indexPath.row {
         case 0:
-            let homeVC = UIStoryboard.getSlideMenuController()
-            self.present(homeVC, animated:true, completion: nil)
-            CFRunLoopWakeUp(CFRunLoopGetCurrent())
-        case 1:
-            openCreateActionVC(editAction: actions.first)
+            openEditGoalVC(editGoal: goal)
+        case 2:
+            openEditActionVC(editAction: actions.first)
         default: break
         }
     }
@@ -95,11 +92,19 @@ class SSSelectedGoalTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
     
-    private func openCreateActionVC(editAction: Action?) {
+    private func openEditActionVC(editAction: Action?) {
         
-        let createActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .createActionVC) as! SSCreateActionViewController
-        createActionVC.goal = goal
-        createActionVC.editAction = editAction
-        navigationController?.pushViewController(createActionVC, animated: true)
+        let editActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .createActionVC) as! SSCreateActionViewController
+        editActionVC.goal = goal
+        editActionVC.editAction = editAction
+        navigationController?.pushViewController(editActionVC, animated: true)
+    }
+    
+    private func openEditGoalVC(editGoal: Goal?) {
+        
+        let editGoalVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .createGoalVC) as! SSCreateGoalViewController
+        editGoalVC.editGoal = editGoal
+        navigationController?.pushViewController(editGoalVC, animated: true)
+        CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }
 }

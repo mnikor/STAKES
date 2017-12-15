@@ -16,14 +16,15 @@ class SSHomeViewController: SSBaseViewController {
     @IBOutlet weak var todayView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var deleteCompleteView: UIView!
+    @IBOutlet weak var tipLabel: SSBaseLabel!
+    
     
     // MARK: Public Properties
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = SSCoreDataManager.instance.fetchedResultsController(entityName: .goal, keyForSort: "date", predicate: ["status": GoalStatusType.wait.rawValue])
     
     
     // MARK: Private Properties
-    private var hideActionButton = true
-    private var selectedGoalButton: SSSelectCircleGoalButton?
+    private var selectedCellCircleButton: SSSelectCircleButton?
     private var focusedIndexPath = IndexPath(row: 0, section: 0)
     
     
@@ -50,8 +51,7 @@ class SSHomeViewController: SSBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        hideActionButton = false
-        updateActionButtons(nil)
+        showDeleteCompleteView(false)
         tableView.reloadData()
     }
     
@@ -65,28 +65,21 @@ class SSHomeViewController: SSBaseViewController {
         navigationController?.pushViewController(createGoalVC, animated: true)
     }
     
-    // Select Goal by Right Circle
-    @IBAction func selectedGoal(_ sender: SSSelectCircleGoalButton) {
-        
-        updateActionButtons(sender)
-        selectedGoalButton = sender
-    }
-    
     // Delete Goal action on DeleteCompleteView
     @IBAction func tappedDeleteGoal(_ sender: SSBaseButton) {
         
-        SSMessageManager.showAlertWithCancelButton(title: .warning, message: .goalDeleted, onViewController: self, action: { self.deleteGoal() })
-        
-        // Update Goal Select button on the left
-        updateActionButtons(selectedGoalButton)
+        SSMessageManager.showCustomAlertWithAction(title: .warning,
+                                                   and: .goalDeleted,
+                                                   onViewController: self,
+                                                   action: { self.deleteGoal() })
     }
     
     // Complete Goal Action on DeleteCompleteView
     @IBAction func tappedCompleteGoal(_ sender: SSBaseButton) {
         
-        selectedGoalButton?.selectedGoal?.changeStatus(.complete)
-        SSMessageManager.showAlertWith(title: .success, and: .goalAchieved, onViewController: self)
-        updateActionButtons(selectedGoalButton)
+        selectedCellCircleButton?.selectedGoal?.changeStatus(.complete)
+        SSMessageManager.showMainCustomAlertWith(title: .success, and: .goalAchieved, onViewController: self)
+        showDeleteCompleteView(false)
     }
     
     
@@ -100,6 +93,8 @@ class SSHomeViewController: SSBaseViewController {
         self.createCirclesBackground()
         self.setTitle("it's")
         
+        tipLabel.textColor = UIColor.colorFrom(colorType: .light)
+        
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .clear
         tableView.remembersLastFocusedIndexPath = true
@@ -110,26 +105,20 @@ class SSHomeViewController: SSBaseViewController {
         }
     }
     
-    private func updateActionButtons(_ button: SSSelectCircleGoalButton?) {
+    private func showDeleteCompleteView(_ bool: Bool) {
         
-        rightActionButton.isHidden = hideActionButton
-        hideActionButton = !hideActionButton
-        deleteCompleteView.isHidden = hideActionButton
+        deleteCompleteView.isHidden = !bool
+        rightActionButton.isHidden = bool
+        selectedCellCircleButton?.isSelectedView = bool
         
-        guard let selectButton = button else { return }
-        
-        if hideActionButton {
-            selectButton.backgroundColor = .white
-            selectedGoalButton?.backgroundColor = .white
-        } else {
-            selectButton.backgroundColor = UIColor(cgColor: selectButton.layer.borderColor!)
-        }
+        tipLabel.isHidden = tableView.visibleCells.count != 0
     }
     
     private func deleteGoal() {
         
-        selectedGoalButton?.selectedGoal?.deleteGoal()
-        self.updatePointsLabel()
+        selectedCellCircleButton?.selectedGoal?.deleteGoal()
+        updatePointsLabel()
+        showDeleteCompleteView(false)
     }
 }
 
@@ -152,10 +141,12 @@ extension SSHomeViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SSHomeTableViewCell.reuseID, for: indexPath) as! SSHomeTableViewCell
             cell.configCellBy(goal)
+            cell.delegate = self
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SSHomeShortTableViewCell.reuseID, for: indexPath) as! SSHomeShortTableViewCell
             cell.configCellBy(goal)
+            cell.delegate = self
             return cell
         }
     }
@@ -166,11 +157,15 @@ extension SSHomeViewController: UITableViewDataSource {
 
 extension SSHomeViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 117
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 280
         } else {
-            return 117
+            return UITableViewAutomaticDimension
         }
     }
     
@@ -232,3 +227,18 @@ extension SSHomeViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+
+// MARK: Select Goal by Right Circle
+
+extension SSHomeViewController: SSSelectCircleButtonDelegate {
+    
+    func selectCircleButton(_ sender: SSSelectCircleButton) {
+        
+        if selectedCellCircleButton != sender {
+            selectedCellCircleButton?.isSelectedView = false
+        }
+        
+        selectedCellCircleButton = sender
+        showDeleteCompleteView(sender.isSelectedView)
+    }
+}

@@ -36,6 +36,9 @@ extension UIStoryboard {
         case createActionVC = "SSCreateActionViewController"
         case createGoalVC = "SSCreateGoalViewController"
         
+        // Custom Alert
+        case completeActionAlert = "SSCustomAlertViewController"
+        
         // Menu
         case menuVC = "SSMenuViewController"
         case achievedGoalsVC = "SSAchievedGoalsViewController"

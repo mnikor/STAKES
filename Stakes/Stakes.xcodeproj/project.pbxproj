@@ -26,6 +26,9 @@
 		9959AE631FBF201600CDBF50 /* Goal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9959AE5F1FBF201600CDBF50 /* Goal+CoreDataProperties.swift */; };
 		9959AE641FBF201600CDBF50 /* Action+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9959AE601FBF201600CDBF50 /* Action+CoreDataClass.swift */; };
 		9959AE651FBF201600CDBF50 /* Action+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9959AE611FBF201600CDBF50 /* Action+CoreDataProperties.swift */; };
+		997BC1B91FE004FB00FBC6A2 /* SSCustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BC1B81FE004FB00FBC6A2 /* SSCustomAlertViewController.swift */; };
+		997BC1C11FE035A300FBC6A2 /* SSComlpeteActionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997BC1C01FE035A300FBC6A2 /* SSComlpeteActionAlertView.swift */; };
+		997BC1C31FE035B000FBC6A2 /* SSComlpeteActionAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 997BC1C21FE035B000FBC6A2 /* SSComlpeteActionAlertView.xib */; };
 		99841DB71FB5D1AA009FEA75 /* SSHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99841DB61FB5D1AA009FEA75 /* SSHomeViewController.swift */; };
 		99841DBA1FB5D207009FEA75 /* SSActionPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99841DB91FB5D207009FEA75 /* SSActionPlanViewController.swift */; };
 		99841DBC1FB5D24A009FEA75 /* SSSelectedGoalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99841DBB1FB5D24A009FEA75 /* SSSelectedGoalTableViewController.swift */; };
@@ -35,9 +38,18 @@
 		99841DC51FB5D3EA009FEA75 /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99841DC41FB5D3EA009FEA75 /* SSSettingsViewController.swift */; };
 		99841DC71FB5D421009FEA75 /* SSFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99841DC61FB5D421009FEA75 /* SSFeedbackViewController.swift */; };
 		99841DCB1FB5E72E009FEA75 /* UIViewController + Reuse ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99841DCA1FB5E72E009FEA75 /* UIViewController + Reuse ID.swift */; };
-		9984A1161FC58F0100696EEC /* SSSelectCircleGoalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984A1151FC58F0100696EEC /* SSSelectCircleGoalButton.swift */; };
+		9984A1161FC58F0100696EEC /* SSSelectCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984A1151FC58F0100696EEC /* SSSelectCircleButton.swift */; };
 		9984A1181FC5A87200696EEC /* SSBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984A1171FC5A87200696EEC /* SSBaseButton.swift */; };
 		9984A11A1FC5C54500696EEC /* SSMainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984A1191FC5C54500696EEC /* SSMainNavigationController.swift */; };
+		998694721FE125F90098F6A9 /* SSBaseCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998694711FE125F90098F6A9 /* SSBaseCustomAlertView.swift */; };
+		998694751FE12BD30098F6A9 /* SSActionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998694741FE12BD30098F6A9 /* SSActionAlertView.swift */; };
+		998694771FE12BDB0098F6A9 /* SSActionAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998694761FE12BDB0098F6A9 /* SSActionAlertView.xib */; };
+		9986947A1FE13FF10098F6A9 /* SSShareGoalAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998694791FE13FF10098F6A9 /* SSShareGoalAlertView.xib */; };
+		9986947C1FE140030098F6A9 /* SSShareGoalAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9986947B1FE140030098F6A9 /* SSShareGoalAlertView.swift */; };
+		998988021FE176AC00FEAD60 /* TGPDiscreteSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998988011FE176AC00FEAD60 /* TGPDiscreteSlider.swift */; };
+		998988041FE177D500FEAD60 /* TGPControlsTicksProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998988031FE177D500FEAD60 /* TGPControlsTicksProtocol.swift */; };
+		998988071FE190E700FEAD60 /* SSMainCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998988061FE190E700FEAD60 /* SSMainCustomAlertView.swift */; };
+		998988091FE1911F00FEAD60 /* SSMainCustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998988081FE1911F00FEAD60 /* SSMainCustomAlertView.xib */; };
 		998A71F01FBD839E00051B97 /* SSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998A71EF1FBD839E00051B97 /* SSConstants.swift */; };
 		998A71F21FBD88A900051B97 /* SSBaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998A71F11FBD88A900051B97 /* SSBaseTextField.swift */; };
 		998A71FA1FBDC13B00051B97 /* SSCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998A71F91FBDC13B00051B97 /* SSCoreDataManager.swift */; };
@@ -105,6 +117,9 @@
 		9959AE5F1FBF201600CDBF50 /* Goal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9959AE601FBF201600CDBF50 /* Action+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Action+CoreDataClass.swift"; path = "CoreDataProperties/Action+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9959AE611FBF201600CDBF50 /* Action+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Action+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		997BC1B81FE004FB00FBC6A2 /* SSCustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCustomAlertViewController.swift; sourceTree = "<group>"; };
+		997BC1C01FE035A300FBC6A2 /* SSComlpeteActionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSComlpeteActionAlertView.swift; sourceTree = "<group>"; };
+		997BC1C21FE035B000FBC6A2 /* SSComlpeteActionAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SSComlpeteActionAlertView.xib; sourceTree = "<group>"; };
 		99841DB61FB5D1AA009FEA75 /* SSHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSHomeViewController.swift; sourceTree = "<group>"; };
 		99841DB91FB5D207009FEA75 /* SSActionPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSActionPlanViewController.swift; sourceTree = "<group>"; };
 		99841DBB1FB5D24A009FEA75 /* SSSelectedGoalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSelectedGoalTableViewController.swift; sourceTree = "<group>"; };
@@ -114,9 +129,18 @@
 		99841DC41FB5D3EA009FEA75 /* SSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		99841DC61FB5D421009FEA75 /* SSFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSFeedbackViewController.swift; sourceTree = "<group>"; };
 		99841DCA1FB5E72E009FEA75 /* UIViewController + Reuse ID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Reuse ID.swift"; sourceTree = "<group>"; };
-		9984A1151FC58F0100696EEC /* SSSelectCircleGoalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSelectCircleGoalButton.swift; sourceTree = "<group>"; };
+		9984A1151FC58F0100696EEC /* SSSelectCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSelectCircleButton.swift; sourceTree = "<group>"; };
 		9984A1171FC5A87200696EEC /* SSBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSBaseButton.swift; sourceTree = "<group>"; };
 		9984A1191FC5C54500696EEC /* SSMainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSMainNavigationController.swift; sourceTree = "<group>"; };
+		998694711FE125F90098F6A9 /* SSBaseCustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSBaseCustomAlertView.swift; sourceTree = "<group>"; };
+		998694741FE12BD30098F6A9 /* SSActionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSActionAlertView.swift; sourceTree = "<group>"; };
+		998694761FE12BDB0098F6A9 /* SSActionAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SSActionAlertView.xib; sourceTree = "<group>"; };
+		998694791FE13FF10098F6A9 /* SSShareGoalAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SSShareGoalAlertView.xib; sourceTree = "<group>"; };
+		9986947B1FE140030098F6A9 /* SSShareGoalAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSShareGoalAlertView.swift; sourceTree = "<group>"; };
+		998988011FE176AC00FEAD60 /* TGPDiscreteSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGPDiscreteSlider.swift; sourceTree = "<group>"; };
+		998988031FE177D500FEAD60 /* TGPControlsTicksProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGPControlsTicksProtocol.swift; sourceTree = "<group>"; };
+		998988061FE190E700FEAD60 /* SSMainCustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSMainCustomAlertView.swift; sourceTree = "<group>"; };
+		998988081FE1911F00FEAD60 /* SSMainCustomAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SSMainCustomAlertView.xib; sourceTree = "<group>"; };
 		998A71EF1FBD839E00051B97 /* SSConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSConstants.swift; sourceTree = "<group>"; };
 		998A71F11FBD88A900051B97 /* SSBaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSBaseTextField.swift; sourceTree = "<group>"; };
 		998A71F91FBDC13B00051B97 /* SSCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSCoreDataManager.swift; sourceTree = "<group>"; };
@@ -218,6 +242,7 @@
 		3A1B71331FB2F5CA00674BB4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				997BC1B81FE004FB00FBC6A2 /* SSCustomAlertViewController.swift */,
 				99841DB81FB5D1B9009FEA75 /* Introduction */,
 				99841DBF1FB5D305009FEA75 /* Home */,
 				99841DC81FB5D483009FEA75 /* Menu */,
@@ -303,6 +328,27 @@
 			path = CoreDataProperties;
 			sourceTree = "<group>";
 		};
+		997BC1B71FE004D700FBC6A2 /* Custom Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				998694711FE125F90098F6A9 /* SSBaseCustomAlertView.swift */,
+				998988051FE190AA00FEAD60 /* Base Custom Alert */,
+				998694731FE12BA20098F6A9 /* Alert with Action */,
+				998694781FE13F250098F6A9 /* Share Alert */,
+				997BC1C41FE035B700FBC6A2 /* Complete Alert */,
+			);
+			path = "Custom Alerts";
+			sourceTree = "<group>";
+		};
+		997BC1C41FE035B700FBC6A2 /* Complete Alert */ = {
+			isa = PBXGroup;
+			children = (
+				997BC1C01FE035A300FBC6A2 /* SSComlpeteActionAlertView.swift */,
+				997BC1C21FE035B000FBC6A2 /* SSComlpeteActionAlertView.xib */,
+			);
+			path = "Complete Alert";
+			sourceTree = "<group>";
+		};
 		99841DB81FB5D1B9009FEA75 /* Introduction */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,10 +367,10 @@
 				99C1E4E11FC4361500FE9300 /* SSHomeCell */,
 				999A25631FCD532700F9E148 /* SSActionPlanCell */,
 				99841DB61FB5D1AA009FEA75 /* SSHomeViewController.swift */,
-				99944CDE1FC80628009AF0E5 /* SSCreateGoalViewController.swift */,
 				99841DB91FB5D207009FEA75 /* SSActionPlanViewController.swift */,
-				99841DBD1FB5D28A009FEA75 /* SSCreateActionViewController.swift */,
 				99841DBB1FB5D24A009FEA75 /* SSSelectedGoalTableViewController.swift */,
+				99944CDE1FC80628009AF0E5 /* SSCreateGoalViewController.swift */,
+				99841DBD1FB5D28A009FEA75 /* SSCreateActionViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -351,11 +397,39 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		998694731FE12BA20098F6A9 /* Alert with Action */ = {
+			isa = PBXGroup;
+			children = (
+				998694741FE12BD30098F6A9 /* SSActionAlertView.swift */,
+				998694761FE12BDB0098F6A9 /* SSActionAlertView.xib */,
+			);
+			path = "Alert with Action";
+			sourceTree = "<group>";
+		};
+		998694781FE13F250098F6A9 /* Share Alert */ = {
+			isa = PBXGroup;
+			children = (
+				9986947B1FE140030098F6A9 /* SSShareGoalAlertView.swift */,
+				998694791FE13FF10098F6A9 /* SSShareGoalAlertView.xib */,
+			);
+			path = "Share Alert";
+			sourceTree = "<group>";
+		};
+		998988051FE190AA00FEAD60 /* Base Custom Alert */ = {
+			isa = PBXGroup;
+			children = (
+				998988061FE190E700FEAD60 /* SSMainCustomAlertView.swift */,
+				998988081FE1911F00FEAD60 /* SSMainCustomAlertView.xib */,
+			);
+			path = "Base Custom Alert";
+			sourceTree = "<group>";
+		};
 		998A71F61FBD96A800051B97 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				99944CE41FC80DCF009AF0E5 /* CreateGoalView */,
 				99944CE61FC80EC1009AF0E5 /* BackgroundCircleView */,
+				997BC1B71FE004D700FBC6A2 /* Custom Alerts */,
 				99D905E81FB9C4B60043DED4 /* SSGoalTextField.swift */,
 				99B5DAF81FDAA69800ED6155 /* SSUnderlineView.swift */,
 				9939ACEB1FC6CF3100F8CA52 /* SSPointsView.swift */,
@@ -363,7 +437,7 @@
 				99D905EA1FB9E0D50043DED4 /* SSStakeTextField.swift */,
 				998FBCF61FBAF8DF0026305A /* SSTimeLinePointView.swift */,
 				99C1E4DB1FC42FDB00FE9300 /* SSCurrentDateLabel.swift */,
-				9984A1151FC58F0100696EEC /* SSSelectCircleGoalButton.swift */,
+				9984A1151FC58F0100696EEC /* SSSelectCircleButton.swift */,
 				99944CED1FC814D4009AF0E5 /* SSCenterActionButton.swift */,
 			);
 			path = View;
@@ -383,8 +457,18 @@
 		998A71F81FBD96F000051B97 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				998C02DE1FE28B1A0065E576 /* Discrete Slider */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		998C02DE1FE28B1A0065E576 /* Discrete Slider */ = {
+			isa = PBXGroup;
+			children = (
+				998988011FE176AC00FEAD60 /* TGPDiscreteSlider.swift */,
+				998988031FE177D500FEAD60 /* TGPControlsTicksProtocol.swift */,
+			);
+			path = "Discrete Slider";
 			sourceTree = "<group>";
 		};
 		99944CE41FC80DCF009AF0E5 /* CreateGoalView */ = {
@@ -510,9 +594,13 @@
 				991467421FBB02980025098E /* Assets.xcassets in Resources */,
 				3A1B712B1FB2F4D300674BB4 /* LaunchScreen.storyboard in Resources */,
 				99C1E4E01FC4360F00FE9300 /* SSHomeTableViewCell.xib in Resources */,
+				998988091FE1911F00FEAD60 /* SSMainCustomAlertView.xib in Resources */,
 				999A25691FCD538400F9E148 /* SSActionPlanTableViewCell.xib in Resources */,
 				99944CE11FC808F7009AF0E5 /* SSCreateGoalView.xib in Resources */,
 				998FBCF01FBAE9530026305A /* Home.storyboard in Resources */,
+				9986947A1FE13FF10098F6A9 /* SSShareGoalAlertView.xib in Resources */,
+				997BC1C31FE035B000FBC6A2 /* SSComlpeteActionAlertView.xib in Resources */,
+				998694771FE12BDB0098F6A9 /* SSActionAlertView.xib in Resources */,
 				3A1B71461FB2FA7000674BB4 /* Localizable.strings in Resources */,
 				999687141FD696D300EF52CE /* Big_Caslon-Medium.ttf in Resources */,
 				998FBCF31FBAE9730026305A /* Menu.storyboard in Resources */,
@@ -613,12 +701,14 @@
 				9959AE621FBF201600CDBF50 /* Goal+CoreDataClass.swift in Sources */,
 				99841DB71FB5D1AA009FEA75 /* SSHomeViewController.swift in Sources */,
 				99D905EB1FB9E0D50043DED4 /* SSStakeTextField.swift in Sources */,
+				9986947C1FE140030098F6A9 /* SSShareGoalAlertView.swift in Sources */,
 				99C1E4DF1FC4360F00FE9300 /* SSHomeTableViewCell.swift in Sources */,
 				99944CEE1FC814D4009AF0E5 /* SSCenterActionButton.swift in Sources */,
 				99841DC31FB5D3C4009FEA75 /* SSAchievedGoalsViewController.swift in Sources */,
 				998FBCF71FBAF8DF0026305A /* SSTimeLinePointView.swift in Sources */,
 				99DA3BB61FB4582500E1B878 /* SSThirdOnboardingViewController.swift in Sources */,
 				99CA87F01FBC8890006BE4FE /* SSRightActionButton.swift in Sources */,
+				998694751FE12BD30098F6A9 /* SSActionAlertView.swift in Sources */,
 				99944CDF1FC80628009AF0E5 /* SSCreateGoalViewController.swift in Sources */,
 				99841DBA1FB5D207009FEA75 /* SSActionPlanViewController.swift in Sources */,
 				9984A11A1FC5C54500696EEC /* SSMainNavigationController.swift in Sources */,
@@ -629,8 +719,11 @@
 				99944CE91FC80ED5009AF0E5 /* SSCircleView.swift in Sources */,
 				99841DBC1FB5D24A009FEA75 /* SSSelectedGoalTableViewController.swift in Sources */,
 				99C1E4EB1FC461B000FE9300 /* Date+Formatter.swift in Sources */,
+				998988021FE176AC00FEAD60 /* TGPDiscreteSlider.swift in Sources */,
 				3A1B71411FB2F82200674BB4 /* UIStoryboard+Stakes.swift in Sources */,
+				997BC1B91FE004FB00FBC6A2 /* SSCustomAlertViewController.swift in Sources */,
 				999A25681FCD538400F9E148 /* SSActionPlanTableViewCell.swift in Sources */,
+				998988041FE177D500FEAD60 /* TGPControlsTicksProtocol.swift in Sources */,
 				9959AE631FBF201600CDBF50 /* Goal+CoreDataProperties.swift in Sources */,
 				998A71F01FBD839E00051B97 /* SSConstants.swift in Sources */,
 				99C1E4DC1FC42FDB00FE9300 /* SSCurrentDateLabel.swift in Sources */,
@@ -638,12 +731,15 @@
 				998A71F21FBD88A900051B97 /* SSBaseTextField.swift in Sources */,
 				99D905E51FB992E90043DED4 /* SSBaseLabel.swift in Sources */,
 				99841DC11FB5D355009FEA75 /* SSMenuViewController.swift in Sources */,
+				997BC1C11FE035A300FBC6A2 /* SSComlpeteActionAlertView.swift in Sources */,
 				999A256F1FCD6EEB00F9E148 /* Float+StakeString.swift in Sources */,
 				3A1B713F1FB2F6F000674BB4 /* TableControl.swift in Sources */,
 				99D905E71FB9C49F0043DED4 /* SSDueDateTextField.swift in Sources */,
+				998694721FE125F90098F6A9 /* SSBaseCustomAlertView.swift in Sources */,
 				993842211FD9A0DA0025BE6B /* SSBaseTableView.swift in Sources */,
-				9984A1161FC58F0100696EEC /* SSSelectCircleGoalButton.swift in Sources */,
+				9984A1161FC58F0100696EEC /* SSSelectCircleButton.swift in Sources */,
 				99C1E4E31FC43EC100FE9300 /* TableViewCell+ReuseID.swift in Sources */,
+				998988071FE190E700FEAD60 /* SSMainCustomAlertView.swift in Sources */,
 				3A1B715A1FB2FC0200674BB4 /* SSMessageManager.swift in Sources */,
 				999A256B1FCD548500F9E148 /* SSBaseTableViewCell.swift in Sources */,
 				99DA3BB81FB4583E00E1B878 /* SSFourthOnboardingViewController.swift in Sources */,

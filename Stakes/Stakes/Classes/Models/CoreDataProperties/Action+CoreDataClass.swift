@@ -60,8 +60,8 @@ public class Action: NSManagedObject {
             points.add(pointsForCurrentStake)
             if self.goal?.calculateСompletion() == 100 {
                 
-                SSMessageManager.showAlertWith(title: .success, and: .goalAchieved, onViewController: nil)
                 goal?.changeStatus(.complete)
+                SSMessageManager.showMainCustomAlertWith(title: .success, and: .goalAchieved, onViewController: nil)
             }
         case .missed:
             points.deduct(pointsForCurrentStake)

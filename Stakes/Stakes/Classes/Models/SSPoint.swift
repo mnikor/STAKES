@@ -37,7 +37,7 @@ class SSPoint {
     }
     
     func calculatePointsFor(stake: Float) -> Int {
-        return stake == 0.0 ? 5 : Int(stake + 1.0)
+        return stake == 0.0 ? 5 : Int(stake + 6.0)
     }
     
     func add(_ points: Int) {

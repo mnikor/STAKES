@@ -12,26 +12,27 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
     
     
     // MARK: Outlets
-    @IBOutlet weak var selectButton: SSSelectCircleGoalButton!
+    @IBOutlet weak var selectButton: SSSelectCircleButton!
     @IBOutlet weak var stakeLabel: SSBaseLabel!
     @IBOutlet weak var dueDateLabel: SSBaseLabel!
     @IBOutlet weak var actionNameLabel: SSBaseLabel!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: SSBaseLabel!
     @IBOutlet weak var pointsLabel: SSBaseLabel!
+    @IBOutlet weak var editImageView: UIImageView!
     
     
     // MARK: Public funcs
     func configCellBy(_ action: Action, at indexPath: IndexPath) {
         
-        selectButton.indexPath = indexPath
         let dueDate = Date.formatter(date: action.date! as Date, with: .monthDayYear)
+        
+        selectButton.indexPath = indexPath
+        hideSelectButton(false)
         
         // Set color
         dueDateLabel.textColor = UIColor.colorFrom(colorType: .dueDate)
-        selectButton.backgroundColor = .white
-        selectButton.makeBorder(width: .small, color: UIColor.colorFrom(colorType: .defaultBlack))
-        
+        selectButton.change(type: .action)
         
         // Set values
         actionNameLabel.text = action.name
@@ -47,24 +48,46 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
     }
     
     
+    // MARK: Action funcs
+    
+    @IBAction func tappedSelectGoalButton(_ sender: SSSelectCircleButton) {
+        
+        sender.isSelectedView = !sender.isSelectedView
+        delegate?.selectCircleButton(sender)
+    }
+    
+    
     // MARK: Private funcs
     private func checkStatus(_ action: Action) {
+        
         let status = action.status!
         var textColor = UIColor.fromRGB(rgbValue: 0x64C3FF) //Completed color
         
         switch status {
         case GoalStatusType.complete.rawValue:
-            statusView.isHidden = false
+            
             statusLabel.text = status
+            hideSelectButton(true)
+            
         case GoalStatusType.missed.rawValue:
-            statusView.isHidden = false
+            
             statusLabel.text = status
+            hideSelectButton(true)
             textColor = UIColor.fromRGB(rgbValue: 0xFF6464) //Missed color
+            
         default:
-            break
+            statusView.isHidden = true
         }
         statusLabel.textColor = textColor
         pointsLabel.textColor = textColor
         pointsLabel.text = SSPoint().getPointsFor(stake: action.stake)
+    }
+    
+    private func hideSelectButton(_ bool: Bool) {
+        
+        editImageView.isHidden = bool
+        selectButton.isHidden = bool
+        statusView.isHidden = !bool
+        self.isUserInteractionEnabled = !bool
     }
 }

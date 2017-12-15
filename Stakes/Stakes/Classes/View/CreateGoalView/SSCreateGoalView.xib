@@ -32,7 +32,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Run a Marathon" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="XgI-R8-PQc" customClass="SSGoalTextField" customModule="Stakes" customModuleProvider="target">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type your goal" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="XgI-R8-PQc" customClass="SSGoalTextField" customModule="Stakes" customModuleProvider="target">
                             <rect key="frame" x="20" y="20" width="335" height="29"/>
                             <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="24"/>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -119,16 +119,16 @@ achieve their goals</string>
                                 <rect key="frame" x="25" y="364" width="283.5" height="228"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Foq-bm-65G" userLabel="Stack View First">
-                                        <rect key="frame" x="94" y="20" width="159.5" height="70"/>
+                                        <rect key="frame" x="68" y="20" width="179.5" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 10th, 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00C-jD-xpc" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="159.5" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="179.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 5km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-ko-Pll" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="19.5" width="159.5" height="50.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 5km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-ko-Pll" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="19.5" width="179.5" height="50.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -162,7 +162,7 @@ achieve their goals</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CCH-nb-XWK" userLabel="Stack View Second">
-                                        <rect key="frame" x="84" y="138" width="179.5" height="70"/>
+                                        <rect key="frame" x="68" y="138" width="179.5" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="May 10th, 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cp4-cM-MzL" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="179.5" height="19.5"/>
@@ -170,7 +170,7 @@ achieve their goals</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 10km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bR-Kq-bJ0" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run 10km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bR-Kq-bJ0" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="19.5" width="179.5" height="50.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                 <nil key="textColor"/>
@@ -195,8 +195,9 @@ achieve their goals</string>
                                     <constraint firstItem="EET-3V-0xe" firstAttribute="centerX" secondItem="QsU-BQ-P0f" secondAttribute="centerX" id="aQ4-cy-elD"/>
                                     <constraint firstItem="QsU-BQ-P0f" firstAttribute="bottom" secondItem="CCH-nb-XWK" secondAttribute="bottom" id="aeB-p7-P5V"/>
                                     <constraint firstItem="Etd-fk-mk1" firstAttribute="centerY" secondItem="Foq-bm-65G" secondAttribute="centerY" id="fZ0-oP-ct9"/>
-                                    <constraint firstItem="Foq-bm-65G" firstAttribute="leading" secondItem="QsU-BQ-P0f" secondAttribute="trailing" constant="66" id="kpY-lH-dFB"/>
+                                    <constraint firstItem="Foq-bm-65G" firstAttribute="leading" secondItem="QsU-BQ-P0f" secondAttribute="trailing" constant="40" id="kpY-lH-dFB"/>
                                     <constraint firstItem="CCH-nb-XWK" firstAttribute="centerX" secondItem="Foq-bm-65G" secondAttribute="centerX" id="swn-zn-Mav"/>
+                                    <constraint firstItem="FxF-ko-Pll" firstAttribute="leading" secondItem="0bR-Kq-bJ0" secondAttribute="leading" id="t21-AL-9mm"/>
                                     <constraint firstItem="Etd-fk-mk1" firstAttribute="centerX" secondItem="QsU-BQ-P0f" secondAttribute="centerX" id="xnD-gm-xUK"/>
                                 </constraints>
                             </view>
@@ -248,8 +249,8 @@ It Interesting</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$99.99" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-Sz-Sqn" customClass="SSBaseTextField" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="393" width="200" height="72"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$9.99" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-Sz-Sqn" customClass="SSBaseTextField" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="105.5" y="393" width="164" height="72"/>
                                 <color key="textColor" red="1" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>

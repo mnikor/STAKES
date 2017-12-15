@@ -15,7 +15,7 @@ class SSHomeShortTableViewCell: SSBaseTableViewCell {
     @IBOutlet weak var goalNameLabel: SSBaseLabel!
     @IBOutlet weak var goalDateLabel: SSBaseLabel!
     @IBOutlet weak var remainingDaysLabel: SSBaseLabel!
-    @IBOutlet weak var deleteCompleteButton: SSSelectCircleGoalButton!
+    @IBOutlet weak var selectGoalButton: SSSelectCircleButton!
     
     
     // MARK: Public funcs
@@ -26,16 +26,24 @@ class SSHomeShortTableViewCell: SSBaseTableViewCell {
         
         // Set color
         goalDateLabel.textColor = UIColor.colorFrom(colorType: .dueDate)
-        deleteCompleteButton.backgroundColor = .white
-        deleteCompleteButton.makeBorder(width: .small, color: UIColor.colorFrom(colorType: .defaultBlack))
+        selectGoalButton.change(type: .action)
         
-        // Change size by amount of characters
-        goalNameLabel.sizeByTextFor(lines: 2)
+        goalNameLabel.numberOfLines = 0
+        goalNameLabel.lineBreakMode = .byWordWrapping
         
         // Set values
         goalNameLabel.text = goal.name
         goalDateLabel.text = goalDateLabel.additionFor(dateText)
         remainingDaysLabel.text = Date.daysBetween(firstDate: Date(), and: goalDate).description + " Days"
-        deleteCompleteButton.selectedGoal = goal
+        selectGoalButton.selectedGoal = goal
+    }
+    
+    
+    // MARK: Action funcs
+    
+    @IBAction func tappedSelectGoalButton(_ sender: SSSelectCircleButton) {
+        
+        sender.isSelectedView = !sender.isSelectedView
+        delegate?.selectCircleButton(sender)
     }
 }

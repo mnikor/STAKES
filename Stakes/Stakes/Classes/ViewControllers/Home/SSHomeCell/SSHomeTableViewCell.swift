@@ -13,7 +13,7 @@ class SSHomeTableViewCell: SSBaseTableViewCell {
     
     // MARK: Outlets
     @IBOutlet weak var progressSlider: UISlider!
-    @IBOutlet weak var deleteCompleteButton: SSSelectCircleGoalButton!
+    @IBOutlet weak var selectGoalButton: SSSelectCircleButton!
     @IBOutlet weak var completeLabel: SSBaseLabel!
     @IBOutlet weak var nameGoalLabel: SSBaseLabel!
     @IBOutlet weak var nameNextActionLabel: SSBaseLabel!
@@ -29,8 +29,7 @@ class SSHomeTableViewCell: SSBaseTableViewCell {
         let completePercent = goal.calculateСompletion()
         
         // Set color and images
-        deleteCompleteButton.makeBorder(width: .medium, color: textColor)
-        deleteCompleteButton.backgroundColor = .white
+        selectGoalButton.change(type: .goal)
         nameNextActionLabel.textColor = textColor
         stakeNextActionLabel.textColor = textColor
         pointsNextActionLabel.textColor = textColor
@@ -59,7 +58,7 @@ class SSHomeTableViewCell: SSBaseTableViewCell {
         
         completeLabel.text = completePercent.description + "% Complete"
         progressSlider.value = Float(completePercent)
-        deleteCompleteButton.selectedGoal = goal
+        selectGoalButton.selectedGoal = goal
         
         // Change size by amount of characters
         nameGoalLabel.sizeByTextFor(lines: 0)
@@ -67,4 +66,13 @@ class SSHomeTableViewCell: SSBaseTableViewCell {
         stakeNextActionLabel.sizeByTextFor(lines: 1)
         pointsNextActionLabel.sizeByTextFor(lines: 1)
     }
+    
+    
+    // MARK: Action funcs
+    @IBAction func tappedSelectGoalButton(_ sender: SSSelectCircleButton) {
+        
+        sender.isSelectedView = !sender.isSelectedView
+        delegate?.selectCircleButton(sender)
+    }
 }
+

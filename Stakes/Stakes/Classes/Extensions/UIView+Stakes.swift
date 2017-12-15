@@ -23,6 +23,13 @@ enum CircleBorderSize: CGFloat {
 
 extension UIView {
     
+    // Border
+    func makeBorder(width: CircleBorderSize, color: UIColor) {
+        
+        layer.borderColor = color.cgColor
+        layer.borderWidth = width.rawValue
+    }
+    
     // Shadow
     func dropShadow() {
         let color: UIColor = .lightGray

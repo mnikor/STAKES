@@ -60,6 +60,23 @@ public class Goal: NSManagedObject {
         SSCoreDataManager.instance.saveContext()
     }
     
+    // Edit Goal Values
+    func changeGoal(name: String, date: Date) {
+        
+        let newDate = date as NSDate
+        
+        // Change Due Date -10 points
+        if self.date != newDate {
+            // TODO: Show alert "Change Goal Date -10 points Yes/No?"
+            points.deduct(10)
+        }
+        
+        self.name = name
+        self.date = newDate
+        
+        SSCoreDataManager.instance.saveContext()
+    }
+    
     // Get Action array sorted by Date for current Goal
     func getActions() -> [Action] {
         var result = [Action]()

@@ -16,6 +16,10 @@ class SSCreateGoalViewController: SSBaseDetailViewController {
     @IBOutlet weak var createGoalView: SSCreateGoalView!
     
     
+    // MARK: Public Properties
+    var editGoal: Goal?
+    
+    
     // MARK: Private Properties
     private var goalNameTextField: SSGoalTextField {
         return createGoalView.goalNameTextField
@@ -40,9 +44,14 @@ class SSCreateGoalViewController: SSBaseDetailViewController {
     @IBAction func tappedSaveButton(_ sender: SSCenterActionButton) {
         guard fieldsValidation() else { return }
         
-        let actionPlanVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .actionPlanVC) as! SSActionPlanViewController
-        actionPlanVC.goal = createGoal()
-        navigationController?.pushViewController(actionPlanVC, animated: true)
+        if let goal = editGoal {
+            goal.changeGoal(name: goalNameTextField.text!, date: dueDateTextField.selectedDate!)
+            navigationController?.popViewController(animated: true)
+        } else {
+            let actionPlanVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .actionPlanVC) as! SSActionPlanViewController
+            actionPlanVC.goal = createGoal()
+            navigationController?.pushViewController(actionPlanVC, animated: true)
+        }
     }
     
     
@@ -52,7 +61,18 @@ class SSCreateGoalViewController: SSBaseDetailViewController {
         hideKeyboardWhenTappedAround()
         goalNameTextField.isUserInteractionEnabled = true
         dueDateTextField.isUserInteractionEnabled = true
+        
+        // Set values for Edit Goal Screen
+        if let goal = editGoal {
+            
+            let goalDate = goal.date! as Date
+            dueDateTextField.selectedDate = goalDate
+            dueDateTextField.text = dueDateTextField.selectedDateToString(date: goalDate)
+            goalNameTextField.text = goal.name
+            saveButton.isEnabled = true
+        }
     }
+    
     
     // Add new Goal
     private func createGoal() -> Goal {

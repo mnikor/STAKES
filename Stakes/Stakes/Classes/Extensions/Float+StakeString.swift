@@ -11,6 +11,7 @@ import Foundation
 extension Float {
     
     func stakeString() -> String {
+        
         let result = String(format: "%.2f", self)
         return "$" + result
     }

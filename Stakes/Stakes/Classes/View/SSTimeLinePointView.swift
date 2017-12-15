@@ -12,10 +12,26 @@ class SSTimeLinePointView: UIView {
     
     
     // MARK: Initializers
+    init() {
+        super.init(frame: UIScreen.main.bounds)
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    
+    // MARK: Overriden funcs
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        settingsUI()
+    }
     
     // MARK: Overriden funcs
     override func awakeFromNib() {
@@ -24,12 +40,13 @@ class SSTimeLinePointView: UIView {
         settingsUI()
     }
     
-    
     // MARK: Public funcs
-    func makeBorder(width: CircleBorderSize, color: UIColor) {
+    
+    func selectedView() {
         
-        layer.borderColor = color.cgColor
-        layer.borderWidth = width.rawValue
+        let newColor = UIColor.colorFrom(colorType: .red)
+        backgroundColor = newColor
+        layer.borderColor = newColor.cgColor
     }
     
     

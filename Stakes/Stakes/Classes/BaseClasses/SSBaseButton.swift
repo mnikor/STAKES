@@ -12,7 +12,7 @@ class SSBaseButton: UIButton {
     
     
     // MARK: Private Properties
-    private var fontLabel:UIFont { return UIFont(name: SSConstants.fontType.bigCaslon.rawValue, size: self.titleLabel!.font.pointSize)! }
+    private var fontLabel:UIFont { return UIFont(name: SSConstants.fontType.helvetica.rawValue, size: self.titleLabel!.font.pointSize)! }
     
     
     // MARK: Overriden funcs

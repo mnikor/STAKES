@@ -13,7 +13,7 @@ class SSBaseLabel: UILabel {
     
     // MARK: Private Properties
     private let colorLabel = UIColor.colorFrom(colorType: .defaultBlack)
-    private var fontLabel:UIFont { return UIFont(name: SSConstants.fontType.bigCaslon.rawValue, size: self.font.pointSize)! }
+    private var fontLabel:UIFont { return UIFont(name: SSConstants.fontType.helvetica.rawValue, size: self.font.pointSize)! }
     
     
     // MARK: Initializers
@@ -39,6 +39,8 @@ class SSBaseLabel: UILabel {
         
         textColor = colorLabel
         font = fontLabel
+        numberOfLines = 0
+        lineBreakMode = .byWordWrapping
     }
     
     

@@ -8,12 +8,23 @@
 
 import Foundation
 
+
+@objc protocol SSPointChangeValueDelegate {
+    
+    func pointChanged()
+}
+
+
 class SSPoint {
+    
+    
+    // MARK: Delegate
+    weak var delegate: SSPointChangeValueDelegate?
     
     
     // MARK: Private Properties
     private let userDefaults = UserDefaults.standard
-    private let pointKey = "currentPoints"
+    private let pointKey = SSConstants.keys.kPointKey.rawValue
     
     
     // MARK: Public Properties
@@ -28,6 +39,11 @@ class SSPoint {
     
     
     // MARK: Public funcs
+    
+    func updatePointsLabel() {
+        delegate?.pointChanged()
+    }
+    
     func getCurrentPoints() -> String {
         return currentPoints < 0 ? currentPoints.description : "+" + currentPoints.description
     }
@@ -41,10 +57,25 @@ class SSPoint {
     }
     
     func add(_ points: Int) {
+        
+        // Add points
         currentPoints += points
+        delegate?.pointChanged()
+        
+        // Show alert when first points earned
+        let userDefaults = UserDefaults.standard
+        let key = SSConstants.keys.kFirstEarnPoint.rawValue
+        
+        if !userDefaults.bool(forKey: key) {
+            
+            SSMessageManager.showCustomAlertWith(message: .firstPointsEarned, onViewController: nil)
+            userDefaults.set(true, forKey: key)
+        }
     }
     
     func deduct(_ points: Int) {
+        
         currentPoints -= points
+        delegate?.pointChanged()
     }
 }

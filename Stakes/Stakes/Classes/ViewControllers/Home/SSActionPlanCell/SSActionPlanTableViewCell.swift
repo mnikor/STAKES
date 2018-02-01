@@ -23,11 +23,10 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
     
     
     // MARK: Public funcs
-    func configCellBy(_ action: Action, at indexPath: IndexPath) {
+    func configCellBy(_ action: Action) {
         
         let dueDate = Date.formatter(date: action.date! as Date, with: .monthDayYear)
         
-        selectButton.indexPath = indexPath
         hideSelectButton(false)
         
         // Set color
@@ -42,7 +41,7 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
         
         // Change size by amount of characters
         actionNameLabel.sizeByTextFor(lines: 2)
-        
+        dueDateLabel.sizeByTextFor(lines: 1)
         // Show or Hide statusView
         checkStatus(action)
     }
@@ -61,17 +60,20 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
     private func checkStatus(_ action: Action) {
         
         let status = action.status!
+        let pointsText = SSPoint().calculatePointsFor(stake: action.stake)
         var textColor = UIColor.fromRGB(rgbValue: 0x64C3FF) //Completed color
         
         switch status {
         case GoalStatusType.complete.rawValue:
             
             statusLabel.text = status
+            pointsLabel.text = "+" + pointsText.description
             hideSelectButton(true)
             
         case GoalStatusType.missed.rawValue:
             
             statusLabel.text = status
+            pointsLabel.text = "-" + pointsText.description
             hideSelectButton(true)
             textColor = UIColor.fromRGB(rgbValue: 0xFF6464) //Missed color
             
@@ -80,7 +82,7 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
         }
         statusLabel.textColor = textColor
         pointsLabel.textColor = textColor
-        pointsLabel.text = SSPoint().getPointsFor(stake: action.stake)
+        
     }
     
     private func hideSelectButton(_ bool: Bool) {

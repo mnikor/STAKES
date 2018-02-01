@@ -10,38 +10,72 @@ import UIKit
 import CoreData
 import Fabric
 import Crashlytics
+import IQKeyboardManagerSwift
+import UserNotifications
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    
     var window: UIWindow?
-
+    let notificationDelegate = SSNotificationDelegate()
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        
+        // MARK: Fabric
         Fabric.with([Crashlytics.self])
+        
+        // MARK: Flurry Analytics
+        SSAnalyticsManager.startAnalytics()
+        
+        // MARK: IQKeyboardManagerSwift
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.colorFrom(colorType: .red)
         
         if window == nil {
             window = UIWindow(frame: UIScreen.main.bounds)
         }
         
-        // Check what a run of app, for display Onboarding screen
+        // MARK: Check what a run of app, for display Onboarding screen
         
-        let launchKey = "isLaunched"
+        let launchKey = SSConstants.keys.kLaunch.rawValue
         var rootVC = UIViewController()
         if UserDefaults.standard.bool(forKey: launchKey) {
             rootVC = UIStoryboard.getSlideMenuController()
         } else {
-            rootVC = UIStoryboard.ssInstantiateVC(.main, typeVC: .introduction) as! UIPageViewController
+            rootVC = SSIntroductionPageViewController.instantiate(.main)
             UserDefaults.standard.set(true, forKey: launchKey)
         }
         
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
+        
+        // MARK: Register Local Notifications
+        if #available(iOS 10.0, *) {
+            
+            let center = UNUserNotificationCenter.current()
+            center.delegate = notificationDelegate
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+                
+                /* -- Push
+            let application = UIApplication.shared
+            if granted { application.registerForRemoteNotifications() }
+                */
+                
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        
         return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

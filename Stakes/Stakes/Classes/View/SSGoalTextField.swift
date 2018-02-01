@@ -11,8 +11,8 @@ import UIKit
 class SSGoalTextField: SSBaseTextField {
     
     
-    // MARK: Private Properties
-    private let charactersLimit = 70
+    // MARK: Public Properties
+    var charactersLimit: Int = 71
     
     
     // MARK: Public Funcs
@@ -21,6 +21,7 @@ class SSGoalTextField: SSBaseTextField {
     func setTextFrom(_ textField: UITextField) {
         
         text = textField.text
+        self.resizeFont()
     }
     
     // Call in shouldChangeCharactersIn func of UITextFieldDelegate

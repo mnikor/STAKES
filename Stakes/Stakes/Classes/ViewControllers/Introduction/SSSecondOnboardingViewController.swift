@@ -19,6 +19,17 @@ class SSSecondOnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createGoalView.goalNameTextField.text = createGoalView.goalNameTextField.placeholder
+        createGoalView.goalNameTextField.text = "Run a Marathon"
+        createGoalView.goalUnderlineView.backgroundColor = UIColor.colorFrom(colorType: .defaultBlack)
+        createGoalView.goalNameTextView.isHidden = true
+        
+        createGoalView.dueDateTextField.text = "September 10th, 2018"
+        createGoalView.dueDateTextField.textColor = UIColor.black.withAlphaComponent(0.1)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        createGoalView.dueDateTextField.resizeFont()
     }
 }

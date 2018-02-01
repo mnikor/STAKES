@@ -49,6 +49,10 @@ achieve their goals</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m5j-o7-LuT"/>
                     </view>
+                    <connections>
+                        <outletCollection property="labelsArray" destination="3d2-pe-ing" collectionClass="NSMutableArray" id="scK-r0-Ge2"/>
+                        <outletCollection property="labelsArray" destination="t2A-5K-0Qs" collectionClass="NSMutableArray" id="mnz-MG-DT8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ntb-fj-gXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,21 +106,22 @@ achieve their goals</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great Job!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OV6-6f-9oS" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="19" y="224" width="337" height="31.5"/>
+                                <rect key="frame" x="19" y="238" width="337" height="31.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh6-9y-oih" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="18.5" y="258.5" width="338.5" height="57.5"/>
-                                <string key="text">next step is going to be creating an action plan timeline that will help you complete your goals. 
-</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="next step is going to be creating an action plan timeline that will help you complete your goals." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh6-9y-oih" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="3" y="273" width="369" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38.5" id="iut-ov-F4t"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5h7-Xq-NrC" userLabel="TimeLineView">
-                                <rect key="frame" x="25" y="364" width="283.5" height="228"/>
+                                <rect key="frame" x="25" y="359.5" width="283.5" height="228"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Foq-bm-65G" userLabel="Stack View First">
                                         <rect key="frame" x="68" y="20" width="179.5" height="70"/>
@@ -154,7 +159,7 @@ achieve their goals</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EET-3V-0xe" userLabel="CircleTwo" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="166.5" width="13" height="13"/>
+                                        <rect key="frame" x="20" y="165.5" width="13" height="13"/>
                                         <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="13" id="2fC-1V-bPG"/>
@@ -162,7 +167,7 @@ achieve their goals</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CCH-nb-XWK" userLabel="Stack View Second">
-                                        <rect key="frame" x="68" y="138" width="179.5" height="70"/>
+                                        <rect key="frame" x="68" y="137.5" width="179.5" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="May 10th, 2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cp4-cM-MzL" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="179.5" height="19.5"/>
@@ -203,17 +208,19 @@ achieve their goals</string>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="eh6-9y-oih" firstAttribute="centerX" secondItem="Iwl-mu-odq" secondAttribute="centerX" id="3c2-OD-fPj"/>
                             <constraint firstItem="5h7-Xq-NrC" firstAttribute="leading" secondItem="G0u-ic-4sS" secondAttribute="leading" constant="25" id="Hwd-47-mq6"/>
-                            <constraint firstItem="OV6-6f-9oS" firstAttribute="top" secondItem="G0u-ic-4sS" secondAttribute="top" constant="204" id="Llw-kE-Ikn"/>
                             <constraint firstItem="G0u-ic-4sS" firstAttribute="trailing" secondItem="OV6-6f-9oS" secondAttribute="trailing" constant="19" id="f3v-rW-cTu"/>
+                            <constraint firstItem="G0u-ic-4sS" firstAttribute="trailing" secondItem="eh6-9y-oih" secondAttribute="trailing" constant="3" id="ij3-w5-E05"/>
+                            <constraint firstItem="eh6-9y-oih" firstAttribute="leading" secondItem="G0u-ic-4sS" secondAttribute="leading" constant="3" id="kfC-dU-Srb"/>
                             <constraint firstItem="OV6-6f-9oS" firstAttribute="leading" secondItem="G0u-ic-4sS" secondAttribute="leading" constant="19" id="pib-I1-8E9"/>
+                            <constraint firstItem="OV6-6f-9oS" firstAttribute="centerY" secondItem="Iwl-mu-odq" secondAttribute="centerY" constant="-80" id="qbG-6k-J1o"/>
                             <constraint firstItem="eh6-9y-oih" firstAttribute="top" secondItem="OV6-6f-9oS" secondAttribute="bottom" constant="3" id="qi3-sb-gaX"/>
                             <constraint firstItem="5h7-Xq-NrC" firstAttribute="top" secondItem="eh6-9y-oih" secondAttribute="bottom" constant="48" id="wdq-5S-fCp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G0u-ic-4sS"/>
                     </view>
                     <connections>
+                        <outlet property="descriptionLabel" destination="eh6-9y-oih" id="5FE-bW-Qid"/>
                         <outlet property="timeLineView" destination="5h7-Xq-NrC" id="5AO-To-jUm"/>
                     </connections>
                 </viewController>
@@ -230,41 +237,42 @@ achieve their goals</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT5-mA-i0D" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="118.5" y="204" width="138.5" height="62.5"/>
+                                <rect key="frame" x="118.5" y="220" width="138.5" height="62.5"/>
                                 <string key="text">Let’s Make
 It Interesting</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most people quit halfway through. betting on yourself is a way  to change it. literally. so, how much do you trust in yourself?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpW-MF-fm1" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="19" y="272.5" width="337" height="57.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most people quit halfway through. betting on yourself is a way  to change it. literally. so, how much do you trust in yourself?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpW-MF-fm1" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="14" y="297.5" width="347" height="57.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i.e. you don’t need to bet a ton of money. but make its sendible to try harder" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXg-i3-wiE" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="57.5" y="339" width="260.5" height="24"/>
+                                <rect key="frame" x="57.5" y="363.5" width="260.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$9.99" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-Sz-Sqn" customClass="SSBaseTextField" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="105.5" y="393" width="164" height="72"/>
+                                <rect key="frame" x="105.5" y="402.5" width="164" height="72"/>
                                 <color key="textColor" red="1" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="pbT-Sz-Sqn" firstAttribute="top" secondItem="HXg-i3-wiE" secondAttribute="bottom" constant="30" id="03S-Rh-9PT"/>
+                            <constraint firstItem="pbT-Sz-Sqn" firstAttribute="top" secondItem="HXg-i3-wiE" secondAttribute="bottom" constant="15" id="03S-Rh-9PT"/>
                             <constraint firstItem="HXg-i3-wiE" firstAttribute="centerX" secondItem="2bm-oB-8I4" secondAttribute="centerX" id="AFi-ws-BFc"/>
                             <constraint firstItem="pbT-Sz-Sqn" firstAttribute="centerX" secondItem="2bm-oB-8I4" secondAttribute="centerX" id="TpQ-9o-eG6"/>
-                            <constraint firstItem="YpW-MF-fm1" firstAttribute="top" secondItem="PT5-mA-i0D" secondAttribute="bottom" constant="6" id="Uom-3v-zV2"/>
+                            <constraint firstItem="YpW-MF-fm1" firstAttribute="top" secondItem="PT5-mA-i0D" secondAttribute="bottom" constant="15" id="Uom-3v-zV2"/>
                             <constraint firstItem="PT5-mA-i0D" firstAttribute="centerX" secondItem="2bm-oB-8I4" secondAttribute="centerX" id="jA5-qU-9TH"/>
+                            <constraint firstItem="YpW-MF-fm1" firstAttribute="leading" secondItem="X6S-55-sO2" secondAttribute="leading" constant="14" id="k9A-1l-NNB"/>
                             <constraint firstItem="HXg-i3-wiE" firstAttribute="top" secondItem="YpW-MF-fm1" secondAttribute="bottom" constant="9" id="n2t-Mg-V6p"/>
-                            <constraint firstItem="PT5-mA-i0D" firstAttribute="top" secondItem="X6S-55-sO2" secondAttribute="top" constant="184" id="r1X-pu-jnD"/>
-                            <constraint firstItem="YpW-MF-fm1" firstAttribute="centerX" secondItem="2bm-oB-8I4" secondAttribute="centerX" id="wjg-aw-NHw"/>
+                            <constraint firstItem="PT5-mA-i0D" firstAttribute="top" secondItem="X6S-55-sO2" secondAttribute="top" constant="200" id="r1X-pu-jnD"/>
+                            <constraint firstItem="X6S-55-sO2" firstAttribute="trailing" secondItem="YpW-MF-fm1" secondAttribute="trailing" constant="14" id="so9-Ru-xmJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X6S-55-sO2"/>
                     </view>

@@ -8,13 +8,16 @@
 
 import Foundation
 
+
+// MARK: Date Formats
+enum SSDateFormat: String {
+    case monthDayYear = "MMMM dd YYYY"
+    case weekdayDayMonthYear = "EEEE dd MMMM YYYY"
+    case mainFormat = "yyyy/MM/dd"
+}
+
+
 extension Date {
-    
-    // MARK: Date Formats
-    enum SSDateFormat: String {
-        case monthDayYear = "MMMM dd YYYY"
-        case weekdayDayMonthYear = "EEEE dd MMMM YYYY"
-    }
     
     
     // MARK: Date formatter for Current Locale and TimeZone
@@ -24,6 +27,34 @@ extension Date {
         formatter.locale = Locale.current
         formatter.dateFormat = format.rawValue
         return formatter.string(from: date)
+    }
+    
+    // MARK: String from Date with format "Month Day th, Year"
+    
+    func dateWithFormatToString() -> String {
+        
+        let dateText = Date.formatter(date: self, with: .monthDayYear)
+        let dateParts = dateText.components(separatedBy: " ")
+        if dateParts.count == 3 {
+            return "\(dateParts[0])  \(dateParts[1])th, \(dateParts[2])"
+        } else {
+            return dateText
+        }
+    }
+    
+    
+    // MARK: Add custom Date Time, for saving to Calendar
+    func addCustomDateTime() -> Date? {
+        
+        let userCalendar = Calendar.current
+        var components = userCalendar.dateComponents([.year, .month, .day, .hour, .minute, .second],
+                                                         from: self)
+        
+        components.hour = 9
+        components.minute = 00
+        components.second = 00
+        
+        return userCalendar.date(from: components)
     }
     
     

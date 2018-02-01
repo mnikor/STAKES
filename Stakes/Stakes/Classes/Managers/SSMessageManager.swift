@@ -12,122 +12,105 @@ import UIKit
 
 class SSMessageManager: NSObject {
     
-    enum AlertButtonTitles: String {
+    enum AlertButtonTitle: String {
         case ok = "Ok"
         case cancel = "Cancel"
     }
     
-    enum MessageTypeTitle: String {
-        case success = "Success"
+    enum MessageTitle: String {
+        case success = "Success!"
         case inProgress = "In progress"
-        case warning = "Warning"
-        case failure = "Failure"
-    }
-    
-    enum SSCustomAlertType {
-        case main, completeAction, withAction, shareGoal
+        case warning = "Warning!"
+        case failure = "Failure!"
+        case error = "Error"
+        case noTitle = ""
     }
     
     enum MessageTypeDescription: String {
         
         // Simple Messages
-        case share = "Share your goal on Facebook or Twitter to earn 10 points!"
-        case missedAction = "You have missed your action . Don’t give up, keep going!"
-        case goalAchieved = "Fantastic! You have achieved your goal. Congratulations, your get additional points !!!"
-        case completedAction = "Congratulations!  You have completed action and earned points. Keep crushing your actions plan!!!"
-        case completed = "Congratulations!   You have completed your action, saved your stake and earned points. Keep crushing your actions plan!!!"
+        case share = "Share your goal with friends"
+        case missedAction = "You have missed your action. Don’t give up, keep going!"
+        case goalAchieved = "Fantastic! You have achieved your goal. Congratulations, you get additional points !!!"
+        case completedActionNoStake = "You have completed action and earned points."
+        case completedAction = "You have completed your action,\nsaved your stake and earned points."
+        case firstPointsEarned = "Keep earning points to use it in our next app updates!"
+        case inAppPurchasesWarning = "If you miss to complete action point your goal will be locked. To unlock it stake should be paid as in-app purchase"
         
         // Yes/No options Messages
-        case emptyStake = "Add stake to maximise commitment?"
+        case emptyStake = "Add stake to maximise commitment. Continue without stake?"
         case lastActionNoSelected = "Would you like to create new actions?"
         case lastAction = "It was your last action, did your  Achieve your goal?"
         case goalDeleted = "Sometimes goals can become irrelevant!  Confirm deletion?"
-        case deleteStake = "Looks like you are not confident enough  in your performance.  Confirm deletion?"
-        case actionDeleted = "Sometimes actions can become irrelevant! This is probably the case? Confirm deletion?"
-        
-        // TODO: For Push Notifications (Insert name of the action)
-        case calendarReminderToday = "Today is the due date for your action: (name of the action). Make sure you complete it!"
-        case calendarReminderOneDay = "Important reminder, that tomorrow is the due date to complete action (name of the action)"
+        case deleteStake = "Looks like you are not confident enough  in your performance.  Confirm stake deletion?"
+        case actionDeleted = "Sometimes actions can become irrelevant and we adapt strategy! Confirm deletion?"
+        case unLockGoal = "You missed to complete the action point. Please pay the stake in a form of in-app purchase to unlock your goal."
         
         // Warnings
         case dueDateWarning = "You cannot pick any date in the past"
+        
+        // Error
+        case failSaveStatusAction = "Something went wrong. Can't save Action status"
+        case error = "Something went wrong. Try again later"
+        case goalIsAchieved = "Goal has been achieved!"
     }
     
     
     // MARK: Properties
+    static let instance = SSMessageManager()
     var rootViewController: UIViewController? {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.window?.rootViewController
     }
     
     
-    // MARK: Singleton
-    static let instance: SSMessageManager = SSMessageManager()
+    // MARK: Custom Alerts. Class(Static) funcs
     
-    
-    // MARK: Class(Static) funcs
-    
-    // Main Custom Alert
-    class func showMainCustomAlertWith(title: MessageTypeTitle, and message: MessageTypeDescription, onViewController: UIViewController?) {
+    // For simple alert with text
+    class func showCustomAlertWith(message: MessageTypeDescription, onViewController: UIViewController?) {
         
-        let alertCompletedActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .completeActionAlert) as! SSCustomAlertViewController
-        
-        alertCompletedActionVC.messageType = .main
-        alertCompletedActionVC.alertTitle = title.rawValue
-        alertCompletedActionVC.alertDescription = message.rawValue
-        alertCompletedActionVC.modalPresentationStyle = .overCurrentContext
+        let alertCompletedActionVC = SSCustomAlertViewController.instantiate(.home) as! SSCustomAlertViewController
+        alertCompletedActionVC.messageType = message
         
         instance.presentAlert(alertCompletedActionVC, onViewController)
     }
     
-    // Custom Alert
-    class func showCustomAlertWith(type: SSCustomAlertType, onViewController: UIViewController?) {
+    // For Alert with Yes/No options
+    class func showCustomAlertWithAction(message: MessageTypeDescription, onViewController: UIViewController?, action:@escaping CompletionBlock) {
         
-        let alertCompletedActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .completeActionAlert) as! SSCustomAlertViewController
-        alertCompletedActionVC.messageType = type
-        alertCompletedActionVC.modalPresentationStyle = .overCurrentContext
-        
-        instance.presentAlert(alertCompletedActionVC, onViewController)
-    }
-    
-    // Custom Alert with Action
-    class func showCustomAlertWithAction(title: MessageTypeTitle, and message: MessageTypeDescription, onViewController: UIViewController?, action:@escaping CompletionBlock) {
-        
-        let alertCompletedActionVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .completeActionAlert) as! SSCustomAlertViewController
-        alertCompletedActionVC.messageType = .withAction
-        alertCompletedActionVC.alertTitle = title.rawValue
-        alertCompletedActionVC.alertDescription = message.rawValue
+        let alertCompletedActionVC = SSCustomAlertViewController.instantiate(.home) as! SSCustomAlertViewController
+        alertCompletedActionVC.messageType = message
         alertCompletedActionVC.handler = action
         
-        var points = String()
-        switch message {
-        case .emptyStake: points = ""
-        case .lastActionNoSelected: points = "+5"
-        case .lastAction: points = "+50"
-        case .goalDeleted: points = "-50"
-        case .deleteStake: points = "-10"
-        case .actionDeleted: points = "-10"
-        default: break
-        }
-        alertCompletedActionVC.points = points
+        instance.presentAlert(alertCompletedActionVC, onViewController)
+    }
+    
+    // For Last Action Alert
+    class func showLastActionCustomAlert(message: MessageTypeDescription, with goal: Goal, onViewController: UIViewController?, action:@escaping CompletionBlock) {
         
-        alertCompletedActionVC.modalPresentationStyle = .overCurrentContext
+        let alertCompletedActionVC = SSCustomAlertViewController.instantiate(.home) as! SSCustomAlertViewController
+        alertCompletedActionVC.messageType = message
+        alertCompletedActionVC.handler = action
+        alertCompletedActionVC.goal = goal
         
         instance.presentAlert(alertCompletedActionVC, onViewController)
     }
+    
+    
+    // MARK: Native Alerts. Class(Static) funcs
     
     // Error Alert
     class func showAlertWith(error: Error, onViewController: UIViewController?) {
         if let viewController = onViewController {
-            viewController.present(instance.createAlertWith(title: MessageTypeTitle.failure.rawValue, message: error.localizedDescription, style: .alert), animated: true, completion: nil)
+            viewController.present(instance.createAlertWith(title: MessageTitle.error.rawValue, message: error.localizedDescription, style: .alert), animated: true, completion: nil)
             return
         }
-        instance.rootViewController?.present(instance.createAlertWith(title: MessageTypeTitle.failure.rawValue.localized(), message: error.localizedDescription, style: .alert), animated: true, completion: nil)
+        instance.rootViewController?.present(instance.createAlertWith(title: MessageTitle.error.rawValue.localized(), message: error.localizedDescription, style: .alert), animated: true, completion: nil)
         return
     }
     
     // Default Alert
-    class func showAlertWith(title: MessageTypeTitle, and message: MessageTypeDescription, onViewController: UIViewController?) {
+    class func showAlertWith(title: MessageTitle, and message: MessageTypeDescription, onViewController: UIViewController?) {
         if onViewController != nil {
             onViewController?.present(instance.createAlertWith(title: title, message: message, style: .alert), animated: true, completion: nil)
             return
@@ -137,14 +120,14 @@ class SSMessageManager: NSObject {
     }
     
     // Alert with Cancel button and action on "Ok" button
-    class func showAlertWithCancelButton(title: MessageTypeTitle, message: MessageTypeDescription, onViewController: UIViewController?, action: @escaping ()->()) {
+    class func showAlertWithCancelButton(title: MessageTitle, message: MessageTypeDescription, onViewController: UIViewController?, action: @escaping ()->()) {
         
         let alert = UIAlertController(title: title.rawValue.localized(), message: message.rawValue.localized(), preferredStyle: .alert)
-        let okAction = UIAlertAction(title: AlertButtonTitles.ok.rawValue.localized(), style: .default) { result in
+        let okAction = UIAlertAction(title: AlertButtonTitle.ok.rawValue.localized(), style: .default) { result in
             action()
         }
 
-        let cancelAction = UIAlertAction(title: AlertButtonTitles.cancel.rawValue.localized(), style: .cancel, handler: { (action) in
+        let cancelAction = UIAlertAction(title: AlertButtonTitle.cancel.rawValue.localized(), style: .cancel, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
         })
 
@@ -162,6 +145,9 @@ class SSMessageManager: NSObject {
     
     // MARK: Private funcs
     private func presentAlert(_ alertVC: UIViewController, _ onViewController: UIViewController?) {
+        
+        alertVC.modalPresentationStyle = .overCurrentContext
+        
         if let viewController = onViewController {
             viewController.present(alertVC, animated: false, completion: nil)
         } else {
@@ -169,14 +155,14 @@ class SSMessageManager: NSObject {
         }
     }
     
-    private func createAlertWith(title: MessageTypeTitle, message: MessageTypeDescription, style: UIAlertControllerStyle) -> UIAlertController {
+    private func createAlertWith(title: MessageTitle, message: MessageTypeDescription, style: UIAlertControllerStyle) -> UIAlertController {
         return createAlertWith(title: title.rawValue, message: message.rawValue, style: style)
     }
     
     private func createAlertWith(title: String, message: String, style: UIAlertControllerStyle) -> UIAlertController {
         
         let alert = UIAlertController(title: title.localized(), message: message.localized(), preferredStyle: style)
-        let cancelAction = UIAlertAction(title: AlertButtonTitles.ok.rawValue.localized(), style: .cancel, handler: { (action) in
+        let cancelAction = UIAlertAction(title: AlertButtonTitle.ok.rawValue.localized(), style: .cancel, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
         })
         

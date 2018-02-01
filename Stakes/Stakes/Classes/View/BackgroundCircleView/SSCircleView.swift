@@ -56,7 +56,10 @@ class SSCircleView: UIView {
         for type in circleViewsDictionary.keys {
             guard let newOrigin = coordinates[type] else { return }
             
-            UIView.animate(withDuration: 0.2) { self.circleViewsDictionary[type]?.frame.origin = newOrigin }
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                
+                self?.circleViewsDictionary[type]?.frame.origin = newOrigin
+            }
         }
     }
     

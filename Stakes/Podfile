@@ -8,5 +8,7 @@ target 'Stakes' do
 pod 'SlideMenuControllerSwift'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'IQKeyboardManagerSwift'
+pod 'Flurry-iOS-SDK/FlurrySDK' #Analytics Pod
 
 end

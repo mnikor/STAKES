@@ -24,6 +24,7 @@ class SSHomeViewController: SSBaseViewController {
     
     
     // MARK: Private Properties
+    private var goalsStatus: GoalStatusType = .wait
     private var selectedCellCircleButton: SSSelectCircleButton?
     private var focusedIndexPath = IndexPath(row: 0, section: 0)
     
@@ -38,6 +39,9 @@ class SSHomeViewController: SSBaseViewController {
         let cellShortNib = UINib(nibName: SSHomeShortTableViewCell.reuseID, bundle: nil)
         tableView.register(cellShortNib, forCellReuseIdentifier: SSHomeShortTableViewCell.reuseID)
         
+        // Points delegate
+        points.delegate = self
+        
         // CoreData fetch data
         fetchedResultsController.delegate = self
         do {
@@ -45,14 +49,16 @@ class SSHomeViewController: SSBaseViewController {
         } catch {
             print(error)
         }
+        
         settingsUI()
+        checkMissedGoals()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        showDeleteCompleteView(false)
         tableView.reloadData()
+        showDeleteCompleteView(false)
     }
     
     
@@ -61,25 +67,39 @@ class SSHomeViewController: SSBaseViewController {
     // Right Button action
     @objc func rightButtonAction(_ sender: UIButton) {
         
-        let createGoalVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .createGoalVC)
+        let createGoalVC = SSCreateGoalViewController.instantiate(.home)
         navigationController?.pushViewController(createGoalVC, animated: true)
     }
     
     // Delete Goal action on DeleteCompleteView
     @IBAction func tappedDeleteGoal(_ sender: SSBaseButton) {
         
-        SSMessageManager.showCustomAlertWithAction(title: .warning,
-                                                   and: .goalDeleted,
-                                                   onViewController: self,
-                                                   action: { self.deleteGoal() })
+        // Deleted Goal
+        SSMessageManager.showCustomAlertWithAction(message: .goalDeleted, onViewController: self) { [weak self] in self?.deleteGoal() }
     }
     
     // Complete Goal Action on DeleteCompleteView
     @IBAction func tappedCompleteGoal(_ sender: SSBaseButton) {
         
-        selectedCellCircleButton?.selectedGoal?.changeStatus(.complete)
-        SSMessageManager.showMainCustomAlertWith(title: .success, and: .goalAchieved, onViewController: self)
+        let selectedGoal = selectedCellCircleButton?.selectedGoal
+        
+        guard selectedGoal?.status != GoalStatusType.complete.rawValue else {
+            SSMessageManager.showAlertWith(title: .error, and: .goalIsAchieved, onViewController: self)
+            return
+        }
+        
+        selectedGoal?.changeStatus(.complete)
+        SSMessageManager.showCustomAlertWith(message: .goalAchieved, onViewController: self)
+        points.updatePointsLabel()
         showDeleteCompleteView(false)
+    }
+    
+    
+    // MARK: Public funcs
+    func filteredGoalBy(_ status: GoalStatusType) {
+        
+        fetchedResultsController = SSCoreDataManager.instance.fetchedResultsController(entityName: .goal, keyForSort: "date", predicate: ["status": status.rawValue])
+        goalsStatus = status
     }
     
     
@@ -94,7 +114,6 @@ class SSHomeViewController: SSBaseViewController {
         self.setTitle("it's")
         
         tipLabel.textColor = UIColor.colorFrom(colorType: .light)
-        
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .clear
         tableView.remembersLastFocusedIndexPath = true
@@ -111,14 +130,48 @@ class SSHomeViewController: SSBaseViewController {
         rightActionButton.isHidden = bool
         selectedCellCircleButton?.isSelectedView = bool
         
-        tipLabel.isHidden = tableView.visibleCells.count != 0
+        tipLabel.isHidden = tableView.visibleCells.count != 0 || goalsStatus == .complete
     }
     
     private func deleteGoal() {
         
+        points.deduct(50)
         selectedCellCircleButton?.selectedGoal?.deleteGoal()
-        updatePointsLabel()
+        
         showDeleteCompleteView(false)
+    }
+    
+    private func openEditGoalVC(editGoal: Goal?) {
+        
+        let editGoalVC = SSCreateGoalViewController.instantiate(.home) as! SSCreateGoalViewController
+        editGoalVC.editGoal = editGoal
+        navigationController?.pushViewController(editGoalVC, animated: true)
+    }
+    
+    private func checkMissedGoals() {
+        
+        let goals: [Goal] = fetchedResultsController.fetchedObjects as! [Goal]
+        let filteredArray = goals.filter({ $0.status! == GoalStatusType.wait.rawValue })
+        
+        for goal in filteredArray {
+            
+            if goal.checkMissedActions() {
+                SSMessageManager.showCustomAlertWith(message: .missedAction, onViewController: self)
+            }
+            
+            /* Uncomment if need to change status for Goal
+            let goalDueDate = goal.date! as Date
+            if goalDueDate < Date().addCustomDateTime()! {
+                
+                goal.changeStatus(.missed)
+            } else {
+                
+                if goal.checkMissedActions() {
+                    SSMessageManager.showCustomAlertWith(message: .missedAction, onViewController: self)
+                }
+            }
+            */
+        }
     }
 }
 
@@ -173,11 +226,10 @@ extension SSHomeViewController: UITableViewDelegate {
         let selectedGoal = fetchedResultsController.object(at: indexPath) as! Goal
         focusedIndexPath = indexPath
         
-        let actionPlanVC = UIStoryboard.ssInstantiateVC(.home, typeVC: .actionPlanVC) as! SSActionPlanViewController
+        let actionPlanVC = SSActionPlanViewController.instantiate(.home) as! SSActionPlanViewController
         actionPlanVC.goal = selectedGoal
         
         navigationController?.pushViewController(actionPlanVC, animated: true)
-        CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }
     
     func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
@@ -193,37 +245,10 @@ extension SSHomeViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         // Update Points Label
-        updatePointsLabel()
+        self.points.updatePointsLabel()
         
-        //TableView reloadData after finished of deleteRows animation
-        CATransaction.begin()
-        
-        CATransaction.setCompletionBlock({
-            self.tableView.reloadData()
-        })
-        
-        tableView.beginUpdates()
-        switch type {
-        case .update: break
-        case .insert:
-            if let indexPathInsert = newIndexPath {
-                tableView.insertRows(at: [indexPathInsert], with: .left)
-            }
-        case .move:
-            if let indexPathMove = indexPath {
-                tableView.deleteRows(at: [indexPathMove], with: .left)
-            }
-            if let newIndexPathMove = newIndexPath {
-                tableView.insertRows(at: [newIndexPathMove], with: .left)
-            }
-        case .delete:
-            if let indexPathDelete = indexPath {
-                tableView.deleteRows(at: [indexPathDelete], with: .left)
-            }
-        }
-        tableView.endUpdates()
-        
-        CATransaction.commit()
+        // Update Table View
+        self.tableView.reloadData()
     }
 }
 
@@ -240,5 +265,12 @@ extension SSHomeViewController: SSSelectCircleButtonDelegate {
         
         selectedCellCircleButton = sender
         showDeleteCompleteView(sender.isSelectedView)
+    }
+    
+    func tappedEditButton(_ goal: Goal?) {
+        
+        if let goal = goal {
+            openEditGoalVC(editGoal: goal)
+        }
     }
 }

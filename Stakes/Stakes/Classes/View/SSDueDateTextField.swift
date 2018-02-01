@@ -13,12 +13,31 @@ class SSDueDateTextField: SSBaseTextField {
     
     // MARK: Public Properties
     let datePicker = UIDatePicker()
-    var selectedDate: Date?
+    
+    // Set custom date time
+    var selectedDate: Date? {
+        get {
+            return date
+        }
+        set {
+            date = newValue?.addCustomDateTime()
+        }
+    }
     
     
     // MARK: Private Properties
+    private var date: Date?
     private let locale = Locale.current
     private let timeZone = TimeZone.current
+    private let calendar = Calendar.current
+    private var dateFormatter: DateFormatter {
+        
+        let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.dateFormat = SSDateFormat.mainFormat.rawValue
+        
+        return formatter
+    }
     
     
     // MARK: Overriden funcs
@@ -56,6 +75,7 @@ class SSDueDateTextField: SSBaseTextField {
         guard selectedDate != nil else {
             selectedDate = Date()
             text = selectedDateToString(date: selectedDate!)
+            self.resizeFont()
             return
         }
         
@@ -66,6 +86,7 @@ class SSDueDateTextField: SSBaseTextField {
             selectedDate = Date()
             text = nil
         }
+        self.resizeFont()
     }
     
     // Call in shouldChangeCharactersIn func of UITextFieldDelegate
@@ -76,11 +97,6 @@ class SSDueDateTextField: SSBaseTextField {
     
     // MARK: Private funcs
     private func validate(selectedDate: Date) -> Bool {
-        let userCalendar = Calendar.current
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.calendar = userCalendar
-        dateFormatter.dateFormat = "yyyy/MM/dd"
         
         let selectedDateString = dateFormatter.string(from: selectedDate)
         let currentDateString = dateFormatter.string(from: Date())
@@ -97,7 +113,7 @@ class SSDueDateTextField: SSBaseTextField {
         datePicker.datePickerMode = .date
         datePicker.timeZone = timeZone
         datePicker.locale = locale
-        datePicker.date = Date()
+        datePicker.date = selectedDate ?? Date()
         datePicker.addTarget(self, action:  #selector(self.dateSelected), for: .valueChanged)
         
         // Create ToolBar

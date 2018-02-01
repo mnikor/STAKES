@@ -11,18 +11,6 @@ import UIKit
 class SSBaseTextField: UITextField {
     
     
-    // Resizing font when setting text value, depend on Text Field width and characters amount
-    override var text: String? {
-        didSet {
-            self.resizeFont()
-        }
-    }
-    
-    
-    // MARK: Private Properties
-    private var fontText:UIFont { return UIFont(name: SSConstants.fontType.bigCaslon.rawValue, size: self.font!.pointSize)! }
-    
-    
     // MARK: Public Properties
     let minFontSize: Double = 9.0
     var startFontSize: Double {
@@ -60,6 +48,25 @@ class SSBaseTextField: UITextField {
         return true
     }
     
+    // Call in textFieldDidEndEditing func of UITextFieldDelegate
+    // Resizing font depend on Text Field width and characters amount
+    func resizeFont() {
+        guard let font = self.font, let text = self.text else { return }
+        
+        let textBounds = self.textRect(forBounds: self.bounds)
+        let maxWidth = textBounds.size.width
+        
+        for fontSize in stride(from: self.startFontSize, through: self.minFontSize, by: -0.5) {
+            let fontSizeCGFloat: CGFloat = CGFloat(fontSize)
+            
+            let size = (text as NSString).size(withAttributes: [NSAttributedStringKey.font: font.withSize(fontSizeCGFloat)])
+            self.font = font.withSize(fontSizeCGFloat)
+            if size.width <= maxWidth {
+                break
+            }
+        }
+    }
+    
     // Addition for Date with format "Month Day th, Year"
     func additionFor(_ dateText: String) -> String {
         
@@ -75,25 +82,7 @@ class SSBaseTextField: UITextField {
     // MARK: Private funcs
     private func setup() {
         
-        font = fontText
+        font = UIFont(name: SSConstants.fontType.helvetica.rawValue, size: self.font!.pointSize)!
         autocapitalizationType = .sentences
-    }
-    
-    // Resizing font depend on Text Field width and characters amount
-    private func resizeFont() {
-        guard let font = self.font, let text = self.text else { return }
-        
-        let textBounds = self.textRect(forBounds: self.bounds)
-        let maxWidth = textBounds.size.width
-        
-        for fontSize in stride(from: self.startFontSize, through: self.minFontSize, by: -0.5) {
-            let fontSizeCGFloat: CGFloat = CGFloat(fontSize)
-            
-            let size = (text as NSString).size(withAttributes: [NSAttributedStringKey.font: font.withSize(fontSizeCGFloat)])
-            self.font = font.withSize(fontSizeCGFloat)
-            if size.width <= maxWidth {
-                break
-            }
-        }
     }
 }

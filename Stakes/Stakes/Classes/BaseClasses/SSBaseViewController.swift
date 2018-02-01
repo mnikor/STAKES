@@ -12,17 +12,16 @@ class SSBaseViewController: UIViewController {
     
     
     // MARK: Public Properties
-    lazy var rightActionButton: SSRightActionButton = {
-        return SSRightActionButton(viewFrame: view.frame)
-    }()
+    var rightActionButton: SSRightActionButton!
+    let points = SSPoint()
     
     
     // MARK: Overriden funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         settingsNavigationController()
+        rightActionButton = SSRightActionButton(viewFrame: view.frame)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,11 +29,11 @@ class SSBaseViewController: UIViewController {
         
         // Set image for Side Menu Left Bar Button
         self.addLeftBarButtonWithImage(getLeftBarButtonImage())
+        self.navigationItem.leftBarButtonItem?.tintColor = .white
         
         // Update Points Label
-        self.updatePointsLabel()
+        self.pointChanged()
     }
-    
     
     // MARK: Public funcs
     
@@ -46,16 +45,9 @@ class SSBaseViewController: UIViewController {
         navigationItem.titleView = title
     }
     
-    // Update Points Label in Navigation Right Item
-    func updatePointsLabel() {
-        if let pointsView = navigationItem.rightBarButtonItem?.customView as? SSPointsView {
-            pointsView.updatePointsView()
-        }
-    }
-    
     // Image for Side Menu Left Bar Button
     func getLeftBarButtonImage() -> UIImage {
-        return UIImage(named: "menu_button")!
+        return UIImage(named: "menu_button")!.withRenderingMode(.alwaysTemplate)
     }
     
     // Create Background view with Circles
@@ -96,6 +88,19 @@ class SSBaseViewController: UIViewController {
         // Add Right UIBarButtonItem
         let rightButton = UIBarButtonItem(customView: SSPointsView())
         navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    
+}
+
+
+// MARK: SSPointChangeValueDelegate
+extension SSBaseViewController: SSPointChangeValueDelegate {
+    
+    func pointChanged() {
+        if let pointsView = navigationItem.rightBarButtonItem?.customView as? SSPointsView {
+            pointsView.updatePointsView()
+        }
     }
 }
 

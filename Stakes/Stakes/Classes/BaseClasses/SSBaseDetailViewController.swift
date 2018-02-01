@@ -23,6 +23,7 @@ class SSBaseDetailViewController: SSBaseViewController {
         
         let leftButton = UIBarButtonItem(image: UIImage(named: "left_arrow"), style: .plain, target: self, action: #selector(self.backAction))
         navigationItem.leftBarButtonItem = leftButton
+        navigationItem.leftBarButtonItem?.tintColor = .white
     }
     
     

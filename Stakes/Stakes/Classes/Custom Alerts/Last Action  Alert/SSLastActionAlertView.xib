@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSLastActionAlertView" customModule="Stakes" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="HFj-Xr-kxP" id="Izm-ZY-bhm"/>
+                <outlet property="noButtonLabel" destination="N2F-vd-Fyn" id="QP0-VZ-PIn"/>
+                <outlet property="pointsLabel" destination="nYW-7X-SHg" id="CbB-yk-RsG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9i-mc-Tvi" userLabel="ContentView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFj-Xr-kxP" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="20" y="20" width="335" height="76.5"/>
+                            <string key="text">Sometimes actions can  become irrelevant! 
+This is probably the case? 
+Confirm deletion: </string>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZt-tq-BEQ">
+                            <rect key="frame" x="345" y="0.0" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="o1v-Wi-rYi"/>
+                                <constraint firstAttribute="width" constant="30" id="oSk-YR-pRQ"/>
+                            </constraints>
+                            <state key="normal" title="X">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="tappedCloseAlertButton:" destination="-1" eventType="touchUpInside" id="ITP-wL-iir"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hI-ep-2TD" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="137" y="108" width="31.5" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTm-iu-s8H" userLabel="YesButton">
+                            <rect key="frame" x="135" y="102.5" width="35" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="1WJ-J1-yqm"/>
+                                <constraint firstAttribute="width" constant="35" id="9mc-ik-0tR"/>
+                            </constraints>
+                            <connections>
+                                <action selector="tappedYesButton:" destination="-1" eventType="touchUpInside" id="Rmo-tG-Gdx"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2F-vd-Fyn" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="210" y="108" width="25.5" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ko-Gd-nw2" userLabel="NoButton">
+                            <rect key="frame" x="205" y="102.5" width="35" height="35"/>
+                            <connections>
+                                <action selector="tappedNoButton:" destination="-1" eventType="touchUpInside" id="byv-FG-Tyn"/>
+                            </connections>
+                        </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYW-7X-SHg" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="300.5" y="633.5" width="30.5" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellow_star" translatesAutoresizingMaskIntoConstraints="NO" id="QJn-Ab-Zil">
+                            <rect key="frame" x="344" y="636" width="19" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="19" id="PTJ-Mn-4ZH"/>
+                                <constraint firstAttribute="width" constant="19" id="xPU-xR-i3l"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="8hI-ep-2TD" firstAttribute="centerX" secondItem="OTm-iu-s8H" secondAttribute="centerX" id="0PL-l7-6tI"/>
+                        <constraint firstAttribute="trailing" secondItem="FZt-tq-BEQ" secondAttribute="trailing" id="497-I4-DUn"/>
+                        <constraint firstItem="QJn-Ab-Zil" firstAttribute="leading" secondItem="nYW-7X-SHg" secondAttribute="trailing" constant="13" id="4LX-h8-pae"/>
+                        <constraint firstItem="HFj-Xr-kxP" firstAttribute="leading" secondItem="g9i-mc-Tvi" secondAttribute="leading" constant="20" id="CJB-Pc-Jrb"/>
+                        <constraint firstItem="OTm-iu-s8H" firstAttribute="height" secondItem="8Ko-Gd-nw2" secondAttribute="height" id="D7K-cN-zrD"/>
+                        <constraint firstItem="8Ko-Gd-nw2" firstAttribute="centerX" secondItem="g9i-mc-Tvi" secondAttribute="centerX" constant="35" id="MqV-o1-HvV"/>
+                        <constraint firstAttribute="bottom" secondItem="QJn-Ab-Zil" secondAttribute="bottom" constant="12" id="OmH-kt-y4s"/>
+                        <constraint firstItem="HFj-Xr-kxP" firstAttribute="top" secondItem="g9i-mc-Tvi" secondAttribute="top" constant="20" id="U3H-7s-o3T"/>
+                        <constraint firstItem="OTm-iu-s8H" firstAttribute="width" secondItem="8Ko-Gd-nw2" secondAttribute="width" id="UWr-3R-Qbt"/>
+                        <constraint firstAttribute="trailing" secondItem="QJn-Ab-Zil" secondAttribute="trailing" constant="12" id="VJT-fX-vW2"/>
+                        <constraint firstItem="N2F-vd-Fyn" firstAttribute="centerX" secondItem="8Ko-Gd-nw2" secondAttribute="centerX" id="Vg2-fY-sCx"/>
+                        <constraint firstItem="FZt-tq-BEQ" firstAttribute="top" secondItem="g9i-mc-Tvi" secondAttribute="top" id="X8U-Pn-6wu"/>
+                        <constraint firstItem="OTm-iu-s8H" firstAttribute="centerX" secondItem="g9i-mc-Tvi" secondAttribute="centerX" constant="-35" id="a7Q-cG-wPp"/>
+                        <constraint firstItem="8hI-ep-2TD" firstAttribute="centerY" secondItem="OTm-iu-s8H" secondAttribute="centerY" id="bwh-6g-axH"/>
+                        <constraint firstAttribute="trailing" secondItem="HFj-Xr-kxP" secondAttribute="trailing" constant="20" id="c2Q-72-bZL"/>
+                        <constraint firstItem="OTm-iu-s8H" firstAttribute="top" secondItem="HFj-Xr-kxP" secondAttribute="bottom" constant="6" id="fMb-oa-CHL"/>
+                        <constraint firstItem="N2F-vd-Fyn" firstAttribute="centerY" secondItem="8Ko-Gd-nw2" secondAttribute="centerY" id="jys-ux-09O"/>
+                        <constraint firstItem="8Ko-Gd-nw2" firstAttribute="top" secondItem="OTm-iu-s8H" secondAttribute="top" id="m96-bv-x1X"/>
+                        <constraint firstItem="nYW-7X-SHg" firstAttribute="centerY" secondItem="QJn-Ab-Zil" secondAttribute="centerY" id="qnb-dU-8G0"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="g9i-mc-Tvi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="JQK-r3-rkC"/>
+                <constraint firstAttribute="trailing" secondItem="g9i-mc-Tvi" secondAttribute="trailing" id="qvT-FJ-t0u"/>
+                <constraint firstItem="g9i-mc-Tvi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tOB-EU-7jv"/>
+                <constraint firstAttribute="bottom" secondItem="g9i-mc-Tvi" secondAttribute="bottom" id="ux4-ch-cKs"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="yellow_star" width="19" height="18"/>
+    </resources>
+</document>

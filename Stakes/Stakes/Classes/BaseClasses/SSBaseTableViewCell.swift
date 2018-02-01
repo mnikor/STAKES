@@ -8,15 +8,21 @@
 
 import UIKit
 
-protocol SSSelectCircleButtonDelegate {
+@objc protocol SSSelectCircleButtonDelegate {
+    
+    // Optional
+    @objc optional func tappedEditButton(_ goal: Goal?)
+    
+    // Required
     func selectCircleButton(_ sender: SSSelectCircleButton)
 }
+
 
 class SSBaseTableViewCell: UITableViewCell {
     
     
     // MARK: Delegate
-    var delegate: SSSelectCircleButtonDelegate?
+    weak var delegate: SSSelectCircleButtonDelegate?
     
     
     // MARK: Overriden funcs

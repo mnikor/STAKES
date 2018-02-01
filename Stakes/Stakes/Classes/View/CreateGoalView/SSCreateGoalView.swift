@@ -12,9 +12,11 @@ class SSCreateGoalView: UIView {
     
     
     // MARK: Outlets
+    @IBOutlet weak var goalNameTextView: SSNameTextView!
     @IBOutlet weak var goalNameTextField: SSGoalTextField!
     @IBOutlet weak var dueDateTextField: SSDueDateTextField!
     @IBOutlet weak var goalUnderlineView: SSUnderlineView!
+    @IBOutlet weak var dueDateUnderlineView: SSUnderlineView!
     @IBOutlet weak var contentView: UIView!
     
     
@@ -43,8 +45,9 @@ class SSCreateGoalView: UIView {
         
         goalNameTextField.textColor = UIColor.colorFrom(colorType: .defaultBlack)
         dueDateTextField.textColor = UIColor.colorFrom(colorType: .defaultBlack)
-        goalUnderlineView.setCustomColor(color: .defaultBlack)
         
+        goalNameTextView.charactersLimit = 65
+        goalNameTextView.linesLimit = 0
         addSubview(contentView!)
     }
     

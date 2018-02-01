@@ -15,4 +15,9 @@ extension Float {
         let result = String(format: "%.2f", self)
         return "$" + result
     }
+    
+    func round(_ toPlace: Int) -> Float {
+        let divisor = pow(10.0, Float(toPlace))
+        return (self * divisor).rounded() / divisor
+    }
 }

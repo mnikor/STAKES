@@ -15,6 +15,18 @@ public class Action: NSManagedObject {
     
     
     // MARK: Private properties
+    var isPurchased: Bool {
+        set {
+            self.purchased = newValue
+            SSCoreDataManager.instance.saveContext()
+        }
+        get {
+            return self.purchased
+        }
+    }
+    
+    
+    // MARK: Private properties
     private let points = SSPoint()
     
     
@@ -29,45 +41,71 @@ public class Action: NSManagedObject {
     // Edit Action Values
     func changeAction(name: String, date: Date, stake: Float) {
         
-        let newDate = date as NSDate
-        
-        // Change Due Date -2 points
-        if self.date != newDate {
-            // TODO: Show alert "Change Action Date -2 points Yes/No?"
-            points.deduct(2)
-        }
-        
-        // Delete stake -10 points
-        if stake == 0.0 {
-            points.deduct(10)
-        }
-        
         self.name = name
-        self.date = newDate
+        self.date = date as NSDate
         self.stake = stake
-        
         SSCoreDataManager.instance.saveContext()
+        
+        // Change Action event into Calendar
+        SSCalendarSyncManager.editEventFromCalendar(title: name, dueDate: date, eventID: self.event_id)
+        
+        // Remove old Notification
+        SSNotificationsManager.instance.deleteNotification(id: self.id!)
+        
+        // Add new Notification for Action
+        SSNotificationsManager.instance.addNotification(type: .action, name: name, dueDate: date, id: self.id!, stake: stake)
     }
     
     // Change Action Status
     func changeStatus(_ status: GoalStatusType) {
         
         let pointsForCurrentStake = points.calculatePointsFor(stake: self.stake)
-        
         self.status = status.rawValue
+        SSCoreDataManager.instance.saveContext()
+        
         switch status {
-        case .complete:
-            points.add(pointsForCurrentStake)
-            if self.goal?.calculateСompletion() == 100 {
-                
-                goal?.changeStatus(.complete)
-                SSMessageManager.showMainCustomAlertWith(title: .success, and: .goalAchieved, onViewController: nil)
-            }
+        case .wait, .locked: return
         case .missed:
+            
             points.deduct(pointsForCurrentStake)
-        case .wait: break
+            
+            // Analytics. Capture "Number of missed actions"
+            SSAnalyticsManager.logEvent(.missedActions)
+            
+        case .complete:
+            
+            // Accomplished earlier Due Date +2 points
+            let actionDate = self.date! as Date
+            if actionDate > Date().addCustomDateTime()! {
+                
+                points.add(2)
+            }
+            points.add(pointsForCurrentStake)
+            
+            // Analytics. Capture "Number of completed actions"
+            SSAnalyticsManager.logEvent(.completedActions)
         }
         
-        SSCoreDataManager.instance.saveContext()
+        // Delete Action Event from Calendar
+        SSCalendarSyncManager.deleteEventFromCalendar(eventID: self.event_id)
+        
+        // Delete Action Notification from Center
+        SSNotificationsManager.instance.deleteNotification(id: self.id!)
+    }
+    
+    
+    // Fetch Action from Core Data
+    class func getActionBy(id: String) -> Action? {
+        
+        let fetchedResultsController = SSCoreDataManager.instance.fetchedResultsController(entityName: .action, keyForSort: "date", predicate: ["id": id])
+        do {
+            try fetchedResultsController.performFetch()
+            let fetchedResults = fetchedResultsController.fetchedObjects
+            let fetchedAction = fetchedResults?.first as? Action
+            return fetchedAction
+        } catch {
+            print(error)
+        }
+        return nil
     }
 }

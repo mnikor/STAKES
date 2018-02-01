@@ -15,7 +15,7 @@ enum SSAnimationDuration: TimeInterval {
     case slow = 0.5
 }
 
-enum CircleBorderSize: CGFloat {
+enum SSBorderSize: CGFloat {
     case small = 1.0
     case medium = 3.0
     case large = 5.0
@@ -24,15 +24,14 @@ enum CircleBorderSize: CGFloat {
 extension UIView {
     
     // Border
-    func makeBorder(width: CircleBorderSize, color: UIColor) {
+    func makeBorder(width: SSBorderSize, color: UIColor) {
         
         layer.borderColor = color.cgColor
         layer.borderWidth = width.rawValue
     }
     
     // Shadow
-    func dropShadow() {
-        let color: UIColor = .lightGray
+    func dropShadow(_ color: UIColor) {
         let opacity: Float = 1.0
         let offSet: CGSize = CGSize(width: -1, height: 1)
         let radius: CGFloat = 3.0
@@ -47,6 +46,38 @@ extension UIView {
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
+    // Screenshot current view
+    func makeScreenshot() -> UIImage? {
+        
+        let color = self.backgroundColor
+        self.backgroundColor = .white
+        
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0.0)
+        self.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        self.backgroundColor = color
+        return image
+    }
+    
+    
+    // MARK: --- Constraints
+    
+    // Embed new view to current view by all bounds
+    func embedWithConstraint(_ view: UIView) {
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        
+        NSLayoutConstraint.activate([
+            view.leftAnchor.constraint(equalTo: self.leftAnchor),
+            view.rightAnchor.constraint(equalTo: self.rightAnchor),
+            view.topAnchor.constraint(equalTo: self.topAnchor),
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            ])
     }
     
     class func isRTL() -> Bool{

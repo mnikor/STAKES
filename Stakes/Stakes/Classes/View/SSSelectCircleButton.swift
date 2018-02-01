@@ -18,7 +18,6 @@ class SSSelectCircleButton: SSBaseButton {
     // MARK: Public Properties
     var selectedGoal: Goal?
     var selectedAction: Action?
-    var indexPath = IndexPath()
     var typeButton: SSCircleButtonType = .goal
     
     var isSelectedView = false {
@@ -35,9 +34,9 @@ class SSSelectCircleButton: SSBaseButton {
     // MARK: Private Properties
     
     // Properties for Goal type
-    private var circleView = SSTimeLinePointView()
+    private var circleView: SSTimeLinePointView!
     private var circleViewSize: CGFloat = 33.0
-    private var sizeBorderView: CircleBorderSize = .medium
+    private var sizeBorderView: SSBorderSize = .medium
     private var viewColorType: SSConstants.colorType = .red
     
     
@@ -45,16 +44,11 @@ class SSSelectCircleButton: SSBaseButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        settingsUI()
     }
     
     
     // MARK: Overriden funcs
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        settingsUI()
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -79,6 +73,8 @@ class SSSelectCircleButton: SSBaseButton {
             viewColorType = .defaultBlack
         }
         
+        circleView.frame.size = CGSize(width: circleViewSize, height: circleViewSize)
+        circleView.layer.cornerRadius = circleView.frame.width / 2
         circleView.makeBorder(width: sizeBorderView, color: UIColor.colorFrom(colorType: viewColorType))
         circleView.backgroundColor = .white
         circleView.isUserInteractionEnabled = false
@@ -89,9 +85,10 @@ class SSSelectCircleButton: SSBaseButton {
     // MARK: Private funcs
     private func settingsUI() {
         
-        self.backgroundColor = .clear
+        let circleViewFrame = CGRect(origin: frame.origin, size: CGSize(width: circleViewSize, height: circleViewSize))
+        circleView = SSTimeLinePointView(frame: circleViewFrame)
         self.addSubview(circleView)
-        isSelectedView = false
+        self.backgroundColor = .clear
     }
     
     // Set Constraints for Circle View

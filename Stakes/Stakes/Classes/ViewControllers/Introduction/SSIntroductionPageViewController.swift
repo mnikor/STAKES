@@ -17,10 +17,10 @@ class SSIntroductionPageViewController: UIPageViewController {
     private var circleView = SSCircleView()
     
     private var orderedViewControllers: [UIViewController] = {
-        return [UIStoryboard.ssInstantiateVC(.main, typeVC: .firstOnboardingVC),
-                UIStoryboard.ssInstantiateVC(.main, typeVC: .secondOnboardingVC),
-                UIStoryboard.ssInstantiateVC(.main, typeVC: .thirdOnboardingVC),
-                UIStoryboard.ssInstantiateVC(.main, typeVC: .fourthOnboardingVC)]
+        return [SSFirstOnboardingViewController.instantiate(.main),
+                SSSecondOnboardingViewController.instantiate(.main),
+                SSThirdOnboardingViewController.instantiate(.main),
+                SSFourthOnboardingViewController.instantiate(.main)]
     }()
     
     

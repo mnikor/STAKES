@@ -19,87 +19,97 @@
                 <rect key="frame" x="0.0" y="0.0" width="374" height="110.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfA-IW-vrs">
-                        <rect key="frame" x="0.0" y="0.0" width="244.5" height="110.5"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-uB-mQc" userLabel="SelectButton" customClass="SSSelectCircleButton" customModule="Stakes" customModuleProvider="target">
+                        <rect key="frame" x="5" y="0.0" width="30" height="110.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="RMu-bi-lkq"/>
+                        </constraints>
+                        <connections>
+                            <action selector="tappedSelectGoalButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qu9-f2-jn7"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sc-yK-Jkx" userLabel="MainView">
+                        <rect key="frame" x="40" y="20" width="299" height="70.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-uB-mQc" userLabel="SelectButton" customClass="SSSelectCircleButton" customModule="Stakes" customModuleProvider="target">
-                                <rect key="frame" x="5" y="0.0" width="30" height="110.5"/>
-                                <connections>
-                                    <action selector="tappedSelectGoalButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qu9-f2-jn7"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sc-yK-Jkx">
-                                <rect key="frame" x="46" y="20" width="198.5" height="70.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhK-1b-2Au" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="56.5" height="19.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="19.5" id="QVD-gH-URM"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Launch App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbg-b4-2jd" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="26.5" width="327" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="327" id="8kn-Au-QxA"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 11th, 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gje-ZH-xQQ" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="74.5" y="0.0" width="124" height="19.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" red="0.61176470588235299" green="0.61176470588235299" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ty-Y3-n0t" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
-                                        <rect key="frame" x="66.5" y="8.5" width="3" height="3"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="3" id="eD1-Da-12V"/>
-                                            <constraint firstAttribute="width" constant="3" id="xkU-PD-0kd"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhK-1b-2Au" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="56.5" height="19.5"/>
                                 <constraints>
-                                    <constraint firstItem="bhK-1b-2Au" firstAttribute="leading" secondItem="1sc-yK-Jkx" secondAttribute="leading" id="2M1-1G-bXw"/>
-                                    <constraint firstItem="6Ty-Y3-n0t" firstAttribute="centerY" secondItem="gje-ZH-xQQ" secondAttribute="centerY" id="Cos-xN-edC"/>
-                                    <constraint firstAttribute="bottom" secondItem="Qbg-b4-2jd" secondAttribute="bottom" id="Opt-f3-Afj"/>
-                                    <constraint firstAttribute="trailing" secondItem="gje-ZH-xQQ" secondAttribute="trailing" id="WGN-TC-JGv"/>
-                                    <constraint firstItem="Qbg-b4-2jd" firstAttribute="leading" secondItem="bhK-1b-2Au" secondAttribute="leading" id="dKw-G6-gsp"/>
-                                    <constraint firstItem="gje-ZH-xQQ" firstAttribute="top" secondItem="1sc-yK-Jkx" secondAttribute="top" id="eEd-6b-mFM"/>
-                                    <constraint firstItem="6Ty-Y3-n0t" firstAttribute="leading" secondItem="bhK-1b-2Au" secondAttribute="trailing" constant="10" id="hXT-tD-Qf5"/>
-                                    <constraint firstItem="gje-ZH-xQQ" firstAttribute="leading" secondItem="6Ty-Y3-n0t" secondAttribute="trailing" constant="5" id="q9K-KS-TH2"/>
-                                    <constraint firstItem="Qbg-b4-2jd" firstAttribute="top" secondItem="bhK-1b-2Au" secondAttribute="bottom" constant="7" id="uBE-yY-2rl"/>
-                                    <constraint firstItem="bhK-1b-2Au" firstAttribute="top" secondItem="1sc-yK-Jkx" secondAttribute="top" id="zZU-UJ-bQ2"/>
+                                    <constraint firstAttribute="height" constant="19.5" id="QVD-gH-URM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Launch App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbg-b4-2jd" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="26.5" width="299" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 11th, 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gje-ZH-xQQ" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="74.5" y="0.0" width="124" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.61176470588235299" green="0.61176470588235299" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ty-Y3-n0t" customClass="SSTimeLinePointView" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="66.5" y="8.5" width="3" height="3"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="eD1-Da-12V"/>
+                                    <constraint firstAttribute="width" constant="3" id="xkU-PD-0kd"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Mbu-uB-mQc" firstAttribute="centerY" secondItem="1sc-yK-Jkx" secondAttribute="centerY" id="1rq-WH-XDm"/>
-                            <constraint firstItem="1sc-yK-Jkx" firstAttribute="leading" secondItem="Mbu-uB-mQc" secondAttribute="trailing" constant="11" id="6tV-mJ-KHy"/>
-                            <constraint firstAttribute="trailing" secondItem="1sc-yK-Jkx" secondAttribute="trailing" id="Bee-eO-lp8"/>
-                            <constraint firstItem="1sc-yK-Jkx" firstAttribute="top" secondItem="qfA-IW-vrs" secondAttribute="top" constant="20" id="CO0-wz-TuP"/>
-                            <constraint firstItem="Mbu-uB-mQc" firstAttribute="centerY" secondItem="qfA-IW-vrs" secondAttribute="centerY" id="Q7c-jg-gp5"/>
-                            <constraint firstAttribute="bottom" secondItem="Mbu-uB-mQc" secondAttribute="bottom" id="RIg-6r-P6A"/>
-                            <constraint firstAttribute="bottom" secondItem="1sc-yK-Jkx" secondAttribute="bottom" constant="20" id="S9B-45-6xu"/>
-                            <constraint firstItem="Mbu-uB-mQc" firstAttribute="top" secondItem="qfA-IW-vrs" secondAttribute="top" id="n8s-tH-uKI"/>
-                            <constraint firstItem="Mbu-uB-mQc" firstAttribute="leading" secondItem="qfA-IW-vrs" secondAttribute="leading" constant="5" id="xtn-VJ-jl5"/>
+                            <constraint firstItem="bhK-1b-2Au" firstAttribute="leading" secondItem="1sc-yK-Jkx" secondAttribute="leading" id="2M1-1G-bXw"/>
+                            <constraint firstItem="6Ty-Y3-n0t" firstAttribute="centerY" secondItem="gje-ZH-xQQ" secondAttribute="centerY" id="Cos-xN-edC"/>
+                            <constraint firstAttribute="bottom" secondItem="Qbg-b4-2jd" secondAttribute="bottom" id="Opt-f3-Afj"/>
+                            <constraint firstItem="Qbg-b4-2jd" firstAttribute="leading" secondItem="bhK-1b-2Au" secondAttribute="leading" id="dKw-G6-gsp"/>
+                            <constraint firstItem="gje-ZH-xQQ" firstAttribute="top" secondItem="1sc-yK-Jkx" secondAttribute="top" id="eEd-6b-mFM"/>
+                            <constraint firstItem="6Ty-Y3-n0t" firstAttribute="leading" secondItem="bhK-1b-2Au" secondAttribute="trailing" constant="10" id="hXT-tD-Qf5"/>
+                            <constraint firstItem="gje-ZH-xQQ" firstAttribute="leading" secondItem="6Ty-Y3-n0t" secondAttribute="trailing" constant="5" id="q9K-KS-TH2"/>
+                            <constraint firstAttribute="trailing" secondItem="Qbg-b4-2jd" secondAttribute="trailing" id="sm3-HL-cUf"/>
+                            <constraint firstItem="Qbg-b4-2jd" firstAttribute="top" secondItem="bhK-1b-2Au" secondAttribute="bottom" constant="7" id="uBE-yY-2rl"/>
+                            <constraint firstItem="bhK-1b-2Au" firstAttribute="top" secondItem="1sc-yK-Jkx" secondAttribute="top" id="zZU-UJ-bQ2"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="w3p-YJ-MXY">
+                        <rect key="frame" x="352" y="49" width="14" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="hAe-aS-6G6"/>
+                            <constraint firstAttribute="width" constant="14" id="wf4-Oj-xob"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4v-C4-wpT" userLabel="EditButton">
+                        <rect key="frame" x="344" y="40" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="H0R-OE-mop"/>
+                            <constraint firstAttribute="width" constant="30" id="nlv-pc-kZk"/>
+                        </constraints>
+                        <connections>
+                            <action selector="tappedEditButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="C3Z-7N-eVa"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="qfA-IW-vrs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2Z5-Rc-YaK"/>
-                    <constraint firstItem="qfA-IW-vrs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cnu-0W-HI2"/>
-                    <constraint firstAttribute="bottom" secondItem="qfA-IW-vrs" secondAttribute="bottom" id="pDH-ER-rnn"/>
-                    <constraint firstItem="qfA-IW-vrs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="w1c-GX-UmK"/>
+                    <constraint firstAttribute="bottom" secondItem="Mbu-uB-mQc" secondAttribute="bottom" id="46Z-MZ-1cg"/>
+                    <constraint firstItem="Mbu-uB-mQc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="CUA-re-0qv"/>
+                    <constraint firstItem="Mbu-uB-mQc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FLV-6Z-BcK"/>
+                    <constraint firstItem="w3p-YJ-MXY" firstAttribute="centerY" secondItem="F4v-C4-wpT" secondAttribute="centerY" id="JWg-nU-EdF"/>
+                    <constraint firstItem="F4v-C4-wpT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SQf-0S-4qj"/>
+                    <constraint firstItem="F4v-C4-wpT" firstAttribute="leading" secondItem="1sc-yK-Jkx" secondAttribute="trailing" constant="5" id="TkQ-DH-3tL"/>
+                    <constraint firstItem="w3p-YJ-MXY" firstAttribute="centerX" secondItem="F4v-C4-wpT" secondAttribute="centerX" id="ZOR-sd-gnA"/>
+                    <constraint firstItem="1sc-yK-Jkx" firstAttribute="leading" secondItem="Mbu-uB-mQc" secondAttribute="trailing" constant="5" id="ZrM-J5-F7G"/>
+                    <constraint firstAttribute="bottom" secondItem="1sc-yK-Jkx" secondAttribute="bottom" constant="20" id="cmf-sd-GBu"/>
+                    <constraint firstItem="1sc-yK-Jkx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="huq-Rb-9Dm"/>
+                    <constraint firstAttribute="trailing" secondItem="F4v-C4-wpT" secondAttribute="trailing" id="iyF-Jz-rRr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="editButton" destination="F4v-C4-wpT" id="Qjo-ei-vBd"/>
+                <outlet property="editImageView" destination="w3p-YJ-MXY" id="k1n-fu-0Gd"/>
                 <outlet property="goalDateLabel" destination="gje-ZH-xQQ" id="JC8-nJ-SVh"/>
                 <outlet property="goalNameLabel" destination="Qbg-b4-2jd" id="Kez-lk-wBS"/>
                 <outlet property="remainingDaysLabel" destination="bhK-1b-2Au" id="e7r-BJ-n96"/>
@@ -108,4 +118,7 @@
             <point key="canvasLocation" x="-36" y="45.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="edit" width="14" height="12"/>
+    </resources>
 </document>

@@ -11,16 +11,13 @@ import UIKit
 class SSCurrentDateLabel: SSBaseLabel {
     
     
-    // MARK: Private Properties
-    
-    
     // MARK: Overriden funcs
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         tintColor = .clear
         numberOfLines = 3
-        text = additionFor(Date.formatter(date: Date(), with: .weekdayDayMonthYear))
+        text = additionFor(Date.formatter(date: Date(), with: .weekdayDayMonthYear).localized())
     }
     
     override func additionFor(_ dateText: String) -> String {

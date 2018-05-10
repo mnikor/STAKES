@@ -30,21 +30,31 @@ class SSMessageManager: NSObject {
         
         // Simple Messages
         case share = "Share your goal with friends"
-        case missedAction = "You have missed your action. Don’t give up, keep going!"
-        case goalAchieved = "Fantastic! You have achieved your goal. Congratulations, you get additional points !!!"
-        case completedActionNoStake = "You have completed action and earned points."
-        case completedAction = "You have completed your action,\nsaved your stake and earned points."
-        case firstPointsEarned = "Keep earning points to use it in our next app updates!"
+        case feedback = "Do you find The Bold app helpful?"
+        case newFeatures = "We are introducing 2 cool new features: \n1. Lessons of Powerful Knowledge, and \n2. Levels of Mastery"
+        case missedAction = "You've missed your action. Don’t give up, keep going!"
+        case goalAchieved = "Fantastic! \nYou have achieved your goal. \nCongratulations, you get additional points!!!"
+        case completedActionNoStake = "Congratulations! \nYou have completed your action and earned points. Keep crushing your action plan!!!"
+        case completedAction = "Congratulations! \nYou have completed your action, saved your stake and earned points. Keep crushing your action plan!!!"
+        case firstPointsEarned = "Keep earning points to unlock Lessons and progress with Mastery Levels"
         case inAppPurchasesWarning = "If you miss to complete action point your goal will be locked. To unlock it stake should be paid as in-app purchase"
+        case unlockLesson = "Unlock Lessons  to acquire powerful \nknowledge quicker."
+        
+        case knowledge = "Acquire important knowledge about how to progress quicker and smarter towards your goals. These lessons are based on scientific research, the experience of high performance people in many fields, and the invaluable knowledge of many great books. \n\nEarn 30 points and spend one month working on your goal"
+        case levelsInfo = "Progress on levels to  master  a skill\n of achieving any goal any time.\nBecome a grandmaster of your life!"
+        // "masteryLevel" firts part here, second part will add with current level title in VC
+        case masteryLevel = "Incredible,\nyou just moved to another Level \nof Mastery! Now you are "
+        case purchaseDone = "Thank you for purchase! \nWe sincereley hope this lesson(s) \nwill be helpful for you."
+        case unlockedLesson = "Amazing, \nyou just unlocked a new \nLesson of Powerful Knowledge! \nRead it carefully and apply what you learn!"
         
         // Yes/No options Messages
-        case emptyStake = "Add stake to maximise commitment. Continue without stake?"
-        case lastActionNoSelected = "Would you like to create new actions?"
-        case lastAction = "It was your last action, did your  Achieve your goal?"
-        case goalDeleted = "Sometimes goals can become irrelevant!  Confirm deletion?"
-        case deleteStake = "Looks like you are not confident enough  in your performance.  Confirm stake deletion?"
-        case actionDeleted = "Sometimes actions can become irrelevant and we adapt strategy! Confirm deletion?"
-        case unLockGoal = "You missed to complete the action point. Please pay the stake in a form of in-app purchase to unlock your goal."
+        case emptyStake = "Add stake to maximise commitment?"
+        case lastActionNoSelected = "Would you like to create a new action?"
+        case lastAction = "This was your last action, have you Achieved your goal?"
+        case goalDeleted = "Sometimes goals become irrelevant! \nConfirm deletion (-50 points):"
+        case deleteStake = "Are you sure you want to delete this stake? \nConfirm deletion (-10 points):"
+        case actionDeleted = "Sometimes actions become irrelevant \nas we adapt our strategy! \nConfirm deletion (-10 points):"
+        case unLockGoal = "You’ve missed your action. \nYour goal is locked now. To unlock  it stake should be paid as in-app purchase. \nDon’t give up, keep going!"
         
         // Warnings
         case dueDateWarning = "You cannot pick any date in the past"
@@ -66,11 +76,13 @@ class SSMessageManager: NSObject {
     
     // MARK: Custom Alerts. Class(Static) funcs
     
-    // For simple alert with text
-    class func showCustomAlertWith(message: MessageTypeDescription, onViewController: UIViewController?) {
+    // For simple alert with text and goal if needed
+    class func showCustomAlertWith(message: MessageTypeDescription, goal: Goal? = nil, action: Action? = nil, onViewController: UIViewController?) {
         
         let alertCompletedActionVC = SSCustomAlertViewController.instantiate(.home) as! SSCustomAlertViewController
         alertCompletedActionVC.messageType = message
+        alertCompletedActionVC.goal = goal
+        alertCompletedActionVC.action = action
         
         instance.presentAlert(alertCompletedActionVC, onViewController)
     }

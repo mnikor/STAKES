@@ -2,8 +2,8 @@
 //  Goal+CoreDataProperties.swift
 //  Stakes
 //
-//  Created by Dmitry Nezhidenko on 12/29/17.
-//  Copyright © 2017 Rubiconware. All rights reserved.
+//  Created by Dmitry Nezhidenko on 2/26/18.
+//  Copyright © 2018 Rubiconware. All rights reserved.
 //
 //
 
@@ -17,12 +17,14 @@ extension Goal {
         return NSFetchRequest<Goal>(entityName: "Goal")
     }
 
+    @NSManaged public var creationDate: NSDate?
     @NSManaged public var date: NSDate?
     @NSManaged public var event_id: String?
+    @NSManaged public var id: String?
     @NSManaged public var name: String?
     @NSManaged public var stake: Float
     @NSManaged public var status: String?
-    @NSManaged public var id: String?
+    @NSManaged public var image: NSObject?
     @NSManaged public var actions: NSOrderedSet?
 
 }

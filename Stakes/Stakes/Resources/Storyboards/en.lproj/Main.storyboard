@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Helvetica.ttc">
+            <string>Helvetica</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Introduction Page View Controller-->
         <scene sceneID="i6M-IT-U6Q">
@@ -284,8 +289,294 @@ It Interesting</string>
             </objects>
             <point key="canvasLocation" x="3712.8000000000002" y="138.98050974512745"/>
         </scene>
+        <!--Fifth Onboarding View Controller-->
+        <scene sceneID="9za-Vf-EnO">
+            <objects>
+                <viewController storyboardIdentifier="SSFifthOnboardingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Hu-3e-n8H" customClass="SSFifthOnboardingViewController" customModule="Stakes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cHn-kf-MrC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Levels of Mastery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yx4-lI-pok" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="85.5" y="35" width="204" height="30"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ieo-iR-DqV">
+                                <rect key="frame" x="26" y="70" width="331" height="497"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sports_icon" translatesAutoresizingMaskIntoConstraints="NO" id="2OA-zS-hIi">
+                                <rect key="frame" x="0.0" y="595" width="87" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="6iU-oq-aNq"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9h-Dd-IhN">
+                                <rect key="frame" x="95" y="564" width="262" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="RC3-qS-X9L"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Progress ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99191647770000002" green="0.56878465410000001" blue="0.56072652339999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="on levels to">
+                                        <attributes>
+                                            <color key="NSColor" red="0.27069070940000001" green="0.270684123" blue="0.27068537469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="  master  a skill">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99191647770000002" green="0.56878465410000001" blue="0.56072652339999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">of achieving any goal any time. 
+Become a </string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.27069070940000001" green="0.270684123" blue="0.27068537469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="grandmaster ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99191647770000002" green="0.56878465410000001" blue="0.56072652339999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="of your life!">
+                                        <attributes>
+                                            <color key="NSColor" red="0.27069070940000001" green="0.270684123" blue="0.27068537469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2OA-zS-hIi" firstAttribute="leading" secondItem="c9h-Dd-IhN" secondAttribute="trailing" constant="-357" id="2R1-hU-pfZ"/>
+                            <constraint firstItem="Ieo-iR-DqV" firstAttribute="leading" secondItem="pGb-BH-F66" secondAttribute="leading" constant="26" id="Bpj-zB-gH1"/>
+                            <constraint firstItem="c9h-Dd-IhN" firstAttribute="trailing" secondItem="Ieo-iR-DqV" secondAttribute="trailing" id="F3s-w1-0R5"/>
+                            <constraint firstItem="yx4-lI-pok" firstAttribute="top" secondItem="pGb-BH-F66" secondAttribute="top" constant="15" id="Ilg-gy-30i"/>
+                            <constraint firstItem="c9h-Dd-IhN" firstAttribute="leading" secondItem="2OA-zS-hIi" secondAttribute="trailing" constant="8" id="LyP-gy-8KD"/>
+                            <constraint firstItem="pGb-BH-F66" firstAttribute="bottom" secondItem="Ieo-iR-DqV" secondAttribute="bottom" constant="100" id="THq-V4-96m"/>
+                            <constraint firstItem="yx4-lI-pok" firstAttribute="centerX" secondItem="pGb-BH-F66" secondAttribute="centerX" id="YO7-VX-F3s"/>
+                            <constraint firstItem="c9h-Dd-IhN" firstAttribute="top" secondItem="Ieo-iR-DqV" secondAttribute="bottom" constant="-3" id="aau-1Y-kAd"/>
+                            <constraint firstItem="2OA-zS-hIi" firstAttribute="leading" secondItem="pGb-BH-F66" secondAttribute="leading" id="eeh-qZ-IfK"/>
+                            <constraint firstItem="pGb-BH-F66" firstAttribute="trailing" secondItem="Ieo-iR-DqV" secondAttribute="trailing" constant="18" id="ol7-lk-PsZ"/>
+                            <constraint firstItem="Ieo-iR-DqV" firstAttribute="top" secondItem="yx4-lI-pok" secondAttribute="bottom" constant="5" id="tvS-rD-j5b"/>
+                            <constraint firstItem="pGb-BH-F66" firstAttribute="bottom" secondItem="2OA-zS-hIi" secondAttribute="bottom" id="yx0-u3-gOg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pGb-BH-F66"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Ieo-iR-DqV" id="bDZ-24-dL9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s5Z-p2-OwG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4405.6000000000004" y="138.98050974512745"/>
+        </scene>
+        <!--Sixth Onboarding View Controller-->
+        <scene sceneID="m9G-1F-IAJ">
+            <objects>
+                <viewController storyboardIdentifier="SSSixthOnboardingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7jA-Et-UiG" customClass="SSSixthOnboardingViewController" customModule="Stakes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BRd-Pr-Oh0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lessons" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnz-qL-QvY" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                                <rect key="frame" x="139" y="35" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="UDB-LN-cQ8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hhK-MV-xnR">
+                                <rect key="frame" x="40" y="85" width="295" height="146"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="146" id="yy4-hU-BvI"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sUh-7a-XvD">
+                                    <size key="itemSize" width="90" height="122"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SSLessonsCollectionViewCell" id="uMY-Wc-eik" customClass="SSLessonsCollectionViewCell" customModule="Stakes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="122"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="122"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knowledge_alert" translatesAutoresizingMaskIntoConstraints="NO" id="35T-Md-WCO">
+                                <rect key="frame" x="124.5" y="246" width="126" height="121"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="121" id="uLL-za-Ink"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZ9-V1-Cki">
+                                <rect key="frame" x="40" y="382" width="295" height="270"/>
+                                <attributedString key="attributedText">
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Acquire">
+                                        <attributes>
+                                            <color key="NSColor" red="0.93315000000000003" green="0.50217999999999996" blue="0.49013000000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="important knowledge about how to">
+                                        <attributes>
+                                            <color key="NSColor" red="0.27069070940000001" green="0.270684123" blue="0.27068537469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="progress quicker and smarter">
+                                        <attributes>
+                                            <color key="NSColor" red="0.93314832448959351" green="0.50218236446380615" blue="0.49013340473175049" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="towards your goals.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.27069070940000001" green="0.270684123" blue="0.27068537469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+IAo
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">These lessons are based on scientific research, the experience of high performance people in many fields, and the invaluable knowledge of many great books.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.27069070940000001" green="0.270684123" blue="0.27068537469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aZ9-V1-Cki" firstAttribute="leading" secondItem="hhK-MV-xnR" secondAttribute="leading" id="5kN-Sb-emu"/>
+                            <constraint firstItem="gnz-qL-QvY" firstAttribute="centerX" secondItem="i5W-yi-QWj" secondAttribute="centerX" id="BWu-z2-5dl"/>
+                            <constraint firstItem="aZ9-V1-Cki" firstAttribute="top" secondItem="35T-Md-WCO" secondAttribute="bottom" constant="15" id="H1C-AW-1AO"/>
+                            <constraint firstItem="35T-Md-WCO" firstAttribute="centerX" secondItem="i5W-yi-QWj" secondAttribute="centerX" id="PCx-IM-D0l"/>
+                            <constraint firstItem="hhK-MV-xnR" firstAttribute="top" secondItem="gnz-qL-QvY" secondAttribute="bottom" constant="20" id="R3A-F4-T4k"/>
+                            <constraint firstItem="hhK-MV-xnR" firstAttribute="centerX" secondItem="i5W-yi-QWj" secondAttribute="centerX" id="WfX-8l-szr"/>
+                            <constraint firstItem="gnz-qL-QvY" firstAttribute="top" secondItem="i5W-yi-QWj" secondAttribute="top" constant="15" id="c0j-DT-I34"/>
+                            <constraint firstItem="i5W-yi-QWj" firstAttribute="trailing" secondItem="hhK-MV-xnR" secondAttribute="trailing" constant="40" id="gPZ-l2-wUq"/>
+                            <constraint firstItem="35T-Md-WCO" firstAttribute="top" secondItem="hhK-MV-xnR" secondAttribute="bottom" constant="15" id="ndQ-yA-aaB"/>
+                            <constraint firstItem="aZ9-V1-Cki" firstAttribute="trailing" secondItem="hhK-MV-xnR" secondAttribute="trailing" id="ojP-ub-NVN"/>
+                            <constraint firstItem="i5W-yi-QWj" firstAttribute="bottom" secondItem="aZ9-V1-Cki" secondAttribute="bottom" constant="15" id="xc3-mW-7T7"/>
+                            <constraint firstItem="hhK-MV-xnR" firstAttribute="leading" secondItem="i5W-yi-QWj" secondAttribute="leading" constant="40" id="zUr-Uu-qjh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="i5W-yi-QWj"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="hhK-MV-xnR" id="SU7-xD-jTK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hj-e4-bmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5060" y="138.98050974512745"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Onboarding_TimeLine" width="3" height="131"/>
+        <image name="knowledge_alert" width="126" height="121"/>
+        <image name="sports_icon" width="87" height="72"/>
     </resources>
 </document>

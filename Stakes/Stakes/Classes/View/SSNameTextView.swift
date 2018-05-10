@@ -88,6 +88,7 @@ class SSNameTextView: UITextView {
         placeholderLabel.isHidden = true
     }
     
+    
     // MARK: Private funcs
     private func settings() {
         
@@ -100,7 +101,6 @@ class SSNameTextView: UITextView {
         textColor = UIColor.colorFrom(colorType: .createActionBlack)
         placeholderLabel.isHidden = !isEmpty
     }
-    
     
     // TextView Placeholder
     private func setPlaceholder() {

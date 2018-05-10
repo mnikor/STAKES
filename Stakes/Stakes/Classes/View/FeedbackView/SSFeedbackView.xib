@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSFeedbackView" customModule="Stakes" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="C2a-Z4-05W" id="hoe-RR-NEw"/>
+                <outlet property="feedbackTextView" destination="3Ew-CU-rhC" id="m1Z-zt-Wvx"/>
+                <outlet property="sendButton" destination="4lq-kS-Lpn" id="ya6-46-pod"/>
+                <outlet property="textViewPlaceholderLabel" destination="66f-c5-dxs" id="Ydf-QG-hlV"/>
+                <outlet property="titleLabel" destination="RAb-h4-eYy" id="thE-d8-NUO"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="313" height="274"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-Z4-05W" userLabel="FeedbackView">
+                    <rect key="frame" x="0.0" y="0.0" width="312.5" height="283.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your feedback is very important for us!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAb-h4-eYy" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="10" width="312.5" height="21.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="312.5" id="Ey9-IK-7mC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ew-CU-rhC" customClass="SSFeedbackTextView" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="20" y="46.5" width="272.5" height="175"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="175" id="wPp-DR-Atw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="type your message here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66f-c5-dxs" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="69" y="124.5" width="174.5" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lq-kS-Lpn" customClass="SSCenterActionButton" customModule="Stakes" customModuleProvider="target">
+                            <rect key="frame" x="80" y="238.5" width="153" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="153" id="iLJ-vf-HaV"/>
+                                <constraint firstAttribute="height" constant="45" id="pfS-gx-s3j"/>
+                            </constraints>
+                            <state key="normal" title="Send"/>
+                            <connections>
+                                <action selector="tappedSendButton:" destination="-1" eventType="touchUpInside" id="5jv-4C-GAo"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="RAb-h4-eYy" firstAttribute="leading" secondItem="C2a-Z4-05W" secondAttribute="leading" id="01R-Vp-lgV"/>
+                        <constraint firstItem="RAb-h4-eYy" firstAttribute="centerX" secondItem="C2a-Z4-05W" secondAttribute="centerX" id="0mt-wT-BJp"/>
+                        <constraint firstItem="RAb-h4-eYy" firstAttribute="top" secondItem="C2a-Z4-05W" secondAttribute="top" constant="10" id="4kY-Z0-ykb"/>
+                        <constraint firstItem="3Ew-CU-rhC" firstAttribute="leading" secondItem="C2a-Z4-05W" secondAttribute="leading" constant="20" id="8ou-LL-4Gn"/>
+                        <constraint firstAttribute="trailing" secondItem="RAb-h4-eYy" secondAttribute="trailing" id="Kcy-5m-jBa"/>
+                        <constraint firstItem="66f-c5-dxs" firstAttribute="centerY" secondItem="3Ew-CU-rhC" secondAttribute="centerY" id="MA7-Ph-HRg"/>
+                        <constraint firstItem="3Ew-CU-rhC" firstAttribute="top" secondItem="RAb-h4-eYy" secondAttribute="bottom" constant="15" id="Prz-og-aey"/>
+                        <constraint firstItem="4lq-kS-Lpn" firstAttribute="centerX" secondItem="C2a-Z4-05W" secondAttribute="centerX" id="XvJ-Sn-tZf"/>
+                        <constraint firstAttribute="bottom" secondItem="4lq-kS-Lpn" secondAttribute="bottom" id="tQ6-ie-BtQ"/>
+                        <constraint firstAttribute="trailing" secondItem="3Ew-CU-rhC" secondAttribute="trailing" constant="20" id="tZK-Cv-RJs"/>
+                        <constraint firstItem="66f-c5-dxs" firstAttribute="centerX" secondItem="3Ew-CU-rhC" secondAttribute="centerX" id="xyb-HQ-mzg"/>
+                        <constraint firstItem="4lq-kS-Lpn" firstAttribute="top" secondItem="3Ew-CU-rhC" secondAttribute="bottom" constant="17" id="yki-aF-COV"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="C2a-Z4-05W" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9Op-x1-m14"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="C2a-Z4-05W" secondAttribute="top" id="uSg-cF-iwx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-6.5" y="-145"/>
+        </view>
+    </objects>
+</document>

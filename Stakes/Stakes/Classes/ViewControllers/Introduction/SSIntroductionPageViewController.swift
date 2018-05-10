@@ -20,7 +20,9 @@ class SSIntroductionPageViewController: UIPageViewController {
         return [SSFirstOnboardingViewController.instantiate(.main),
                 SSSecondOnboardingViewController.instantiate(.main),
                 SSThirdOnboardingViewController.instantiate(.main),
-                SSFourthOnboardingViewController.instantiate(.main)]
+                SSFourthOnboardingViewController.instantiate(.main),
+                SSFifthOnboardingViewController.instantiate(.main),
+                SSSixthOnboardingViewController.instantiate(.main)]
     }()
     
     
@@ -51,7 +53,7 @@ class SSIntroductionPageViewController: UIPageViewController {
     
     // MARK: Private funcs
     private func stylePageControl() {
-        let heightPageControl: CGFloat = 75.0
+        let heightPageControl: CGFloat = 30.0
         pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - heightPageControl, width:
             UIScreen.main.bounds.width, height: heightPageControl))
         
@@ -65,7 +67,7 @@ class SSIntroductionPageViewController: UIPageViewController {
 }
 
 
-//MARK: UIPageViewControllerDataSource
+// MARK: UIPageViewControllerDataSource
 
 extension SSIntroductionPageViewController: UIPageViewControllerDataSource {
     
@@ -89,7 +91,7 @@ extension SSIntroductionPageViewController: UIPageViewControllerDataSource {
         let orderedViewControllersCount = orderedViewControllers.count
         
         guard orderedViewControllersCount != nextIndex else {
-            if let lastVC = orderedViewControllers[viewControllerIndex] as? SSFourthOnboardingViewController {
+            if let lastVC = orderedViewControllers[viewControllerIndex] as? SSSixthOnboardingViewController {
                 UIApplication.shared.keyWindow?.addSubview(lastVC.rightActionButton)
             }
             return nil
@@ -100,7 +102,7 @@ extension SSIntroductionPageViewController: UIPageViewControllerDataSource {
 }
 
 
-//MARK: UIPageViewControllerDelegate
+// MARK: UIPageViewControllerDelegate
 
 extension SSIntroductionPageViewController: UIPageViewControllerDelegate {
     
@@ -117,7 +119,7 @@ extension SSIntroductionPageViewController: UIPageViewControllerDelegate {
 }
 
 
-//MARK: UIScrollViewDelegate
+// MARK: UIScrollViewDelegate
 
 extension SSIntroductionPageViewController: UIScrollViewDelegate {
     

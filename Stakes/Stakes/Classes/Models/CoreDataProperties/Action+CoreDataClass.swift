@@ -14,7 +14,7 @@ import CoreData
 public class Action: NSManagedObject {
     
     
-    // MARK: Private properties
+    // MARK: Public properties
     var isPurchased: Bool {
         set {
             self.purchased = newValue
@@ -74,13 +74,29 @@ public class Action: NSManagedObject {
             
         case .complete:
             
+            var addedPoints = pointsForCurrentStake
             // Accomplished earlier Due Date +2 points
             let actionDate = self.date! as Date
             if actionDate > Date().addCustomDateTime()! {
                 
-                points.add(2)
+                addedPoints += 2
             }
-            points.add(pointsForCurrentStake)
+            
+            // Add points to Total Sum
+            points.add(addedPoints)
+            
+            // Add points to goal points
+            if goal!.addedPoints != nil {
+                goal!.addedPoints! += addedPoints
+            } else {
+                goal!.addedPoints = addedPoints
+            }
+            
+            // Actions completed count
+            let userDefaults = UserDefaults.standard
+            let key = SSConstants.keys.kCompletedActions.rawValue
+            let countOfShows = userDefaults.integer(forKey: key)
+            userDefaults.set(countOfShows + 1, forKey: key)
             
             // Analytics. Capture "Number of completed actions"
             SSAnalyticsManager.logEvent(.completedActions)
@@ -93,6 +109,8 @@ public class Action: NSManagedObject {
         SSNotificationsManager.instance.deleteNotification(id: self.id!)
     }
     
+    
+    // MARK: Class funcs
     
     // Fetch Action from Core Data
     class func getActionBy(id: String) -> Action? {

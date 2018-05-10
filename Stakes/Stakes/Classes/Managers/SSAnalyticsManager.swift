@@ -29,27 +29,28 @@ class SSAnalyticsManager {
         Flurry.startSession(SSAnalyticsManager.instance.kFlurryID, with: FlurrySessionBuilder
             .init()
             .withCrashReporting(true)
-            .withLogLevel(FlurryLogLevelAll))
+            .withLogLevel(FlurryLogLevelNone))
     }
     
     
     //MARK: Add Event
     class func logEvent(_ event: SSConstants.analytics) {
-        
         Flurry.logEvent(event.rawValue)
+    }
+    
+    class func logEvent(stringEvent: String) {
+        Flurry.logEvent(stringEvent)
     }
     
     
     //MARK: Add Event with parameters
     class func logEvent(_ event: SSConstants.analytics, with parameters: [String : Any]) {
-//        ["User": SSConstants.userID!]
         Flurry.logEvent(event.rawValue, withParameters: parameters)
     }
     
     
     //MARK: Users screen path
     class func addScreen(screen: UIViewController) {
-        
         Flurry.logPageView()
     }
     

@@ -6,9 +6,15 @@ target 'Stakes' do
   use_frameworks!
 
 pod 'SlideMenuControllerSwift'
+pod 'IQKeyboardManagerSwift'
+pod 'EFCountingLabel'
+
 pod 'Fabric'
 pod 'Crashlytics'
-pod 'IQKeyboardManagerSwift'
 pod 'Flurry-iOS-SDK/FlurrySDK' #Analytics Pod
+
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
 
 end

@@ -11,8 +11,7 @@ import UIKit
 struct SSConstants {
     
     
-    // MARK: Stakes value
-    static let userID = UIDevice.current.identifierForVendor?.uuidString
+    // MARK: Constant properties
     static let appStoreLink = "https://itunes.apple.com/us/app/the-bold/id1335550087?ls=1&mt=8"
     static let instagramURL = URL(string: "instagram://app")!
     static let stakes: [Float : purchase] = [0.0    : .zeroStake,
@@ -37,6 +36,7 @@ struct SSConstants {
     // MARK: Fonts Constants
     enum fontType: String {
         case helvetica = "Helvetica"
+        case helveticaBold = "Helvetica-Bold"
         case bigCaslon = "BigCaslon-Medium"
     }
     
@@ -54,32 +54,31 @@ struct SSConstants {
         case blue = 0x5D9BE5
         case nextAction = 0x4A90E2
         case settingsRed = 0xFF6D6D
-        
-        case testGreen = 0x0CFF14
+        case green = 0x64C3FF
     }
     
     
     // MARK: Keys
     enum keys: String {
+        case kLocaleIdentifier = "en"
         case kNotificationActionID = "Complete"
         case kNotificationCategoryID = "ReminderCategory"
         case kLaunch = "isLaunched"
         case kPointKey = "currentPoints"
+        case kTempPointKey = "temporaryPoints"
         case kFirstEarnPoint = "FirstEarnPoint"
         case kActionWithoutStake = "ActionWithoutStake"
+        
+        case kCurrentLevelType
+        case kShowNewFeaturesAlert
         case kShowWarningInAppPurchases
+        
+        case kCompletedActions
         case kSyncWithCalendar
         case kFeedbackText
+        case kCreatedLessons
     }
     
-    /*
-     
-     
-     
-     
-     
-
-     */
     
     // MARK: Analytics
     enum analytics: String {
@@ -89,13 +88,15 @@ struct SSConstants {
          Number of stakes set
          Overall stake amount
          */
-        case allActions = "User all actions"
+        case allActions = "Action Created"//"User all actions"
         
         /*
          Number of Goals set overall
          Average number of goals per user
          */
         case allGoals = "Goals set overall"
+        
+        case unlockPressed = "The unlock lesson button is pressed"
         
         // Number of times stake is changed
         case amountStakeChanges = "Stake is changed"
@@ -120,6 +121,9 @@ struct SSConstants {
         
         // Number of times goal is shared
         case shareGoal = "Goal is shared"
+        
+        // Number of goals locked
+        case lockedGoal = "Goal is locked"
     }
     
     

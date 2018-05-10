@@ -36,7 +36,7 @@ class SSHomeShortTableViewCell: SSBaseTableViewCell {
         // Set values
         goalNameLabel.text = goal.name
         goalDateLabel.text = goalDateLabel.additionFor(dateText)
-        remainingDaysLabel.text = getDaysLabelText(goalDate)
+        remainingDaysLabel.text = getDaysLabelTextFor(goal: goal)
         selectGoalButton.selectedGoal = goal
         
         // Is enable to edit
@@ -57,6 +57,7 @@ class SSHomeShortTableViewCell: SSBaseTableViewCell {
         delegate?.tappedEditButton!(selectGoalButton.selectedGoal)
     }
     
+    
     // MARK: Private funcs
     private func isDisableEdit(_ bool: Bool) {
         
@@ -64,10 +65,17 @@ class SSHomeShortTableViewCell: SSBaseTableViewCell {
         editButton.isEnabled = !bool
     }
     
-    private func getDaysLabelText(_ goalDate: Date) -> String {
-        var result = String()
-        let days = Date.daysBetween(firstDate: Date(), and: goalDate)
+    private func getDaysLabelTextFor(goal: Goal) -> String {
         
+        if goal.status == GoalStatusType.complete.rawValue {
+            remainingDaysLabel.textColor = UIColor.colorFrom(colorType: .green)
+            return GoalStatusType.complete.rawValue
+        }
+        
+        var result = String()
+        let goalDate = goal.date! as Date
+        let days = Date.daysBetween(firstDate: Date(), and: goalDate)
+        remainingDaysLabel.textColor = UIColor.colorFrom(colorType: .defaultBlack)
         switch days {
         case 0: result = "Today"
         case _ where days < 0:

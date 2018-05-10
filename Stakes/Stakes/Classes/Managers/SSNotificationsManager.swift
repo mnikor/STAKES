@@ -13,16 +13,16 @@ import UserNotifications
 enum SSReminderType: Double {
     
     case toDay = 0.0
+    case oneNight = 43200.0
     case oneDay = 86400.0
     case threeDays = 259200.0
     case week = 604800.0
     case twoWeeks = 1296000.0
 
-    static let reminderTypesArray: [SSReminderType] = [.twoWeeks, .week, .threeDays, .oneDay, .toDay]
+    static let reminderTypesArray: [SSReminderType] = [.twoWeeks, .week, .threeDays, .oneDay, oneNight, .toDay]
 }
 
 
-// TODO: Fallback on earlier versions
 class SSNotificationsManager {
     
     
@@ -40,13 +40,12 @@ class SSNotificationsManager {
     }
     
     
-    /////
-    // TODO: Testing only. Delete
-//    private var currentDayTest: Date?
-//    private var resultIndex = Double()
-//    private let dayTimeInterval: Double = 180.0 * 24.0
-    /////
-    
+    /*
+    // TODO: Testing only
+    private var currentDayTest: Date?
+    private var resultIndex = Double()
+    private let dayTimeInterval: Double = 180.0 * 24.0
+    */
     
     
     // MARK: Public funcs
@@ -89,20 +88,69 @@ class SSNotificationsManager {
     // Add Notification for Goal or Action
     func addNotification(type: CoredataObjectType, name: String, dueDate: Date, id: String, stake: Float) {
         
+        let selectedDueDate: Date = dueDate.addCustomDateTime()! //create date on due date at 9am
+        let timeZone = TimeZone.autoupdatingCurrent
+        let secondsFromGMT: TimeInterval = TimeInterval(timeZone.secondsFromGMT())
+        let currentDate: Date = Date().addingTimeInterval(secondsFromGMT)
+        
+        //.addingTimeInterval(7200) //create current date
         for reminder in SSReminderType.reminderTypesArray {
             
             // Check Reminder Settings
             if UserDefaults.standard.bool(forKey: reminder.rawValue.description) {
                 
-                // Check DueDate for Reminder
-                if let timeInterval = getTimeIntervalFor(dueDate, reminder: reminder) {
+                if reminder == .toDay || reminder == .oneNight {
+                    if selectedDueDate.timeIntervalSinceReferenceDate - currentDate.timeIntervalSinceReferenceDate < 86400.0 {
+                        if reminder == .toDay {
+                            if selectedDueDate.compare(currentDate) == ComparisonResult.orderedDescending { //selectedDueDate 9AM > Date()
+                                //add notification: today
+                                reminderType = reminder
+                                let timeInterval = selectedDueDate.timeIntervalSinceReferenceDate - currentDate.timeIntervalSinceReferenceDate
+                                // Make body depend on Reminder Type
+                                let body = getNotificationBody(type: type, name: name, stake: stake)
+                                
+//                                 Make Notification
+                                let generatedID = id + "/" +  reminder.rawValue.description
+                                makeNotification(type: type, name: name, timeInterval: timeInterval, body: body, id: generatedID)
+                            }
+                        }
+                        if reminder == .oneNight {
+                            if selectedDueDate.addingTimeInterval(43200).compare(currentDate) == ComparisonResult.orderedDescending { //selectedDueDate 9PM > Date()
+                                //add notification: today
+                                reminderType = reminder
+                                let timeInterval = selectedDueDate.addingTimeInterval(43200).timeIntervalSinceReferenceDate - currentDate.timeIntervalSinceReferenceDate
+                                // Make body depend on Reminder Type
+                                let body = getNotificationBody(type: type, name: name, stake: stake)
+                                
+                                // Make Notification
+                                let generatedID = id + "/" +  reminder.rawValue.description
+                                makeNotification(type: type, name: name, timeInterval: timeInterval, body: body, id: generatedID)
+                            }
+                        }
+                    } else {
+                        // Check DueDate for Reminder
+                        if let timeInterval = getTimeIntervalFor(selectedDueDate, reminder: reminder) {
+                            
+                            // Make body depend on Reminder Type
+                            let body = getNotificationBody(type: type, name: name, stake: stake)
+                            
+                            // Make Notification
+                            let generatedID = id + "/" +  reminder.rawValue.description
+                            makeNotification(type: type, name: name, timeInterval: timeInterval, body: body, id: generatedID)
+                        }
+                    }
                     
-                    // Make body depend on Reminder Type
-                    let body = getNotificationBody(type: type, name: name, stake: stake)
-                    
-                    // Make Notification
-                    let generatedID = id + "/" +  reminder.rawValue.description
-                    makeNotification(type: type, name: name, timeInterval: timeInterval, body: body, id: generatedID)
+                } else {
+                    // Check DueDate for Reminder
+                    if let timeInterval = getTimeIntervalFor(selectedDueDate, reminder: reminder) {
+                        
+                        // Make body depend on Reminder Type
+                        let body = getNotificationBody(type: type, name: name, stake: stake)
+                        
+                        // Make Notification
+                        let generatedID = id + "/" +  reminder.rawValue.description
+                        makeNotification(type: type, name: name, timeInterval: timeInterval, body: body, id: generatedID)
+                    }
                 }
             }
         }
@@ -115,7 +163,7 @@ class SSNotificationsManager {
     // Get the nearest reminder date
     private func getTimeIntervalFor(_ dueDate: Date, reminder: SSReminderType) -> TimeInterval? {
         
-        let currentDay = Date()
+        let currentDay = Date().addingTimeInterval(7200)
         let timeBeforeDueDate = dueDate.timeIntervalSinceReferenceDate - currentDay.timeIntervalSinceReferenceDate
         
         guard timeBeforeDueDate != 0.0 else { return nil }
@@ -129,13 +177,12 @@ class SSNotificationsManager {
             return result
 //                return timeBeforeDueDate - reminder.rawValue
             
-            
-            /////
-            // TODO: Testing only. Delete
-//            let resultTesting = result / dayTimeInterval
-//            print("Day: \(currentDay). DueDate: \(dueDate). Time: \(resultTesting). Type: \(reminder)")
-//            return resultTesting
-            /////
+            /*
+            // TODO: Testing only
+            let resultTesting = result / dayTimeInterval
+            print("Day: \(currentDay). DueDate: \(dueDate). Time: \(resultTesting). Type: \(reminder)")
+            return resultTesting
+            */
         }
         return nil
     }
@@ -147,10 +194,12 @@ class SSNotificationsManager {
         let stakeString = stake.stakeString()
         
         switch reminderType {
+        case .oneNight:
+            body = "You have not indicated action point as complete. Indicate as complete or change the due date, otherwise your goal will be locked."
         case .toDay:
-            body = "Today is the due date for your \(object): \(name) \(stakeString) is at stake. Make sure you complete it!"
+            body = "You have an action due to be completed today \(name) \nWith a stake of \(stakeString) \nMake sure to complete it to win your stake!"
         case .oneDay:
-            body = "Important reminder, that tomorrow is the due date to complete \(object): \(name) \(stakeString) is at stake"
+            body = "You have an action due to be completed tomorrow \(name)"
         default:
             var days = Int()
             switch reminderType {
@@ -187,21 +236,27 @@ class SSNotificationsManager {
             content.body = body
             content.sound = UNNotificationSound.default()
             content.categoryIdentifier = notificationCategoryID
-            // TODO: Logic content.badge = 1
             
-            
-            /////
-            // TODO: Testing only. Delete
-//            currentDayTest = Date().addCustomDateTime()!
-            /////
-            
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false) //timeInterval
             let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
             
             center.add(request, withCompletionHandler: nil)
-            print("Notify created")
-//            getAllNotifications()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    func removePushNotificationBy(id: String) {
+        if #available(iOS 10.0, *) {
+            center.getPendingNotificationRequests { (notificationRequests) in
+                var identifiers: [String] = []
+                for notification:UNNotificationRequest in notificationRequests {
+                    if notification.identifier.hasPrefix(id) {
+                        identifiers.append(notification.identifier)
+                    }
+                }
+                self.center.removePendingNotificationRequests(withIdentifiers: identifiers)
+            }
         } else {
             // Fallback on earlier versions
         }

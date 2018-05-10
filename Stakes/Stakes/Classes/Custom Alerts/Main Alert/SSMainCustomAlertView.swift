@@ -12,27 +12,35 @@ class SSMainCustomAlertView: SSBaseCustomAlertView {
     
     
     // MARK: Outlets
+    @IBOutlet weak var alertImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: SSBaseLabel!
+    @IBOutlet weak var contentView: UIView!
     
     
-    // MARK: Private Properties
-    private let nibName = "SSMainCustomAlertView"
+    // MARK: Public properties
+    var messageType: SSMessageManager.MessageTypeDescription!
     
     
     // MARK: Initializers
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        xibSetup()
+    init(type: SSMessageManager.MessageTypeDescription) {
+        super.init(frame: .zero)
+        
+        self.messageType = type
+        self.loadFromNib()
+        settingsUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetup()
+        
+        self.loadFromNib()
+        settingsUI()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        xibSetup()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.bounds = contentView.bounds
     }
     
     
@@ -43,22 +51,35 @@ class SSMainCustomAlertView: SSBaseCustomAlertView {
     
     
     // MARK: Private funcs
-    
-    // Load Xib
-    private func xibSetup() {
-        
-        let view = Bundle.main.loadNibNamed(nibName, owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
-        
-        settingsUI()
-    }
-    
     private func settingsUI() {
-        
+
         let messageBlackColor = UIColor.colorFrom(colorType: .blackTitleAlert)
-        
+
         // Set Labels Text Color
         descriptionLabel.textColor = messageBlackColor
+        
+        // Set Values
+        descriptionLabel.text = messageType.rawValue
+        if messageType == .newFeatures {
+            descriptionLabel.textAlignment = .left
+        }
+        
+        var image: UIImage? = UIImage()
+        switch messageType! {
+        case .knowledge:
+            image = UIImage(named: "knowledge_alert")
+        case .masteryLevel:
+            image = UIImage(named: "next_level_of_mastery")
+            descriptionLabel.text?.append("\(SSLevelsManager.instance.getCurrentLevel().title) Keep mastering your life skills.")
+        case .purchaseDone, .unlockedLesson:
+            image = UIImage(named: "gift_alert")
+        case .levelsInfo:
+            image = UIImage(named: "sports_icon")
+            alertImageView.contentMode = .scaleAspectFit
+        default:
+            alertImageView.removeFromSuperview()
+            return
+        }
+        alertImageView.image = image
     }
 }

@@ -61,7 +61,7 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
         
         let status = action.status!
         let pointsText = SSPoint().calculatePointsFor(stake: action.stake)
-        var textColor = UIColor.fromRGB(rgbValue: 0x64C3FF) //Completed color
+        var textColor = UIColor.fromRGB(rgbValue: 0xA5B0FF) //Completed color
         
         switch status {
         case GoalStatusType.complete.rawValue:
@@ -75,7 +75,7 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
             statusLabel.text = status
             pointsLabel.text = "-" + pointsText.description
             hideSelectButton(true)
-            textColor = UIColor.fromRGB(rgbValue: 0xFF6464) //Missed color
+            textColor = UIColor.fromRGB(rgbValue: 0xEF8686) //Missed color
             
         default:
             statusView.isHidden = true

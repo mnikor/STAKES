@@ -12,6 +12,7 @@ import Fabric
 import Crashlytics
 import IQKeyboardManagerSwift
 import UserNotifications
+import FBSDKCoreKit
 
 
 @UIApplicationMain
@@ -34,6 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: IQKeyboardManagerSwift
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().toolbarTintColor = UIColor.colorFrom(colorType: .red)
+        
+        // MARK: Facebook SDK
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // MARK: Lessons Initializers
+        SSLessonsManager.initLessons()
         
         if window == nil {
             window = UIWindow(frame: UIScreen.main.bounds)
@@ -71,8 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Fallback on earlier versions
         }
         
-        
-        
         return true
     }
     
@@ -91,6 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        FBSDKAppEvents.activateApp()
+        
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 

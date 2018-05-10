@@ -40,6 +40,13 @@ class SSSettingsViewController: SSBaseViewController {
         settingsUI()
     }
     
+    override func createCirclesBackground() {
+        
+        let circleView = UIImageView(image: UIImage(named: "background_settings"))
+        circleView.frame = self.view.frame
+        view.insertSubview(circleView, at: 0)
+    }
+    
     
     // MARK: Action funcs
     @IBAction func tappedOneDaySwitch(_ sender: UISwitch) {

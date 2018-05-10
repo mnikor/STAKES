@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 enum GoalStatusType: String {
@@ -18,9 +19,32 @@ enum GoalStatusType: String {
     case locked = "Locked"
 }
 
+enum GoalTimeSpentType {
+    case short, mid, long
+}
+
 
 @objc(Goal)
 public class Goal: NSManagedObject {
+    
+    
+    // MARK: Public properties
+    var addedPoints: Int?
+    var timeSpentType: GoalTimeSpentType {
+        
+        let create: Date = self.creationDate != nil ? self.creationDate! as Date : Date()
+        let now: Date = Date()
+        let monthSpent: Int = Date.daysBetween(firstDate: create, and: now) / 30
+        
+        if monthSpent >= 3 {
+            
+            if monthSpent > 10 {
+                return .long
+            }
+            return .mid
+        }
+        return .short
+    }
     
     
     // MARK: Private properties
@@ -71,11 +95,14 @@ public class Goal: NSManagedObject {
     }
     
     // Set properties for current Goal and Save Context
-    func make(name: String, date: Date) {
+    func make(name: String, date: Date, image: UIImage?) {
         let goalID = UUID().uuidString
+        let creationDate = Date() as NSDate
         
         self.name = name
         self.date = date as NSDate
+        self.creationDate = creationDate
+        self.image = image
         self.stake = 0.0
         self.id = goalID
         SSCoreDataManager.instance.saveContext()
@@ -93,13 +120,17 @@ public class Goal: NSManagedObject {
                 SSCoreDataManager.instance.saveContext()
             }
         }
+        
+        // Lesson tracking
+        SSLessonsManager.instance.track(creationDate)
     }
     
     // Edit Goal Values
-    func changeGoal(name: String, date: Date) {
-        
+    func changeGoal(name: String, date: Date, image: UIImage?) {
+    
         self.name = name
         self.date = date as NSDate
+        self.image = image
         SSCoreDataManager.instance.saveContext()
         
         // Change Goal Event into Calendar
@@ -219,6 +250,11 @@ public class Goal: NSManagedObject {
         
         // Analytics. Capture "Number of goals deleted"
         SSAnalyticsManager.logEvent(.deletedGoals)
+        
+        // Lesson tracking
+        if let trackingLesson = SSLessonsManager.instance.trackingLesson {
+            trackingLesson.goalDate = nil
+        }
     }
     
     // Calculate percent of completed action
@@ -253,6 +289,9 @@ public class Goal: NSManagedObject {
             
         case .locked:
             
+            // Analytics. Capture "Number of goals locked"
+            SSAnalyticsManager.logEvent(.lockedGoal)
+            
             for action in getActionsBy(statusFilters: [.wait]) {
                 action.changeStatus(status)
             }
@@ -261,6 +300,7 @@ public class Goal: NSManagedObject {
         case .complete:
             
             points.add(50)
+            addedPoints = 50
             
             // Analytics. Capture "Number of achieved goals"
             SSAnalyticsManager.logEvent(.achievedGoals)
@@ -307,6 +347,12 @@ public class Goal: NSManagedObject {
                 isMissedAction = true
             }
         }
+        
+        // Lock Goal
+//        if isMissedAction {
+//            self.changeStatus(.locked)
+//        }
+        
         return isMissedAction
     }
     
@@ -323,6 +369,17 @@ public class Goal: NSManagedObject {
         return actions
     }
     
+    func getImage() -> UIImage? {
+        
+        if let image = self.image as? UIImage {
+            return image
+        } else {
+            return nil
+        }
+    }
+    
+    
+    // MARK: Class funcs
     
     // Fetch Action from Core Data
     class func getGoalBy(id: String) -> Goal? {

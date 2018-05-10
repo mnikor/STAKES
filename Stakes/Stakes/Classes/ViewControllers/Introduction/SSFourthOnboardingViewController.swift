@@ -22,17 +22,4 @@ class SSFourthOnboardingViewController: SSBaseViewController {
         let opacityDefaultColor = UIColor.colorFrom(colorType: .defaultBlack).withAlphaComponent(0.5)
         tipLabel.textColor = opacityDefaultColor
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        rightActionButton.setImage(UIImage(named: "arrow"), for: .normal)
-        rightActionButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-    }
-    
-    @objc func buttonAction(_ sender: UIButton) {
-        
-        UIApplication.shared.keyWindow?.rootViewController = UIStoryboard.getSlideMenuController()
-        rightActionButton.removeFromSuperview()
-    }
 }

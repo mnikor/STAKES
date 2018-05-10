@@ -11,7 +11,7 @@ import Foundation
 
 @objc protocol SSPointChangeValueDelegate {
     
-    func pointChanged()
+    func pointChanged(withAnimation: Bool)
 }
 
 
@@ -25,6 +25,7 @@ class SSPoint {
     // MARK: Private Properties
     private let userDefaults = UserDefaults.standard
     private let pointKey = SSConstants.keys.kPointKey.rawValue
+    private let tempPointKey = SSConstants.keys.kTempPointKey.rawValue
     
     
     // MARK: Public Properties
@@ -33,15 +34,24 @@ class SSPoint {
             return userDefaults.integer(forKey: pointKey)
         }
         set {
+            tempPoints = currentPoints
             userDefaults.set(newValue, forKey: pointKey)
+        }
+    }
+    var tempPoints: Int {
+        get {
+            return userDefaults.integer(forKey: tempPointKey)
+        }
+        set {
+            userDefaults.set(newValue, forKey: tempPointKey)
         }
     }
     
     
     // MARK: Public funcs
     
-    func updatePointsLabel() {
-        delegate?.pointChanged()
+    func updatePointsLabel(withAnimation: Bool) {
+        delegate?.pointChanged(withAnimation: withAnimation)
     }
     
     func getCurrentPoints() -> String {
@@ -60,7 +70,12 @@ class SSPoint {
         
         // Add points
         currentPoints += points
-        delegate?.pointChanged()
+        delegate?.pointChanged(withAnimation: true)
+        
+        // Lesson tracking
+        if let trackingLesson = SSLessonsManager.instance.trackingLesson {
+            trackingLesson.setPoints(trackingLesson.points + Float(points))
+        }
         
         // Show alert when first points earned
         let userDefaults = UserDefaults.standard
@@ -76,6 +91,6 @@ class SSPoint {
     func deduct(_ points: Int) {
         
         currentPoints -= points
-        delegate?.pointChanged()
+        delegate?.pointChanged(withAnimation: true)
     }
 }

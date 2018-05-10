@@ -27,7 +27,7 @@ class SSDueDateTextField: SSBaseTextField {
     
     // MARK: Private Properties
     private var date: Date?
-    private let locale = Locale.current
+    private let locale = Locale.current //(identifier: SSConstants.keys.kLocaleIdentifier.rawValue)
     private let timeZone = TimeZone.current
     private let calendar = Calendar.current
     private var dateFormatter: DateFormatter {
@@ -63,7 +63,6 @@ class SSDueDateTextField: SSBaseTextField {
     
     
     // MARK: Public funcs
-    
     func selectedDateToString(date: Date) -> String {
         let dateText = Date.formatter(date: date, with: .monthDayYear)
         return self.additionFor(dateText)

@@ -34,6 +34,7 @@ class SSFirstOnboardingViewController: UIViewController {
         
         let userDefaults = UserDefaults.standard
         userDefaults.set(true, forKey: SSReminderType.toDay.rawValue.description)
+        userDefaults.set(true, forKey: SSReminderType.oneNight.rawValue.description)
         userDefaults.set(true, forKey: SSReminderType.oneDay.rawValue.description)
         userDefaults.set(false, forKey: SSReminderType.threeDays.rawValue.description)
         userDefaults.set(true, forKey: SSReminderType.week.rawValue.description)

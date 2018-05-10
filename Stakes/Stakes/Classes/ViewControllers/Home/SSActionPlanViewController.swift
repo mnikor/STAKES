@@ -12,33 +12,37 @@ class SSActionPlanViewController: SSBaseDetailViewController {
     
     
     // MARK: Outlets
-    @IBOutlet weak var containerViewTop: UIView!
+    
+    // Views
+    @IBOutlet weak var topView: SSActionPlanTopView!
     @IBOutlet weak var tableViewBottom: UITableView!
-    @IBOutlet weak var expandConstraintTop: NSLayoutConstraint!
-    @IBOutlet weak var expandConstraintBottom: NSLayoutConstraint!
     @IBOutlet weak var emptyActionPlanView: UIView!
     @IBOutlet weak var deleteCompleteView: UIView!
-    @IBOutlet weak var tipLabel: SSBaseLabel!
-    @IBOutlet weak var expandButton: SSCenterActionButton!
     @IBOutlet weak var titleUnderlineView: SSUnderlineView!
+    
+    // Constraints
+    @IBOutlet weak var expandConstraintTop: NSLayoutConstraint!
+    @IBOutlet weak var expandConstraintBottom: NSLayoutConstraint!
+    @IBOutlet weak var topViewHeightConstraint: NSLayoutConstraint!
+    
+    // Labels and Buttons
+    @IBOutlet weak var tipLabel: SSBaseLabel!
+    @IBOutlet weak var runImageView: UIImageView!
+    @IBOutlet weak var expandButton: SSCenterActionButton!
     
     
     // MARK: Public Properties
     var goal: Goal?
     var isExpanded = false
-    
-    var showEmptyView: Bool {
-        return actions.count == 0
-    }
-    var containerViewController: SSSelectedGoalViewController {
-        return childViewControllers.first as! SSSelectedGoalViewController
-    }
-    
+    var circleView: UIImageView?
     
     // MARK: Private Properties
     private var selectedCellCircleButton: SSSelectCircleButton?
     private var actions: [Action] {
         return goal != nil ? goal!.getActionsSortByStatus() : [Action]()
+    }
+    private var showEmptyView: Bool {
+        return actions.count == 0
     }
     
     
@@ -50,10 +54,10 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         points.delegate = self
         
         // Register table cell class from nib
-        let cellNib = UINib(nibName: SSActionPlanTableViewCell.reuseID, bundle: nil)
-        tableViewBottom.register(cellNib, forCellReuseIdentifier: SSActionPlanTableViewCell.reuseID)
+        let actionsCellNib = UINib(nibName: SSActionPlanTableViewCell.reuseID, bundle: nil)
+        tableViewBottom.register(actionsCellNib, forCellReuseIdentifier: SSActionPlanTableViewCell.reuseID)
         
-        createTopViewController()
+        topView.settingsTopContentViewFor(self, selectedGoal: goal!)
         settingsUI()
         
         // Check missed actions for Purchase
@@ -66,13 +70,6 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         updateUIAfterAction()
         showHideEptyView()
         expandAction()
-        containerViewTop.isHidden = isExpanded
-        
-        // Delegate for Cells from containerViewController
-        for cell in containerViewController.cells {
-
-            cell.delegate = self
-        }
     }
     
     // Navigation Controller left button back action
@@ -94,8 +91,6 @@ class SSActionPlanViewController: SSBaseDetailViewController {
             
             SSMessageManager.showCustomAlertWithAction(message: .actionDeleted, onViewController: self) { [weak self] in self?.delete(isGoal: false) }
         }
-        
-        updateUIAfterAction()
     }
     
     // Complete Goal or Action on DeleteCompleteView
@@ -116,10 +111,35 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         } else {
             
             goal?.changeStatus(.complete)
-            SSMessageManager.showCustomAlertWith(message: .goalAchieved, onViewController: self)
+            SSMessageManager.showCustomAlertWith(message: .goalAchieved, goal: goal, onViewController: self)
         }
         
+        points.updatePointsLabel(withAnimation: true)
         updateUIAfterAction()
+    }
+    
+    // Expand/Reduce Actions
+    @IBAction func tappedExpandButton(_ sender: SSCenterActionButton) {
+        
+        if isExpanded {
+            topView.hideTopView = !isExpanded
+        }
+        isExpanded = !isExpanded
+        
+        showDeleteCompleteView(false)
+        makeCreateActionButton()
+        
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            
+            self?.updateTopViewCells()
+            self?.expandAction()
+            self?.view.layoutSubviews()
+            
+        }) { [weak self] (bool) in
+            if bool {
+                self?.topView.hideTopView = self!.isExpanded
+            }
+        }
     }
     
     // Right Button action
@@ -133,31 +153,6 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         } else {
             
             shareGoal()
-        }
-    }
-    
-    // Expand/Reduce Actions
-    @IBAction func tappedExpandButton(_ sender: SSCenterActionButton) {
-        
-        if isExpanded {
-            
-            containerViewTop.isHidden = !isExpanded
-        }
-        isExpanded = !isExpanded
-        
-        showDeleteCompleteView(false)
-        makeCreateActionButton()
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
-            
-            self?.expandAction()
-            self?.containerViewController.updateCells()
-            self?.view.layoutSubviews()
-            
-        }) { [weak self] (bool) in
-            if bool {
-                
-                self?.containerViewTop.isHidden = self!.isExpanded
-            }
         }
     }
     
@@ -178,6 +173,15 @@ class SSActionPlanViewController: SSBaseDetailViewController {
             guard let button = view as? SSBaseButton else { return }
             button.makeBorder(width: .small, color: button.titleColor(for: .normal)!)
         }
+    }
+    
+    override func createCirclesBackground() {
+        
+        if circleView == nil {
+            circleView = UIImageView(image: UIImage(named: "background_action_plan"))
+        }
+        circleView?.frame = self.view.frame
+        view.insertSubview(circleView!, at: 0)
     }
     
     private func showDeleteCompleteView(_ bool: Bool) {
@@ -206,41 +210,20 @@ class SSActionPlanViewController: SSBaseDetailViewController {
             }
         }
         
-        /*
-        //TableView reloadData after deleteRows animation finished
-        let tableView = (isExpanded ? tableViewBottom : tableViewTop)!
-        CATransaction.begin()
-        
-        CATransaction.setCompletionBlock({ [weak self] in
-            
-            self?.tableViewTop.reloadData()
-            self?.tableViewBottom.reloadData()
-        })
-        
-        tableView.beginUpdates()
-        
-        if isExpanded {
-            tableView.deleteRows(at: [selectedCellCircleButton!.indexPath], with: .left)
-        }
-        
-        tableView.endUpdates()
-        
-        CATransaction.commit()
-        */
-        
         updateUIAfterAction()
-        points.updatePointsLabel()
+        points.updatePointsLabel(withAnimation: true)
         showHideEptyView()
     }
     
     private func expandAction() {
         
-        points.updatePointsLabel()
+        points.updatePointsLabel(withAnimation: false)
         let newPositionByY = view.frame.height - (expandButton.frame.height + 120.0)
         let buttonTitle = isExpanded ? "Collapse Actions" : "Expand Actions"
         expandButton.setTitle(buttonTitle, for: .normal)
+        expandButton.backgroundColor = .white
         
-        expandConstraintTop.constant = isExpanded ? 0.0 : -containerViewTop.frame.height
+        expandConstraintTop.constant = isExpanded ? 0.0 : -topView.frame.height
         expandConstraintBottom.constant = isExpanded ? -newPositionByY : 0.0
     }
     
@@ -263,30 +246,59 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         
         rightActionButton.addTarget(self, action: #selector(rightButtonAction), for: .touchUpInside)
         if showEmptyView || isExpanded {
-            
-            rightActionButton.setImage(UIImage(named: "red_plus"), for: .normal)
+            if showEmptyView {
+                rightActionButton.setImage(UIImage(named: "add_task_white"), for: .normal)
+            } else {
+                rightActionButton.setImage(UIImage(named: "add_task_blue"), for: .normal)
+                circleView?.alpha = 0.2
+            }
             rightActionButton.isEnabled = goal?.status != GoalStatusType.complete.rawValue
+            rightActionButton.backgroundColor = .clear
         } else {
             
             let shareImage = UIImage(named: "share")
+            circleView?.alpha = 0.2
             rightActionButton.isEnabled = true
             rightActionButton.imageView?.tintColor = UIColor.colorFrom(colorType: .red)
             rightActionButton.setImage(shareImage?.withRenderingMode(.alwaysTemplate), for: .normal)
+            rightActionButton.backgroundColor = .clear
         }
         view.addSubview(rightActionButton)
     }
     
-    // Update Points Label, DeleteCompleteView and TableViews
+    
+    // Update Points Label, DeleteCompleteView, Top View and Footer TableView
     private func updateUIAfterAction() {
         
-        tableViewBottom.reloadData()
-        containerViewController.updateCells()
-        containerViewTop.isHidden = isExpanded
-        points.updatePointsLabel()
+        if isExpanded {
+            // Show Actions table view
+            topView.hideTopView = true
+            tableViewBottom.reloadData()
+        } else {
+            // Show Goal cell view
+            updateTopViewCells()
+            topView.hideTopView = showEmptyView
+        }
         showDeleteCompleteView(false)
     }
     
+    // Update Top View UI
+    private func updateTopViewCells() {
+        
+        if let heightConstant = topView.getCurrentViewHeight() {
+            expandConstraintTop.constant = -heightConstant
+            topViewHeightConstraint.constant = heightConstant
+            view.layoutIfNeeded()
+        }
+    }
+    
     private func showCompleteAlertFor(_ action: Action) {
+        
+        // Show Feedback Alert
+        let completedActionsCount = UserDefaults.standard.integer(forKey: SSConstants.keys.kCompletedActions.rawValue)
+        if completedActionsCount == 7 {
+            SSMessageManager.showCustomAlertWith(message: .feedback, onViewController: self)
+        }
         
         // Show Last Action Alert
         if goal?.calculateСompletion() == 100 {
@@ -296,13 +308,13 @@ class SSActionPlanViewController: SSBaseDetailViewController {
                 self?.openCreateActionVC(editAction: nil)
             })
             
-            // Show Complete Action Alert with stake or no
         } else {
             
+            // Show Complete Action Alert with stake or no
             if action.stake == 0.0 {
-                SSMessageManager.showCustomAlertWith(message: .completedActionNoStake, onViewController: self)
+                SSMessageManager.showCustomAlertWith(message: .completedActionNoStake, goal: goal, action: action, onViewController: self)
             } else {
-                SSMessageManager.showCustomAlertWith(message: .completedAction, onViewController: self)
+                SSMessageManager.showCustomAlertWith(message: .completedAction, goal: goal, action: action, onViewController: self)
             }
         }
     }
@@ -325,7 +337,7 @@ class SSActionPlanViewController: SSBaseDetailViewController {
 
                 // When posted to Instagram
                 self?.points.add(10)
-                self?.points.updatePointsLabel()
+                self?.points.updatePointsLabel(withAnimation: true)
             }
         })
     }
@@ -333,7 +345,7 @@ class SSActionPlanViewController: SSBaseDetailViewController {
     private func shareGoal() -> Void {
         
         let shareText = "Hey, I am excited to share my goal I set using amazing app \"Bold\""
-        let shareImage = containerViewTop.makeScreenshot() ?? UIImage()
+        let shareImage = topView.makeScreenshot() ?? UIImage()
         var activities: [UIActivity]? = [UIActivity]()
         let linkedInType = "com.linkedin.LinkedIn.ShareExtension"
         
@@ -357,9 +369,12 @@ class SSActionPlanViewController: SSBaseDetailViewController {
         }
         
         let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: activities)
+        let shareViewAlert = SSShareGoalAlertView()
         activityVC.completionWithItemsHandler = { [weak self] (activity, success, items, error) in
-            
-            guard success else { return }
+            shareViewAlert.removeFromSuperview()
+            guard success else {
+                return
+            }
             
             switch activity?.rawValue {
             case linkedInType?,
@@ -367,43 +382,16 @@ class SSActionPlanViewController: SSBaseDetailViewController {
                  UIActivityType.postToTwitter.rawValue?:
                 
                 self?.points.add(10)
-                self?.points.updatePointsLabel()
                 
                 // Analytics. Capture "Number of times goal is shared"
                 SSAnalyticsManager.logEvent(.shareGoal)
             default: break
             }
         }
-        
-        self.present(activityVC, animated: true, completion: { [weak self] in
-            
-            // Add Share alert
-            let shareViewAlert = SSShareGoalAlertView()
-            shareViewAlert.center = self?.view.center ?? .zero
-            shareViewAlert.frame.origin.y = 30.0
-            UIApplication.shared.keyWindow?.subviews.last?.addSubview(shareViewAlert)
-        })
+        self.present(activityVC, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.subviews.last?.addSubview(shareViewAlert)
     }
     
-    // Make top table view in container view
-    private func createTopViewController() {
-        
-        let controller = SSSelectedGoalViewController.instantiate(.home) as! SSSelectedGoalViewController
-        
-        controller.goal = goal
-        addChildViewController(controller)
-        controller.view.translatesAutoresizingMaskIntoConstraints = false
-        containerViewTop.addSubview(controller.view)
-        
-        NSLayoutConstraint.activate([
-            controller.view.leadingAnchor.constraint(equalTo: containerViewTop.leadingAnchor),
-            controller.view.trailingAnchor.constraint(equalTo: containerViewTop.trailingAnchor),
-            controller.view.topAnchor.constraint(equalTo: containerViewTop.topAnchor),
-            controller.view.bottomAnchor.constraint(equalTo: containerViewTop.bottomAnchor)
-            ])
-        
-        controller.didMove(toParentViewController: self)
-    }
     
     // Check missed status, not purchased, with stake actions for Purchase
     private func showPurchaseAlert() {
@@ -442,7 +430,7 @@ extension SSActionPlanViewController: UITableViewDataSource {
 extension SSActionPlanViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 119
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

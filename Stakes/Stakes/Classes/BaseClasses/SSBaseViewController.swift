@@ -29,14 +29,14 @@ class SSBaseViewController: UIViewController {
         
         // Set image for Side Menu Left Bar Button
         self.addLeftBarButtonWithImage(getLeftBarButtonImage())
-        self.navigationItem.leftBarButtonItem?.tintColor = .white
+        self.navigationItem.leftBarButtonItem?.tintColor = .darkGray
         
         // Update Points Label
-        self.pointChanged()
+        self.pointChanged(withAnimation: false)
     }
     
-    // MARK: Public funcs
     
+    // MARK: Public funcs
     func setTitle(_ newTitle: String) {
         
         let title = SSBaseLabel()
@@ -55,9 +55,6 @@ class SSBaseViewController: UIViewController {
         
         let circleView = UIImageView(image: UIImage(named: "background"))
         circleView.frame = self.view.frame
-        
-//        let circleView = SSCircleView(frame: view.frame)
-//        circleView.createCircleViewsFor(currentScreen: 4)
         view.insertSubview(circleView, at: 0)
     }
     
@@ -89,17 +86,15 @@ class SSBaseViewController: UIViewController {
         let rightButton = UIBarButtonItem(customView: SSPointsView())
         navigationItem.rightBarButtonItem = rightButton
     }
-    
-    
 }
 
 
 // MARK: SSPointChangeValueDelegate
 extension SSBaseViewController: SSPointChangeValueDelegate {
     
-    func pointChanged() {
+    func pointChanged(withAnimation: Bool) {
         if let pointsView = navigationItem.rightBarButtonItem?.customView as? SSPointsView {
-            pointsView.updatePointsView()
+            pointsView.updatePointsView(withCounting: withAnimation)
         }
     }
 }

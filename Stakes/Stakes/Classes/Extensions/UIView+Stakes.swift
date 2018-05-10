@@ -63,22 +63,16 @@ extension UIView {
         return image
     }
     
-    
-    // MARK: --- Constraints
-    
-    // Embed new view to current view by all bounds
-    func embedWithConstraint(_ view: UIView) {
+    func loadFromNib() {
         
-        view.translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = UIColor.clear
+        let nibName = type(of: self).description().components(separatedBy: ".").last!
+        let view = Bundle.main.loadNibNamed(nibName, owner: self, options: nil)?.first as! UIView
+        
+        view.frame = self.bounds
         self.addSubview(view)
-        
-        NSLayoutConstraint.activate([
-            view.leftAnchor.constraint(equalTo: self.leftAnchor),
-            view.rightAnchor.constraint(equalTo: self.rightAnchor),
-            view.topAnchor.constraint(equalTo: self.topAnchor),
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-            ])
     }
+    
     
     class func isRTL() -> Bool{
         return UIView.appearance().semanticContentAttribute == .forceLeftToRight

@@ -55,8 +55,6 @@ class SSCreateActionViewController: SSBaseDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("STAKES: \(stakes)")
-        
         // Points delegate
         points.delegate = self
         
@@ -66,6 +64,12 @@ class SSCreateActionViewController: SSBaseDetailViewController {
         
         settingsUI()
         hideKeyboardWhenTappedAround()
+    }
+    
+    override func createCirclesBackground() {
+        let circleView = UIImageView(image: UIImage(named: "background_add_action"))
+        circleView.frame = self.view.frame
+        view.insertSubview(circleView, at: 0)
     }
     
     
@@ -104,6 +108,7 @@ class SSCreateActionViewController: SSBaseDetailViewController {
         stakeButton.setTitle(selectedStake.stakeString(), for: .normal)
         pointsLabel.text = points.getPointsFor(stake: selectedStake)
     }
+    
     
     // MARK: Private funcs
     private func settingsUI() {

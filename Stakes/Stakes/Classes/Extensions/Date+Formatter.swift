@@ -20,17 +20,16 @@ enum SSDateFormat: String {
 extension Date {
     
     
-    // MARK: Date formatter for Current Locale and TimeZone
+    // MARK: Date formatter for English Locale and TimeZone
     static func formatter(date: Date, with format: SSDateFormat) -> String {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
-        formatter.locale = Locale.current
+        formatter.locale = Locale(identifier: SSConstants.keys.kLocaleIdentifier.rawValue)
         formatter.dateFormat = format.rawValue
         return formatter.string(from: date)
     }
     
     // MARK: String from Date with format "Month Day th, Year"
-    
     func dateWithFormatToString() -> String {
         
         let dateText = Date.formatter(date: self, with: .monthDayYear)
@@ -42,21 +41,21 @@ extension Date {
         }
     }
     
-    
     // MARK: Add custom Date Time, for saving to Calendar
     func addCustomDateTime() -> Date? {
         
-        let userCalendar = Calendar.current
-        var components = userCalendar.dateComponents([.year, .month, .day, .hour, .minute, .second],
+        var userCalendar = Calendar.current
+        userCalendar.locale = Locale.current
+        userCalendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        var components = userCalendar.dateComponents([.year, .month, .day, .calendar, .timeZone, .hour, .minute, .second],
                                                          from: self)
         
         components.hour = 9
         components.minute = 00
         components.second = 00
-        
-        return userCalendar.date(from: components)
+        let data: Date = userCalendar.date(from: components)!
+        return data
     }
-    
     
     // MARK: Amount days between two date
     static func daysBetween(firstDate: Date, and secondDate: Date) -> Int {

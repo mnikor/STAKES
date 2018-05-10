@@ -12,19 +12,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSMainCustomAlertView" customModule="Stakes" customModuleProvider="target">
             <connections>
+                <outlet property="alertImageView" destination="DGE-jG-glT" id="Dag-PN-UNw"/>
+                <outlet property="contentView" destination="hrg-y0-MW2" id="2Ve-o1-9Xb"/>
                 <outlet property="descriptionLabel" destination="Cgf-TA-KvQ" id="jJL-RU-8mw"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="382" height="245"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrg-y0-MW2">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="382" height="241.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRl-Zc-JQc">
-                            <rect key="frame" x="345" y="0.0" width="30" height="30"/>
+                            <rect key="frame" x="352" y="0.0" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="HAP-6K-9Xy"/>
                                 <constraint firstAttribute="width" constant="30" id="iSq-sa-30A"/>
@@ -37,29 +39,41 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have completed your action, saved your stake and earned points." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgf-TA-KvQ" customClass="SSBaseLabel" customModule="Stakes" customModuleProvider="target">
-                            <rect key="frame" x="30" y="314.5" width="315" height="38.5"/>
+                            <rect key="frame" x="30" y="153" width="322" height="38.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DGE-jG-glT">
+                            <rect key="frame" x="127" y="15" width="128" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="128" id="7oX-44-aqG"/>
+                                <constraint firstAttribute="height" constant="128" id="zML-vI-CZE"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Cgf-TA-KvQ" secondAttribute="bottom" constant="50" id="02J-q3-TnA"/>
+                        <constraint firstItem="DGE-jG-glT" firstAttribute="centerX" secondItem="hrg-y0-MW2" secondAttribute="centerX" id="0iD-2n-iRA"/>
                         <constraint firstItem="eRl-Zc-JQc" firstAttribute="top" secondItem="hrg-y0-MW2" secondAttribute="top" id="7N8-bJ-eEE"/>
                         <constraint firstItem="Cgf-TA-KvQ" firstAttribute="leading" secondItem="hrg-y0-MW2" secondAttribute="leading" constant="30" id="Eiz-ug-aou"/>
-                        <constraint firstItem="Cgf-TA-KvQ" firstAttribute="centerY" secondItem="hrg-y0-MW2" secondAttribute="centerY" id="F5S-fl-wSw"/>
+                        <constraint firstItem="Cgf-TA-KvQ" firstAttribute="centerY" secondItem="hrg-y0-MW2" secondAttribute="centerY" priority="750" id="F5S-fl-wSw"/>
+                        <constraint firstItem="Cgf-TA-KvQ" firstAttribute="top" secondItem="hrg-y0-MW2" secondAttribute="top" priority="750" constant="50" id="ITK-3Q-J1q"/>
+                        <constraint firstItem="DGE-jG-glT" firstAttribute="top" secondItem="hrg-y0-MW2" secondAttribute="top" constant="15" id="VMl-Gz-Zed"/>
                         <constraint firstAttribute="trailing" secondItem="Cgf-TA-KvQ" secondAttribute="trailing" constant="30" id="W3f-Eh-Ie9"/>
                         <constraint firstAttribute="trailing" secondItem="eRl-Zc-JQc" secondAttribute="trailing" id="hVG-b6-vU4"/>
+                        <constraint firstItem="Cgf-TA-KvQ" firstAttribute="top" secondItem="DGE-jG-glT" secondAttribute="bottom" constant="10" id="zNB-Rt-c5T"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="hrg-y0-MW2" secondAttribute="bottom" id="8NJ-2H-NQK"/>
                 <constraint firstItem="hrg-y0-MW2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NCO-bD-G5l"/>
                 <constraint firstItem="hrg-y0-MW2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UIj-mG-3Ao"/>
                 <constraint firstItem="hrg-y0-MW2" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="jAy-b0-p1k"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="24.5" y="51.5"/>
+            <point key="canvasLocation" x="28" y="-159.5"/>
         </view>
     </objects>
 </document>

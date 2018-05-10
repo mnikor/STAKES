@@ -18,6 +18,14 @@ class SSHomeViewController: SSBaseViewController {
     @IBOutlet weak var deleteCompleteView: UIView!
     @IBOutlet weak var tipLabel: SSBaseLabel!
     
+    var circleView: UIImageView?
+    
+    enum ControllerType {
+        case active
+        case archived
+    }
+    
+    var controllerType: ControllerType = .active
     
     // MARK: Public Properties
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = SSCoreDataManager.instance.fetchedResultsController(entityName: .goal, keyForSort: "date", predicate: ["status": GoalStatusType.wait.rawValue])
@@ -34,8 +42,8 @@ class SSHomeViewController: SSBaseViewController {
         super.viewDidLoad()
         
         // Register table cell class from nib
-        let cellNib = UINib(nibName: SSHomeTableViewCell.reuseID, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: SSHomeTableViewCell.reuseID)
+        let cellNib = UINib(nibName: GoalWithImageHomeTableViewCell.reuseID, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: GoalWithImageHomeTableViewCell.reuseID)
         let cellShortNib = UINib(nibName: SSHomeShortTableViewCell.reuseID, bundle: nil)
         tableView.register(cellShortNib, forCellReuseIdentifier: SSHomeShortTableViewCell.reuseID)
         
@@ -54,11 +62,33 @@ class SSHomeViewController: SSBaseViewController {
         checkMissedGoals()
     }
     
+    override func createCirclesBackground() {
+        if circleView == nil {
+            circleView = UIImageView(image: UIImage(named: "background_home"))
+        }
+        circleView?.frame = self.view.frame
+        view.insertSubview(circleView!, at: 0)
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
         showDeleteCompleteView(false)
+        
+        // Alert after update from AppStore
+        let key = SSConstants.keys.kShowNewFeaturesAlert.rawValue
+        let userDefaults = UserDefaults.standard
+        if !userDefaults.bool(forKey: key) {
+            SSMessageManager.showCustomAlertWith(message: .newFeatures, onViewController: self)
+            userDefaults.set(true, forKey: key)
+            
+            // Init first Level
+            let key = SSConstants.keys.kCurrentLevelType.rawValue
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(LevelsType.beginner.rawValue, forKey: key)
+        }
     }
     
     
@@ -75,7 +105,10 @@ class SSHomeViewController: SSBaseViewController {
     @IBAction func tappedDeleteGoal(_ sender: SSBaseButton) {
         
         // Deleted Goal
-        SSMessageManager.showCustomAlertWithAction(message: .goalDeleted, onViewController: self) { [weak self] in self?.deleteGoal() }
+        SSMessageManager.showCustomAlertWithAction(message: .goalDeleted, onViewController: self) { [weak self] in
+            
+            self?.deleteGoal()
+        }
     }
     
     // Complete Goal Action on DeleteCompleteView
@@ -89,8 +122,9 @@ class SSHomeViewController: SSBaseViewController {
         }
         
         selectedGoal?.changeStatus(.complete)
-        SSMessageManager.showCustomAlertWith(message: .goalAchieved, onViewController: self)
-        points.updatePointsLabel()
+        selectedGoal?.calculateСompletion()
+        SSMessageManager.showCustomAlertWith(message: .goalAchieved, goal: selectedGoal, onViewController: self)
+        points.updatePointsLabel(withAnimation: true)
         showDeleteCompleteView(false)
     }
     
@@ -106,9 +140,12 @@ class SSHomeViewController: SSBaseViewController {
     // MARK: Private funcs
     private func settingsUI() {
         
-        rightActionButton.setImage(UIImage(named: "red_plus"), for: .normal)
-        rightActionButton.addTarget(self, action: #selector(rightButtonAction), for: .touchUpInside)
-        view.addSubview(rightActionButton)
+        if controllerType == .active {
+            rightActionButton.setImage(UIImage(named: "add_task_red"), for: .normal)
+            rightActionButton.addTarget(self, action: #selector(rightButtonAction), for: .touchUpInside)
+            view.addSubview(rightActionButton)
+            rightActionButton.backgroundColor = .clear
+        }
         
         self.createCirclesBackground()
         self.setTitle("it's")
@@ -131,6 +168,12 @@ class SSHomeViewController: SSBaseViewController {
         selectedCellCircleButton?.isSelectedView = bool
         
         tipLabel.isHidden = tableView.visibleCells.count != 0 || goalsStatus == .complete
+        circleView?.alpha = tipLabel.isHidden ? 0.2 : 1
+        if tipLabel.isHidden {
+            rightActionButton.setImage(UIImage(named: "add_task_red"), for: .normal)
+        } else {
+            rightActionButton.setImage(UIImage(named: "add_task_white"), for: .normal)
+        }
     }
     
     private func deleteGoal() {
@@ -159,7 +202,7 @@ class SSHomeViewController: SSBaseViewController {
                 SSMessageManager.showCustomAlertWith(message: .missedAction, onViewController: self)
             }
             
-            /* Uncomment if need to change status for Goal
+            /* //Uncomment if need to change status for Goal
             let goalDueDate = goal.date! as Date
             if goalDueDate < Date().addCustomDateTime()! {
                 
@@ -192,8 +235,12 @@ extension SSHomeViewController: UITableViewDataSource {
         let goal = fetchedResultsController.object(at: indexPath) as! Goal
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SSHomeTableViewCell.reuseID, for: indexPath) as! SSHomeTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: GoalWithImageHomeTableViewCell.reuseID, for: indexPath) as! GoalWithImageHomeTableViewCell
             cell.configCellBy(goal)
+            if controllerType == .archived {
+                cell.completeLabel.text = "100% Complete"
+                cell.progressSlider.value = Float(100)
+            }
             cell.delegate = self
             return cell
         } else {
@@ -215,11 +262,7 @@ extension SSHomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 280
-        } else {
-            return UITableViewAutomaticDimension
-        }
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -245,7 +288,7 @@ extension SSHomeViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         // Update Points Label
-        self.points.updatePointsLabel()
+        self.points.updatePointsLabel(withAnimation: false)
         
         // Update Table View
         self.tableView.reloadData()

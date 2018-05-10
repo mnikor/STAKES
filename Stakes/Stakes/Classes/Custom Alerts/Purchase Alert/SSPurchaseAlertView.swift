@@ -12,32 +12,35 @@ class SSPurchaseAlertView: SSBaseCustomAlertView {
     
     
     // MARK: Outlets
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var descriptionLabel: SSBaseLabel!
     @IBOutlet weak var confirmPurchaseButton: SSCenterActionButton!
+    @IBOutlet weak var alertImageView: UIImageView!
     
     
     // MARK: Public Properties
     var goal: Goal?
     
     
-    // MARK: Private Properties
-    private let nibName = "SSPurchaseAlertView"
-    
-    
     // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        xibSetup()
+        
+        self.loadFromNib()
+        settingsUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetup()
+        
+        self.loadFromNib()
+        settingsUI()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        xibSetup()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.bounds = contentView.bounds
     }
     
     
@@ -70,20 +73,10 @@ class SSPurchaseAlertView: SSBaseCustomAlertView {
                 
                 action.isPurchased = true
                 if self?.goal!.getActionsForPurchase().count == 0 {
+                    
+                    self?.goal?.changeStatus(.wait)
                     self?.delegate?.closeCustomAlert()
                 }
- 
-                /*
-                if let error = error {
-                    SSMessageManager.showAlertWith(error: error, onViewController: nil)
-                } else {
-                    
-                    action.isPurchased = true
-                    if self?.goal!.getActionsForPurchase().count == 0 {
-                        self?.delegate?.closeCustomAlert()
-                    }
-                }
-                */
             })
         }
     }
@@ -94,19 +87,11 @@ class SSPurchaseAlertView: SSBaseCustomAlertView {
     
     
     // MARK: Private funcs
-    
-    // Load Xib
-    private func xibSetup() {
-        
-        let view = Bundle.main.loadNibNamed(nibName, owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
-        
-        settingsUI()
-    }
-    
     private func settingsUI() {
         
-        descriptionLabel.textColor = UIColor.colorFrom(colorType: .blackTitleAlert)
+        let mainColor = UIColor.colorFrom(colorType: .blackTitleAlert)
+        
+        descriptionLabel.textColor = mainColor
+        confirmPurchaseButton.titleColor = mainColor
     }
 }

@@ -11,8 +11,6 @@ import EventKit
 
 
 typealias AddEventCompletion = ((_ id: String?) -> Void)?
-//((_ success: Bool, _ error: NSError?, _ id: String?) -> Void)?
-
 
 class SSCalendarSyncManager {
     

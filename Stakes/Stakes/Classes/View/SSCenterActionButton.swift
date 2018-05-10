@@ -10,6 +10,9 @@ import UIKit
 
 class SSCenterActionButton: SSBaseButton {
     
+    // MARK: Public properties
+    var titleColor: UIColor?
+    
     
     // MARK: Overriden funcs
     override func draw(_ rect: CGRect) {
@@ -27,7 +30,7 @@ class SSCenterActionButton: SSBaseButton {
         layer.cornerRadius = frame.height / 2
         self.makeBorder(width: .small, color: color)
         
-        tintColor = color
+        tintColor = titleColor != nil ? titleColor! : color
         backgroundColor = .white
     }
 }

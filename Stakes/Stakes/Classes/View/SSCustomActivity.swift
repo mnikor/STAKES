@@ -19,7 +19,6 @@ class SSCustomActivity: UIActivity {
     
     
     // MARK: Initializer
-    
     init(title: String, imageName: String, performAction: @escaping () -> Void) {
         self.activityName = title
         self.activityImageName = imageName
@@ -29,44 +28,30 @@ class SSCustomActivity: UIActivity {
     }
     
     
-    
     // MARK: Overrides
-    
     override var activityType: UIActivityType? {
         return customActivityType
     }
-    
-    
     
     override var activityTitle: String? {
         return activityName
     }
     
-    
-    
     override class var activityCategory: UIActivityCategory {
         return .share
     }
-    
-    
     
     override var activityImage: UIImage? {
         return UIImage(named: activityImageName)
     }
     
-    
-    
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         return true
     }
     
-    
-    
     override func prepare(withActivityItems activityItems: [Any]) {
         // Nothing to prepare
     }
-    
-    
     
     override func perform() {
         customActionWhenTapped()

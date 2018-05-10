@@ -22,6 +22,7 @@ class SSFeedbackTextView: UITextView {
         return text == nil || text == ""
     }
     
+    
     // MARK: Private Properties
     private let userDefaults = UserDefaults.standard
     private let keyFeedbackText = SSConstants.keys.kFeedbackText.rawValue

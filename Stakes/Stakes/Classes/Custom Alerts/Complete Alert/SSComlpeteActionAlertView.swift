@@ -7,34 +7,64 @@
 //
 
 import UIKit
+import EFCountingLabel
 
 class SSComlpeteActionAlertView: SSBaseCustomAlertView {
     
     
     // MARK: Outlets
-    @IBOutlet weak var titleLabel: SSBaseLabel!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: SSBaseLabel!
-    @IBOutlet weak var bottomLabel: SSBaseLabel!
+    @IBOutlet weak var pointsCountingLabel: EFCountingLabel!
+    @IBOutlet weak var contentView: UIView!
     
     
-    // MARK: Private Properties
-    private let nibName = "SSComlpeteActionAlertView"
+    // MARK: Public properties
+    var messageType: SSMessageManager.MessageTypeDescription!
+    var action: Action? {
+        didSet {
+            // Points counting animation
+            pointsCountingLabel.isHidden = false
+            let points: SSPoint = SSPoint()
+            pointsCountingLabel.countFrom(0, to: CGFloat(points.calculatePointsFor(stake: action!.stake)), withDuration: 1.0)
+        }
+    }
+    var goal: Goal? {
+        didSet {
+            if let currentGoal = goal {
+                if action == nil {
+                    // Points counting animation
+                    pointsCountingLabel.isHidden = false
+                    let fromPoints: CGFloat = CGFloat(currentGoal.getPoints())
+                    let toPoints: CGFloat = CGFloat(currentGoal.addedPoints ?? currentGoal.getPoints())
+                    pointsCountingLabel.countFrom(fromPoints, to: toPoints, withDuration: 1.0)
+                }
+            }
+        }
+    }
+    
     
     
     // MARK: Initializers
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        xibSetup()
+    init(type: SSMessageManager.MessageTypeDescription) {
+        super.init(frame: .zero)
+        
+        self.messageType = type
+        self.loadFromNib()
+        settingsUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetup()
+        
+        self.loadFromNib()
+        settingsUI()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        xibSetup()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.bounds = contentView.bounds
     }
     
     
@@ -45,25 +75,33 @@ class SSComlpeteActionAlertView: SSBaseCustomAlertView {
     
     
     // MARK: Private funcs
-    
-    // Load Xib
-    private func xibSetup() {
-        
-        let view = Bundle.main.loadNibNamed(nibName, owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
-        
-        settingsUI()
-    }
-    
     private func settingsUI() {
         
-        let messageRedColor = UIColor.colorFrom(colorType: .redTitleAlert)
-        let messageBlackColor = UIColor.colorFrom(colorType: .blackTitleAlert)
+        let messageBlackColor = UIColor.fromRGB(rgbValue: 0xA5B0FF)
         
         // Set Labels Text Color
-        titleLabel.textColor = messageRedColor
         descriptionLabel.textColor = messageBlackColor
-        bottomLabel.textColor = messageRedColor
+        
+        // Settings EFCountingLabel
+        pointsCountingLabel.format = "%d"
+        pointsCountingLabel.isHidden = true
+        pointsCountingLabel.textColor = messageBlackColor
+        
+        // Set text
+        descriptionLabel.text = messageType.rawValue
+        
+        // Set Image
+        var image: UIImage? = UIImage()
+        
+        switch messageType! {
+        case .goalAchieved:
+            image = UIImage(named: "goal_achieved")
+        case .completedAction, .completedActionNoStake:
+            image = UIImage(named: "action_completed")
+        default:
+            imageView.removeFromSuperview()
+            return
+        }
+        imageView.image = image
     }
 }

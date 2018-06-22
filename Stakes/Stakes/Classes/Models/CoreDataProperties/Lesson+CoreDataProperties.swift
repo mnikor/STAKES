@@ -1,9 +1,8 @@
 //
 //  Lesson+CoreDataProperties.swift
-//  Stakes
+//  
 //
-//  Created by Dmitry Nezhidenko on 3/13/18.
-//  Copyright © 2018 Rubiconware. All rights reserved.
+//  Created by Anton Klysa on 5/25/18.
 //
 //
 
@@ -17,13 +16,13 @@ extension Lesson {
         return NSFetchRequest<Lesson>(entityName: "Lesson")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var id: String?
-    @NSManaged public var isLocked: Bool
-    @NSManaged public var isTracking: Bool
     @NSManaged public var color: String?
     @NSManaged public var content: String?
     @NSManaged public var goalDate: NSDate?
+    @NSManaged public var id: String?
+    @NSManaged public var isLocked: Bool
+    @NSManaged public var isTracking: Bool
     @NSManaged public var points: Float
+    @NSManaged public var title: String?
 
 }

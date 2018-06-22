@@ -60,7 +60,10 @@ class SSActionPlanTableViewCell: SSBaseTableViewCell {
     private func checkStatus(_ action: Action) {
         
         let status = action.status!
-        let pointsText = SSPoint().calculatePointsFor(stake: action.stake)
+        var pointsText = SSPoint().calculatePointsFor(stake: action.stake)
+        if action.is_preliminarily_completed == true {
+            pointsText = SSPoint().calculatePointsFor(stake: action.stake) + 2
+        }
         var textColor = UIColor.fromRGB(rgbValue: 0xA5B0FF) //Completed color
         
         switch status {

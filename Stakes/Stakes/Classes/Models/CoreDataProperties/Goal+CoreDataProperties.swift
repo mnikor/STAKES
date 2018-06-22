@@ -1,9 +1,8 @@
 //
 //  Goal+CoreDataProperties.swift
-//  Stakes
+//  
 //
-//  Created by Dmitry Nezhidenko on 2/26/18.
-//  Copyright © 2018 Rubiconware. All rights reserved.
+//  Created by Anton Klysa on 5/25/18.
 //
 //
 
@@ -21,10 +20,10 @@ extension Goal {
     @NSManaged public var date: NSDate?
     @NSManaged public var event_id: String?
     @NSManaged public var id: String?
+    @NSManaged public var image: NSObject?
     @NSManaged public var name: String?
     @NSManaged public var stake: Float
     @NSManaged public var status: String?
-    @NSManaged public var image: NSObject?
     @NSManaged public var actions: NSOrderedSet?
 
 }

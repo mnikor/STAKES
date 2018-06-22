@@ -26,7 +26,15 @@ class SSComlpeteActionAlertView: SSBaseCustomAlertView {
             // Points counting animation
             pointsCountingLabel.isHidden = false
             let points: SSPoint = SSPoint()
-            pointsCountingLabel.countFrom(0, to: CGFloat(points.calculatePointsFor(stake: action!.stake)), withDuration: 1.0)
+            
+            let pointsForCurrentStake = points.calculatePointsFor(stake: action!.stake)
+            var addedPoints = pointsForCurrentStake
+            let actionDate = action!.date! as Date
+            if actionDate > Date().addCustomDateTime()! {
+                addedPoints += 2
+            }
+            
+            pointsCountingLabel.countFrom(0, to: CGFloat(addedPoints), withDuration: 1.0)
         }
     }
     var goal: Goal? {

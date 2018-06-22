@@ -310,7 +310,9 @@ public class Goal: NSManagedObject {
         
         for action in getActions() {
             
-            action.changeStatus(status)
+            if action.status != status.rawValue {
+                action.changeStatus(status)
+            }
         }
         
         // Delete Goal Event from Calendar

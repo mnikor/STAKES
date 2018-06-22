@@ -78,8 +78,9 @@ public class Action: NSManagedObject {
             // Accomplished earlier Due Date +2 points
             let actionDate = self.date! as Date
             if actionDate > Date().addCustomDateTime()! {
-                
+                is_preliminarily_completed = true;
                 addedPoints += 2
+                SSCoreDataManager.instance.saveContext()
             }
             
             // Add points to Total Sum

@@ -156,6 +156,7 @@
 		3A1B715D1FB2FC8800674BB4 /* UIView+Stakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Stakes.swift"; sourceTree = "<group>"; };
 		3A1B715F1FB2FD5100674BB4 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A1B71601FB3145C00674BB4 /* SSIntroductionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSIntroductionPageViewController.swift; sourceTree = "<group>"; };
+		3A48813620B8027F00FA4C66 /* Stakes_v2.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stakes_v2.2.xcdatamodel; sourceTree = "<group>"; };
 		3A6A509F206D038A00895362 /* Stakes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Stakes.entitlements; sourceTree = "<group>"; };
 		3A96A563206124D500DA071D /* SSFifthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSFifthOnboardingViewController.swift; sourceTree = "<group>"; };
 		3A96A565206131EB00DA071D /* SSSixthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSixthOnboardingViewController.swift; sourceTree = "<group>"; };
@@ -1181,8 +1182,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Stakes/Stakes.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 37HBR3VGFU;
 				INFOPLIST_FILE = Stakes/Info.plist;
@@ -1190,8 +1191,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikonorov.bold;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fe63699d-cbe2-4737-8b98-85812e05169b";
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Distribution. Bold";
+				PROVISIONING_PROFILE = "aad4c194-9933-488e-93e5-ac7f796c1a01";
+				PROVISIONING_PROFILE_SPECIFIER = "Bold development";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1203,8 +1204,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Stakes/Stakes.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 37HBR3VGFU;
 				INFOPLIST_FILE = Stakes/Info.plist;
@@ -1212,8 +1213,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikonorov.bold;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "80de8977-0cc9-4483-9332-b8b19a607190";
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Distribution. Bold";
+				PROVISIONING_PROFILE = "aad4c194-9933-488e-93e5-ac7f796c1a01";
+				PROVISIONING_PROFILE_SPECIFIER = "Bold development";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1246,10 +1247,11 @@
 		3A1B71241FB2F4D300674BB4 /* Stakes.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3A48813620B8027F00FA4C66 /* Stakes_v2.2.xcdatamodel */,
 				994AABF0204404BB00DFFE6D /* Stakes_v2.1.xcdatamodel */,
 				3A1B71251FB2F4D300674BB4 /* Stakes.xcdatamodel */,
 			);
-			currentVersion = 994AABF0204404BB00DFFE6D /* Stakes_v2.1.xcdatamodel */;
+			currentVersion = 3A48813620B8027F00FA4C66 /* Stakes_v2.2.xcdatamodel */;
 			path = Stakes.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
